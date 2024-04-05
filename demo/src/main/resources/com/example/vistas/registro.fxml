@@ -27,6 +27,6 @@
         <TextField fx:id="campoContraseñaReg" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
         
         <Button text="Atrás" onAction="#switchToLogin" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <Button text="Continuar" onAction="#switchToLogin" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        <Button text="Continuar" onAction="#switchToMenuPrincipal" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
     </GridPane>
 </VBox>

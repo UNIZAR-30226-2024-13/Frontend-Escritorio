@@ -28,4 +28,9 @@ public class LoginController implements Initializable{
     private void switchToRegistro() throws IOException {
         App.setRoot("/com/example/vistas/registro");
     }
+
+    @FXML
+    private void switchToMenuPrincipal() throws IOException {
+        App.setRoot("/com/example/vistas/menuPrincipal");
+    }
 }
