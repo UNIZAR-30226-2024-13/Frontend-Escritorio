@@ -10,7 +10,7 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SecondaryController implements Initializable {
+public class LoginController implements Initializable{
 
     @FXML
     private ImageView imagenLogo;
@@ -23,8 +23,9 @@ public class SecondaryController implements Initializable {
         // Establecer la imagen en el ImageView
         imagenLogo.setImage(imagen);
     }
+
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("/com/example/vistas/primary");
+    private void switchToRegistro() throws IOException {
+        App.setRoot("/com/example/vistas/registro");
     }
 }
