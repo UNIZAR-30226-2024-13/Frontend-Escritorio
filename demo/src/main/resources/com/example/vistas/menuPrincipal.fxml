@@ -7,14 +7,14 @@
             xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.MenuPrincipalController">
     <top>
         <GridPane>
-            <Button fx:id="botonAmigos" text="Amigos" prefWidth="100" prefHeight="30" />
+            <Button fx:id="botonAmigos" text="Amigos" onAction="#switchToAmigos" prefWidth="100" prefHeight="30" />
         </GridPane>
     </top>
     <center>
-        <GridPane alignment="CENTER" hgap="10" vgap="30">
-            <Button text="Crear Partida" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200" prefHeight="30" />
-            <Button text="Unirse a Partida" GridPane.columnIndex="1" GridPane.rowIndex="2"  prefWidth="200" prefHeight="30" />
-            <Button text="Partidas Pausadas" GridPane.columnIndex="1" GridPane.rowIndex="3"  prefWidth="200" prefHeight="30" />
+        <GridPane alignment="CENTER" vgap="30">
+            <Button text="Crear Partida" GridPane.columnIndex="1" onAction="#switchToMenuCrearPartida" GridPane.rowIndex="1" prefWidth="200" prefHeight="30" />
+            <Button text="Unirse a Partida" GridPane.columnIndex="1" onAction="#switchToMenuUnirse" GridPane.rowIndex="2"  prefWidth="200" prefHeight="30" />
+            <Button text="Partidas Pausadas" GridPane.columnIndex="1" onAction="#switchToMenuPartidas" GridPane.rowIndex="3"  prefWidth="200" prefHeight="30" />
         </GridPane>
     </center>
 </BorderPane>

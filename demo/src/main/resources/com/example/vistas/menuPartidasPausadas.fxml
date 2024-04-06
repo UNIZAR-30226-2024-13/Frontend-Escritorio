@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+
+<HBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ListaPartidasPausadasController">
+
+    <TableView fx:id="tablaPartidasPausadas">
+        <columns>
+            <TableColumn text="Juego" fx:id="columnaTipoJuego" />
+        </columns>
+        <HBox.margin>
+            <Insets top="20" right="20" bottom="20" left="20" />
+        </HBox.margin>
+    </TableView>
+</HBox>

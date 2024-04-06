@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Button?>
+
+<BorderPane prefHeight="400" prefWidth="600" style="-fx-padding: 50px;"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.MenuCrearPartidaController">
+    <top>
+        <GridPane alignment="CENTER" hgap="10" vgap="30">
+            <Button fx:id="botonCinquillo" text="Cinquillo" GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="100" prefHeight="30" />
+            <Button fx:id="botonPoker" text="Poker" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="100" prefHeight="30" />
+        </GridPane>
+    </top>
+    <center>
+        <GridPane alignment="CENTER" hgap="10" vgap="30">
+            <Button fx:id="botonMentiroso" text="Mentiroso"  GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="100" prefHeight="30" />
+            <Button fx:id="botonBlackJack" text="BlackJack"  GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="100" prefHeight="30" />
+        </GridPane>
+    </center>
+    <bottom>
+        <GridPane alignment="CENTER" hgap="10" vgap="30">
+            <Button fx:id="botonUNO" text="UNO"  GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="100" prefHeight="30" />
+        </GridPane>
+    </bottom>
+</BorderPane>
