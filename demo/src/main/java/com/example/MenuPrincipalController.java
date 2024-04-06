@@ -6,13 +6,9 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
 
 public class MenuPrincipalController implements Initializable{
-
-    @FXML
-    private ImageView imagenLogo;
-
+    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
@@ -35,5 +31,10 @@ public class MenuPrincipalController implements Initializable{
     @FXML
     private void switchToMenuPartidas() throws IOException {
         App.setRoot("/com/example/vistas/menuPartidasPausadas");
+    }
+
+    @FXML
+    private void switchToPerfil() throws IOException {
+        App.setRoot("/com/example/vistas/perfil");
     }
 }

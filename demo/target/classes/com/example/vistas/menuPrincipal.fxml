@@ -4,25 +4,48 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
 
-<BorderPane prefHeight="400" prefWidth="600"
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.MenuPrincipalController">
+<BorderPane prefHeight="400" prefWidth="600" stylesheets="@../styles/styles.css"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.MenuPrincipalController" >
+    
     <top>
-        <GridPane style="-fx-padding: 30px; -fx-background-color: darkred;" >
-            <Label text="CartaVerse" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-text-fill: white; -fx-font-size: 20px;"/>
+        <GridPane styleClass="top-grid-pane">
+
+            <columnConstraints>
+                <ColumnConstraints percentWidth="95"/>
+                <ColumnConstraints/>
+            </columnConstraints>
+
+            <Label text="CartaVerse" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="white-label"/>
+            <Button fx:id="botonPerfil" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#switchToPerfil" styleClass="image-button" GridPane.halignment="RIGHT">
+                <graphic>
+                    <ImageView fitWidth="50" fitHeight="50">
+                        <Image url="@../imgs/logo.jpg"/>
+                    </ImageView>
+                </graphic>
+            </Button>
         </GridPane>
     </top>
+    <left>
+        <GridPane styleClass="lateral-grid-pane">
+            <Button fx:id="botonAmigos" text="Amigos" onAction="#switchToAmigos" prefHeight="30" />
+        </GridPane>
+    </left>
     <center>
-        <VBox alignment="CENTER" style="-fx-padding: 30px; -fx-background-color: darkgreen;">
-            <GridPane style="-fx-padding: 20px;" >
-                <Button fx:id="botonAmigos" text="Amigos" onAction="#switchToAmigos" prefWidth="100" prefHeight="30" />
-            </GridPane>
-            <GridPane alignment="CENTER" vgap="40" style="-fx-padding: 20px; -fx-border-color: yellow; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-color: darkgreen;">
-                <Button text="Crear Partida" GridPane.columnIndex="1" onAction="#switchToMenuCrearPartida" GridPane.rowIndex="1" prefWidth="200" prefHeight="30" />
-                <Button text="Unirse a Partida" GridPane.columnIndex="1" onAction="#switchToMenuUnirse" GridPane.rowIndex="2"  prefWidth="200" prefHeight="30" />
-                <Button text="Partidas Pausadas" GridPane.columnIndex="1" onAction="#switchToMenuPartidas" GridPane.rowIndex="3"  prefWidth="200" prefHeight="30" />
+        <VBox>
+            <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS">
+                <Button text="Crear Partida" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#switchToMenuCrearPartida" />
+                <Button text="Unirse a Partida" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#switchToMenuUnirse" />
+                <Button text="Partidas Pausadas" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#switchToMenuPartidas" />
             </GridPane>
         </VBox>
     </center>
+    <right>
+        <GridPane styleClass="lateral-grid-pane">
+        </GridPane>
+    </right>
 </BorderPane>

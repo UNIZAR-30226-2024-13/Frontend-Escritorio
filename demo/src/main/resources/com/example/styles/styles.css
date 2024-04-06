@@ -1,0 +1,55 @@
+/* Estilos para el GridPane en la parte superior */
+.top-grid-pane {
+    -fx-padding: 30px;
+    -fx-background-color: darkred;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+}
+
+/* Estilos para la etiqueta en la parte superior */
+.white-label {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+/* Estilos para el GridPane en el centro */
+.center-grid-pane {
+    -fx-padding: 10px;
+    -fx-border-color: yellow;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-color: darkgreen;
+    -fx-alignment: center;
+    -fx-vgap: 40;
+}
+
+/* Estilos para los botones */
+Button {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+}
+
+/* Estilo para el botón específico */
+.image-button {
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+    -fx-pref-width: 50px; /* Ajusta el ancho deseado */
+    -fx-pref-height: 50px; /* Ajusta la altura deseada */
+}
+
+/* Estilos para el GridPane en la parte derecha */
+.lateral-grid-pane {
+    -fx-padding: 100px;
+    -fx-background-color: darkgreen;
+}
+
+/* Color principal de la aplicacion */
+.main-color {
+    -fx-background-color: darkgreen;
+}
+
+/* Estilo de las Vbox */
+VBox {
+    -fx-padding: 30px;
+    -fx-background-color: darkgreen;
+}
