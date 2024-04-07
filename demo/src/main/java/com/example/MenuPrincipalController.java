@@ -6,8 +6,15 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.event.ActionEvent;
+import javafx.scene.layout.VBox;
 
 public class MenuPrincipalController implements Initializable{
+
+    @FXML
+    private VBox opcionesVBox;
+
+    private boolean opcionesVisible = false;
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -41,5 +48,12 @@ public class MenuPrincipalController implements Initializable{
     @FXML
     private void switchToMainMenu() throws IOException {
         App.setRoot("/com/example/vistas/menuPrincipal");
+    }
+
+    @FXML
+    private void mostrarOcultarOpciones(ActionEvent event) {
+        opcionesVisible = !opcionesVisible;
+        opcionesVBox.setManaged(opcionesVisible);
+        opcionesVBox.setVisible(opcionesVisible);
     }
 }

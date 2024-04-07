@@ -29,7 +29,7 @@
                 </graphic>
             </Button>
             <Label text="CartaVerse" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="LEFT" styleClass="white-label"/>
-            <Button fx:id="botonPerfil" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#switchToPerfil" styleClass="image-button">
+            <Button fx:id="botonPerfil" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#mostrarOcultarOpciones" styleClass="image-button">
                 <graphic>
                     <ImageView fitWidth="70" fitHeight="70">
                         <Image url="@../imgs/default-pic.jpg"/>
@@ -60,7 +60,11 @@
         </VBox>
     </center>
     <right>
-        <GridPane styleClass="lateral-grid-pane">
-        </GridPane>
+        <VBox fx:id="opcionesVBox" managed="false" visible= "false" styleClass="right-grid-pane" >
+            <GridPane styleClass="red-grid-pane" VBox.vgrow="ALWAYS" >
+                <Button fx:id="botonPerfil" text="Perfil" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Button fx:id="botonCerrarSesion" text="Cerrar Sesion" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            </GridPane>
+        </VBox>
     </right>
 </BorderPane>
