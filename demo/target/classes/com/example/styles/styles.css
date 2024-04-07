@@ -28,6 +28,7 @@ Button {
     -fx-pref-width: 200px;
     -fx-pref-height: 30px;
     -fx-background-color: rgb(255, 179, 0);
+    -fx-font-size: 14px;
 }
 
 /* Estilo para el botón con imagenes de 70x70 */
@@ -53,4 +54,16 @@ Button {
 VBox {
     -fx-padding: 30px;
     -fx-background-color: darkgreen;
+}
+
+/* Estilo de las tablas */
+TableView {
+    -fx-background-color: darkgreen;
+    -fx-border-color: rgb(255, 179, 0);
+    -fx-border-width: 1px;
+}
+
+/* Estilo de las columnas de la tabla */
+.columna {
+    -fx-background-color: rgb(255, 179, 0);
 }

@@ -1,24 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.geometry.Insets?>
 
-<HBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ListaAmigosController">
-    <GridPane alignment="CENTER" hgap="10" vgap="30">
-        <Button fx:id="botonAgregar" text="Añadir" GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="100" prefHeight="30" />
-        <Button fx:id="botonEliminar" text="Eliminar" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="100" prefHeight="30" />
-        
-        <TableView fx:id="tablaPartidasPausadas" GridPane.columnIndex="0" GridPane.rowIndex="1">
-            <columns>
-                <TableColumn text="Nombre" fx:id="columnaNombre" />
-            </columns>
-            <HBox.margin>
-                <Insets top="20" right="20" bottom="20" left="20" />
-            </HBox.margin>
-        </TableView>
-    </GridPane>
-</HBox>
+<BorderPane prefHeight="400" prefWidth="600" stylesheets="@../styles/styles.css"
+    xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ListaAmigosController">
+    
+    <top>
+        <GridPane styleClass="top-grid-pane">
+
+            <columnConstraints>
+                <ColumnConstraints percentWidth="5"/>
+                <ColumnConstraints percentWidth="90"/>
+                <ColumnConstraints/>
+            </columnConstraints>
+
+            <Button fx:id="botonPerfil" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="image-button">
+                <graphic>
+                    <ImageView fitWidth="70" fitHeight="70">
+                        <Image url="@../imgs/logo.jpg"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Label text="CartaVerse" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="LEFT" styleClass="white-label"/>
+            <Button fx:id="botonPerfil" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#switchToPerfil" styleClass="image-button">
+                <graphic>
+                    <ImageView fitWidth="70" fitHeight="70">
+                        <Image url="@../imgs/default-pic.jpg"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </GridPane>
+    </top>
+    <left>
+        <GridPane styleClass="lateral-grid-pane"/>
+    </left>
+    <center>
+        <VBox>
+            <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS">
+                <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <TextField fx:id="nombreAmigo" promptText="Nombre" prefWidth="90"/>
+                    <Button fx:id="botonAgregar" text="Añadir"/>
+                    <Button fx:id="botonEliminar" text="Eliminar"/>
+                </HBox>
+                <TableView fx:id="tablaPartidasPausadas" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
+                    <columns>
+                        <TableColumn text="Nombre" fx:id="columnaNombre" styleClass="columna" prefWidth="550"/>
+                    </columns>
+                </TableView>
+            </GridPane>
+        </VBox>
+    </center>
+    <right>
+        <GridPane styleClass="lateral-grid-pane"/>
+    </right>
+</BorderPane>
