@@ -9,13 +9,13 @@
 /* Estilos para la etiqueta en la parte superior */
 .white-label {
     -fx-text-fill: white;
-    -fx-font-size: 20px;
+    -fx-font-size: 22px;
 }
 
 /* Estilos para el GridPane en el centro */
 .center-grid-pane {
     -fx-padding: 10px;
-    -fx-border-color: yellow;
+    -fx-border-color: #ffb300;
     -fx-border-width: 2px;
     -fx-border-radius: 10px;
     -fx-background-color: darkgreen;
@@ -27,14 +27,23 @@
 Button {
     -fx-pref-width: 200px;
     -fx-pref-height: 30px;
+    -fx-background-color: #ffb300;;
+}
+
+/* Estilos para los botones de juegos */
+.button-partida {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 100px;
+    -fx-background-color: #ffb300;;
+    -fx-font-size: 18px;
 }
 
 /* Estilo para el botón específico */
 .image-button {
     -fx-min-width: 0;
     -fx-min-height: 0;
-    -fx-pref-width: 50px; /* Ajusta el ancho deseado */
-    -fx-pref-height: 50px; /* Ajusta la altura deseada */
+    -fx-pref-width: 70px; /* Ajusta el ancho deseado */
+    -fx-pref-height: 70px; /* Ajusta la altura deseada */
 }
 
 /* Estilos para el GridPane en la parte derecha */

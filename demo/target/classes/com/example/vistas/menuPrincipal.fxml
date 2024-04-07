@@ -20,10 +20,10 @@
                 <ColumnConstraints/>
             </columnConstraints>
 
-            <Label text="CartaVerse" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="white-label"/>
+            <Label text="CartaVerse" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="white-label"  GridPane.halignment="LEFT"/>
             <Button fx:id="botonPerfil" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#switchToPerfil" styleClass="image-button" GridPane.halignment="RIGHT">
                 <graphic>
-                    <ImageView fitWidth="50" fitHeight="50">
+                    <ImageView fitWidth="70" fitHeight="70">
                         <Image url="@../imgs/logo.jpg"/>
                     </ImageView>
                 </graphic>
