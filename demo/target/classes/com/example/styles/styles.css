@@ -6,7 +6,7 @@
     -fx-border-width: 2px;
 }
 
-/* Estilos para la etiqueta en la parte superior */
+/* Estilos para las etiquetas */
 .white-label {
     -fx-text-fill: white;
     -fx-font-size: 20px;
@@ -35,11 +35,11 @@ Button {
 .image-button {
     -fx-min-width: 0;
     -fx-min-height: 0;
-    -fx-pref-width: 65px; /* Ajusta el ancho deseado */
-    -fx-pref-height: 65px; /* Ajusta la altura deseada */
+    -fx-pref-width: 65px;
+    -fx-pref-height: 65px;
 }
 
-/* Estilos para el GridPane en la parte derecha */
+/* Estilos para los GridPane laterales */
 .lateral-grid-pane {
     -fx-padding: 100px;
     -fx-background-color: darkgreen;
@@ -48,6 +48,11 @@ Button {
 /* Color principal de la aplicacion */
 .main-color {
     -fx-background-color: darkgreen;
+}
+
+/* Color secundario de la aplicacion */
+.secondary-color {
+    -fx-border-color: rgb(255, 179, 0);
 }
 
 /* Estilo de las Vbox */
