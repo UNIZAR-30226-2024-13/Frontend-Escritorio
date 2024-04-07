@@ -16,15 +16,23 @@
         <GridPane styleClass="top-grid-pane">
 
             <columnConstraints>
-                <ColumnConstraints percentWidth="95"/>
+                <ColumnConstraints percentWidth="5"/>
+                <ColumnConstraints percentWidth="90"/>
                 <ColumnConstraints/>
             </columnConstraints>
 
-            <Label text="CartaVerse" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="white-label"  GridPane.halignment="LEFT"/>
-            <Button fx:id="botonPerfil" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#switchToPerfil" styleClass="image-button" GridPane.halignment="RIGHT">
+            <Button fx:id="botonPerfil" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="image-button">
                 <graphic>
                     <ImageView fitWidth="70" fitHeight="70">
                         <Image url="@../imgs/logo.jpg"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Label text="CartaVerse" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="LEFT" styleClass="white-label"/>
+            <Button fx:id="botonPerfil" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#switchToPerfil" styleClass="image-button">
+                <graphic>
+                    <ImageView fitWidth="70" fitHeight="70">
+                        <Image url="@../imgs/default-pic.jpg"/>
                     </ImageView>
                 </graphic>
             </Button>
@@ -32,7 +40,14 @@
     </top>
     <left>
         <GridPane styleClass="lateral-grid-pane">
-            <Button fx:id="botonAmigos" text="Amigos" onAction="#switchToAmigos" prefHeight="30" />
+            <Button fx:id="botonAmigos" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#switchToAmigos" styleClass="image-button">
+                <graphic>
+                    <ImageView fitWidth="70" fitHeight="70">
+                        <Image url="@../imgs/friends.jpg"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Label text="Amigos" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="white-label"/>
         </GridPane>
     </left>
     <center>

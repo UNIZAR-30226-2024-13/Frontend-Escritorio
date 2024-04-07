@@ -6,7 +6,7 @@
     -fx-border-width: 2px;
 }
 
-/* Estilos para la etiqueta en la parte superior */
+/* Estilos para las etiquetas */
 .white-label {
     -fx-text-fill: white;
     -fx-font-size: 22px;
@@ -15,7 +15,7 @@
 /* Estilos para el GridPane en el centro */
 .center-grid-pane {
     -fx-padding: 10px;
-    -fx-border-color: #ffb300;
+    -fx-border-color: rgb(255, 179, 0);
     -fx-border-width: 2px;
     -fx-border-radius: 10px;
     -fx-background-color: darkgreen;
@@ -27,26 +27,27 @@
 Button {
     -fx-pref-width: 200px;
     -fx-pref-height: 30px;
-    -fx-background-color: #ffb300;;
+    -fx-background-color: rgb(255, 179, 0);
+    -fx-font-size: 14px;
 }
 
 /* Estilos para los botones de juegos */
 .button-partida {
     -fx-pref-width: 200px;
     -fx-pref-height: 100px;
-    -fx-background-color: #ffb300;;
+    -fx-background-color: rgb(255, 179, 0);
     -fx-font-size: 18px;
 }
 
-/* Estilo para el botón específico */
+/* Estilo para el botón con imagenes de 70x70 */
 .image-button {
     -fx-min-width: 0;
     -fx-min-height: 0;
-    -fx-pref-width: 70px; /* Ajusta el ancho deseado */
-    -fx-pref-height: 70px; /* Ajusta la altura deseada */
+    -fx-pref-width: 65px;
+    -fx-pref-height: 65px;
 }
 
-/* Estilos para el GridPane en la parte derecha */
+/* Estilos para los GridPane laterales */
 .lateral-grid-pane {
     -fx-padding: 100px;
     -fx-background-color: darkgreen;
@@ -57,8 +58,25 @@ Button {
     -fx-background-color: darkgreen;
 }
 
+/* Color secundario de la aplicacion */
+.secondary-color {
+    -fx-border-color: rgb(255, 179, 0);
+}
+
 /* Estilo de las Vbox */
 VBox {
     -fx-padding: 30px;
     -fx-background-color: darkgreen;
+}
+
+/* Estilo de las tablas */
+TableView {
+    -fx-background-color: darkgreen;
+    -fx-border-color: rgb(255, 179, 0);
+    -fx-border-width: 1px;
+}
+
+/* Estilo de las columnas de la tabla */
+.columna {
+    -fx-background-color: rgb(255, 179, 0);
 }
