@@ -47,6 +47,11 @@ public class MenuCrearPartidaController implements Initializable{
     }
 
     @FXML
+    private void switchToMainMenu() throws IOException {
+        App.setRoot("/com/example/vistas/menuPrincipal");
+    }
+    
+    @FXML
     private void mostrarOcultarOpciones(ActionEvent event) {
         opcionesVisible = !opcionesVisible;
         opcionesVBox.setManaged(opcionesVisible);

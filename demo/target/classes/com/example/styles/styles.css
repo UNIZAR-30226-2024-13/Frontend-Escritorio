@@ -23,6 +23,24 @@
     -fx-vgap: 40;
 }
 
+/* Estilos para el GridPane de ventana emergente */
+.red-grid-pane {
+    -fx-padding: 10px;
+    -fx-border-color: rgb(255, 179, 0);
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-color: darkred;
+    -fx-alignment: center;
+    -fx-vgap: 40;
+}
+
+/* Estilos para el GridPane que aparece a la derecha */
+.right-grid-pane {
+    -fx-background-color: darkred;
+    -fx-border-color: black;
+    -fx-border-width: 0px 2px 0px 2px;
+}
+
 /* Estilos para los botones */
 Button {
     -fx-pref-width: 200px;
