@@ -15,7 +15,7 @@
 /* Estilos para el GridPane en el centro */
 .center-grid-pane {
     -fx-padding: 10px;
-    -fx-border-color: yellow;
+    -fx-border-color: rgb(255, 179, 0);
     -fx-border-width: 2px;
     -fx-border-radius: 10px;
     -fx-background-color: darkgreen;
@@ -27,14 +27,15 @@
 Button {
     -fx-pref-width: 200px;
     -fx-pref-height: 30px;
+    -fx-background-color: rgb(255, 179, 0);
 }
 
-/* Estilo para el botón específico */
+/* Estilo para el botón con imagenes de 70x70 */
 .image-button {
     -fx-min-width: 0;
     -fx-min-height: 0;
-    -fx-pref-width: 50px; /* Ajusta el ancho deseado */
-    -fx-pref-height: 50px; /* Ajusta la altura deseada */
+    -fx-pref-width: 65px; /* Ajusta el ancho deseado */
+    -fx-pref-height: 65px; /* Ajusta la altura deseada */
 }
 
 /* Estilos para el GridPane en la parte derecha */

@@ -37,4 +37,9 @@ public class MenuPrincipalController implements Initializable{
     private void switchToPerfil() throws IOException {
         App.setRoot("/com/example/vistas/perfil");
     }
+
+    @FXML
+    private void switchToMainMenu() throws IOException {
+        App.setRoot("/com/example/vistas/menuPrincipal");
+    }
 }
