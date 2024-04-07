@@ -15,15 +15,23 @@
         <GridPane styleClass="top-grid-pane">
 
             <columnConstraints>
-                <ColumnConstraints percentWidth="95"/>
+                <ColumnConstraints percentWidth="5"/>
+                <ColumnConstraints percentWidth="90"/>
                 <ColumnConstraints/>
             </columnConstraints>
 
-            <Label text="CartaVerse" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="white-label"  GridPane.halignment="LEFT"/>
-            <Button fx:id="botonPerfil" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#mostrarOcultarOpciones" styleClass="image-button" GridPane.halignment="RIGHT">
+            <Button fx:id="botonPerfil" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="image-button">
                 <graphic>
                     <ImageView fitWidth="70" fitHeight="70">
                         <Image url="@../imgs/logo.jpg"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Label text="CartaVerse" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="LEFT" styleClass="white-label"/>
+            <Button fx:id="botonPerfil" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#switchToPerfil" styleClass="image-button">
+                <graphic>
+                    <ImageView fitWidth="70" fitHeight="70">
+                        <Image url="@../imgs/default-pic.jpg"/>
                     </ImageView>
                 </graphic>
             </Button>
@@ -33,11 +41,11 @@
         <VBox>
             <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS" >
                 <Label text=" Seleccione el juego" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="white-label" />
-                <Button fx:id="botonCinquillo" text="Cinquillo" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="button-partida" />
-                <Button fx:id="botonPoker" text="Poker" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="button-partida" />
-                <Button fx:id="botonMentiroso" text="Mentiroso"  GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="button-partida" />
-                <Button fx:id="botonBlackJack" text="BlackJack"  GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="button-partida" />
-                <Button fx:id="botonUNO" text="UNO"  GridPane.columnIndex="1" GridPane.rowIndex="3" styleClass="button-partida" />
+                <Button fx:id="botonCinquillo" text="Cinquillo" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Button fx:id="botonPoker" text="Poker" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <Button fx:id="botonMentiroso" text="Mentiroso"  GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Button fx:id="botonBlackJack" text="BlackJack"  GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                <Button fx:id="botonUNO" text="UNO"  GridPane.columnIndex="1" GridPane.rowIndex="3"/>
             </GridPane>
         </VBox>
     </center>

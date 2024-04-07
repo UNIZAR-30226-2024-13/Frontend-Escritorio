@@ -31,14 +31,6 @@ Button {
     -fx-font-size: 14px;
 }
 
-/* Estilos para los botones de juegos */
-.button-partida {
-    -fx-pref-width: 200px;
-    -fx-pref-height: 100px;
-    -fx-background-color: rgb(255, 179, 0);
-    -fx-font-size: 18px;
-}
-
 /* Estilo para el botón con imagenes de 70x70 */
 .image-button {
     -fx-min-width: 0;
