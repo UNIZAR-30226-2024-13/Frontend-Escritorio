@@ -9,7 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
 
-public class PerfilController implements Initializable{
+public class CambiarUsuarioController implements Initializable{
 
     @FXML
     private VBox opcionesVBox;
@@ -30,20 +30,6 @@ public class PerfilController implements Initializable{
         App.setRoot("/com/example/vistas/menuPrincipal");
     }
 
-    @FXML
-    private void switchToCambiarUsuario() throws IOException {
-        App.setRoot("/com/example/vistas/cambiarUsuario");
-    }
-
-    @FXML
-    private void switchToCambiarContrasegna() throws IOException {
-        App.setRoot("/com/example/vistas/cambiarContrasegna");
-    }
-
-    @FXML
-    private void switchToCambiarFoto() throws IOException {
-        App.setRoot("/com/example/vistas/cambiarFoto");
-    }
 
     @FXML
     private void mostrarOcultarOpciones(ActionEvent event) {

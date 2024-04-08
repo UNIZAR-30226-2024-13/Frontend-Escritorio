@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
 
 <BorderPane prefHeight="400" prefWidth="600" stylesheets="@../styles/styles.css"
-    xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ListaAmigosController">
-    
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.CambiarContrasegnaController" >
     <top>
         <GridPane styleClass="top-grid-pane">
 
@@ -42,22 +37,13 @@
             </Button>
         </GridPane>
     </top>
-    <left>
-        <GridPane styleClass="lateral-grid-pane"/>
-    </left>
     <center>
         <VBox>
-            <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS">
-                <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                    <TextField fx:id="nombreAmigo" promptText="Nombre" prefWidth="90"/>
-                    <Button fx:id="botonAgregar" text="Añadir"/>
-                    <Button fx:id="botonEliminar" text="Eliminar"/>
-                </HBox>
-                <TableView fx:id="tablaPartidasPausadas" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
-                    <columns>
-                        <TableColumn text="Nombre" fx:id="columnaNombre" styleClass="columna" prefWidth="550"/>
-                    </columns>
-                </TableView>
+            <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS" hgap="20" >
+                <Label text="Introduce nueva contraseña" styleClass="white-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="campoNuevaContrasegna" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Button fx:id="botonConfirmar" text="Confirmar" GridPane.columnIndex="0" GridPane.rowIndex="2" onAction="#switchToPerfil" />
+
             </GridPane>
         </VBox>
     </center>
