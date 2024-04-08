@@ -67,7 +67,11 @@
     <right>
         <VBox fx:id="opcionesVBox" managed="false" visible= "false" styleClass="right-grid-pane" >
             <GridPane styleClass="red-grid-pane" VBox.vgrow="ALWAYS" >
+<<<<<<< HEAD
                 <Button fx:id="botonPerfil" text="Perfil" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#switchToPerfil" />
+=======
+                <Button fx:id="botonPerfil" text="Perfil" onAction="#switchToPerfil" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+>>>>>>> 402437a103b9207d7c0ab149247b55d128fa033c
                 <Button fx:id="botonCerrarSesion" text="Cerrar Sesion" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             </GridPane>
         </VBox>

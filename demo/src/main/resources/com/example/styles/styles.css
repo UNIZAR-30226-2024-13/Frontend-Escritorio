@@ -49,7 +49,6 @@ Button {
     -fx-font-size: 14px;
 }
 
-
 /* Estilo para el botón con imagenes de 70x70 */
 .image-button {
     -fx-min-width: 0;
