@@ -18,7 +18,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("/com/example/vistas/carta"), 640, 480);
+        scene = new Scene(loadFXML("/com/example/vistas/login"), 640, 480);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/example/imgs/logo.jpg")));
         stage.setScene(scene);
         stage.setMaximized(true);

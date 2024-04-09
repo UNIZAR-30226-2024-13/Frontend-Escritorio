@@ -21,11 +21,14 @@
 
         <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="white-label"/>
         <TextField fx:id="campoEmailReg" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Nombre de usuario:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="white-label"/>
+        <TextField fx:id="campoEmailReg" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
         
-        <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="white-label"/>
-        <TextField fx:id="campoContraseñaReg" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="white-label"/>
+        <TextField fx:id="campoContraseñaReg" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
         
-        <Button text="Atrás" onAction="#switchToLogin" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <Button text="Continuar" onAction="#switchToMenuPrincipal" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        <Button text="Atrás" onAction="#switchToLogin" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Button text="Continuar" onAction="#switchToMenuPrincipal" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
     </GridPane>
 </VBox>
