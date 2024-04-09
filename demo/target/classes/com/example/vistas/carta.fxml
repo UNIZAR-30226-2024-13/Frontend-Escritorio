@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.image.Image?>
+
+<GridPane prefHeight="150" prefWidth="100" stylesheets="@../styles/styles.css"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.CartaController" >
+    <GridPane fx:id="cartaPane" styleClass="stack-pane-carta" prefHeight="150" prefWidth="100">
+        <GridPane styleClass="stack-pane-contenido-carta" alignment="CENTER" prefHeight="150" prefWidth="100">
+            <Label fx:id="numeroCarta" styleClass="label-numero-carta" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+            <ImageView fx:id="imagenPaloCarta" fitWidth="40" fitHeight="40" GridPane.rowIndex="0" GridPane.columnIndex="1">
+        </GridPane>
+    </GridPane>
+</GridPane>
