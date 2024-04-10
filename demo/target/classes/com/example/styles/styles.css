@@ -12,6 +12,12 @@
     -fx-font-size: 22px;
 }
 
+/* Estilos para las etiquetas de error */
+.error-label {
+    -fx-text-fill: darkred;
+    -fx-font-size: 18px;
+}
+
 /* Estilos para el GridPane en el centro */
 .center-grid-pane {
     -fx-padding: 10px;
