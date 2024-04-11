@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,7 +19,7 @@ public class LoginController implements Initializable{
     private TextField campoUser;
 
     @FXML
-    private TextField campoContrasegna;
+    private PasswordField campoContrasegna;
 
     @FXML
     private ImageView imagenLogo;
@@ -28,6 +29,12 @@ public class LoginController implements Initializable{
 
     @FXML
     private Label errorPasswd;
+
+    @FXML
+    private Label marcaErrorUser;
+
+    @FXML
+    private Label marcaErrorPasswd;
 
     private boolean errorUserVisible = false;
 
@@ -60,30 +67,16 @@ public class LoginController implements Initializable{
         if (user.isEmpty()) {
             errorUser.setText("Debes rellenar el campo Nombre de usuario");
             errorPasswd.setVisible(false);
-            errorPasswd.setManaged(false);
             errorUser.setVisible(true);
-            errorUser.setManaged(true);
+            marcaErrorPasswd.setVisible(false);
+            marcaErrorUser.setVisible(true);
         }
         else if (passwd.isEmpty()) {
             errorPasswd.setText("Debes rellenar el campo Contraseña");
             errorUser.setVisible(false);
-            errorUser.setManaged(false);
             errorPasswd.setVisible(true);
-            errorPasswd.setManaged(true);
-        }
-        else if (passwd.length() < 8) {
-            errorPasswd.setText("La contraseña debe tener más de 8 carácteres");
-            errorUser.setVisible(false);
-            errorUser.setManaged(false);
-            errorPasswd.setVisible(true);
-            errorPasswd.setManaged(true);
-        }
-        else if (!passwd.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+")) {
-            errorPasswd.setText("La contraseña debe contener letras y números");
-            errorUser.setVisible(false);
-            errorUser.setManaged(false);
-            errorPasswd.setVisible(true);
-            errorPasswd.setManaged(true);
+            marcaErrorPasswd.setVisible(true);
+            marcaErrorUser.setVisible(false);
         }
         else{
             // Comprobar si el usuario esta en la BD
