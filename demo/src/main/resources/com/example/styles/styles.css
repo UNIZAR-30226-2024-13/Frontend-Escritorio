@@ -55,6 +55,14 @@ Button {
     -fx-font-size: 14px;
 }
 
+/* Estilo cuando se pulsa un boton */
+.button-clicked {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+    -fx-background-color: lightblue;
+    -fx-font-size: 14px;
+}
+
 /* Estilo para el botón con imagenes de 70x70 */
 .image-button {
     -fx-min-width: 0;

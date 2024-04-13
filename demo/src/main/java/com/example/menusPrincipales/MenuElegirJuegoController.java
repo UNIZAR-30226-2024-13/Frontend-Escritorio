@@ -62,26 +62,31 @@ public class MenuElegirJuegoController implements Initializable{
 
     @FXML
     private void crearCinquillo() throws IOException {
+        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
         App.setRoot("/com/example/vistas/juegos/crearCinquillo");
     }
 
     @FXML
     private void crearMentiroso() throws IOException {
+        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
         App.setRoot("/com/example/vistas/juegos/crearMentiroso");
     }
 
     @FXML
     private void crearPoker() throws IOException {
+        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
         App.setRoot("/com/example/vistas/juegos/crearPoker");
     }
 
     @FXML
     private void crearBlackJack() throws IOException {
+        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
         App.setRoot("/com/example/vistas/juegos/crearBlackJack");
     }
 
     @FXML
     private void crearUNO() throws IOException {
+        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
         App.setRoot("/com/example/vistas/juegos/crearUNO");
     }
 }
