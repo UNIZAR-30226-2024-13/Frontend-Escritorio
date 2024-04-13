@@ -65,7 +65,7 @@ public class RegistroController implements Initializable {
 
     @FXML
     private void switchToMenuPrincipal() throws IOException {
-        App.setRoot("/com/example/vistas/menuPrincipal");
+        App.setRoot("/com/example/vistas/menusPrincipales/menuPrincipal");
     }
 
     @FXML
@@ -139,7 +139,7 @@ public class RegistroController implements Initializable {
             marcaErrorPasswd.setVisible(true);
         }
         else if (!passwd.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+")) {
-            error.setText("La contraseña debe contener al menos una mayúscala, una minúscula y un dígito");
+            error.setText("La contraseña debe contener al menos una mayúscula, una minúscula y un dígito");
             error.setVisible(true);
             marcaErrorNombre.setVisible(false);
             marcaErrorPais.setVisible(false);

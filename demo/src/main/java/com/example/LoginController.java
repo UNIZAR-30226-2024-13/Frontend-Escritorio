@@ -7,9 +7,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -35,10 +34,6 @@ public class LoginController implements Initializable{
 
     @FXML
     private Label marcaErrorPasswd;
-
-    private boolean errorUserVisible = false;
-
-    private boolean errorPasswdVisible = false;
     
 
     @Override
@@ -57,7 +52,7 @@ public class LoginController implements Initializable{
 
     @FXML
     private void switchToMenuPrincipal() throws IOException {
-        App.setRoot("/com/example/vistas/menuPrincipal");
+        App.setRoot("/com/example/vistas/menusPrincipales/menuPrincipal");
     }
 
     @FXML
