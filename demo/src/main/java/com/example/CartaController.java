@@ -25,6 +25,7 @@ public class CartaController implements Initializable {
         numeroCarta.setText(numero);
     }
 
+    @SuppressWarnings("exports")
     public void setImagen(Image imagen) {
         imagenPaloCarta.setImage(imagen);
     }

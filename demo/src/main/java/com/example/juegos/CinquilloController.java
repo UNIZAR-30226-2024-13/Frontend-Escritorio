@@ -25,7 +25,6 @@ public class CinquilloController {
 
     private boolean opcionesVisible = false;
     private CartaController cartaController = new CartaController();
-    private ReversoCartaController reversoController = new ReversoCartaController();
 
     /**
      * Hace visible una etiqueta con un mensaje, pasados 5 segundos la vuelve a ocultar
@@ -61,10 +60,8 @@ public class CinquilloController {
     }
 
     public void configurarCarta() {
-        Image imagen = new Image("/resources/com/example/imgs/reverso.jpg");
+        Image imagen = new Image(getClass().getResourceAsStream("/resources/com/example/imgs/reverso.jpg"));
         cartaController.setNumero("1");
         cartaController.setImagen(imagen);
-
-        reversoController.setImagen(imagen);
     }
 }
