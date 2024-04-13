@@ -29,6 +29,15 @@
     -fx-vgap: 40;
 }
 
+/* Estilo para las mesas de juego */
+.game-grid-pane {
+    -fx-border-color: rgb(255, 179, 0);
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-color: darkgreen;
+    -fx-alignment: center;
+}
+
 /* Estilos para el GridPane de ventana emergente */
 .red-grid-pane {
     -fx-padding: 10px;
@@ -93,6 +102,13 @@ VBox {
     -fx-background-color: darkgreen;
 }
 
+/* Estilo de las Hbox */
+HBox {
+    -fx-padding: 10px;
+    -fx-background-color: darkgreen;
+    -fx-alignment: CENTER;
+}
+
 /* Estilo de las tablas */
 TableView {
     -fx-background-color: darkgreen;
@@ -108,7 +124,6 @@ TableView {
 /* carta */
 .stack-pane-carta {
     -fx-background-color: white;
-    -fx-padding: 10px;
     -fx-border-color: black; 
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
@@ -116,10 +131,11 @@ TableView {
 
 .stack-pane-contenido-carta {
     -fx-background-color: rgb(252, 252, 104); 
-    -fx-padding: 10px;
     -fx-border-color: black; 
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
+    -fx-prefHeight: "50";
+    -fx-prefWidth: "33";
 }
 
 .label-numero-carta {

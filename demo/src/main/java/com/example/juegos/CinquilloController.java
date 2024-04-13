@@ -2,12 +2,16 @@ package com.example.juegos;
 
 import java.io.IOException;
 
+import com.example.CartaController;
+import com.example.ReversoCartaController;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -20,6 +24,8 @@ public class CinquilloController {
     private Label etiquetaMensajeAbandono;
 
     private boolean opcionesVisible = false;
+    private CartaController cartaController = new CartaController();
+    private ReversoCartaController reversoController = new ReversoCartaController();
 
     /**
      * Hace visible una etiqueta con un mensaje, pasados 5 segundos la vuelve a ocultar
@@ -52,5 +58,13 @@ public class CinquilloController {
     @FXML
     private void pausarPartida() throws IOException {
         // TODO : Iniciar votacion o votar si / no
+    }
+
+    public void configurarCarta() {
+        Image imagen = new Image("/resources/com/example/imgs/reverso.jpg");
+        cartaController.setNumero("1");
+        cartaController.setImagen(imagen);
+
+        reversoController.setImagen(imagen);
     }
 }

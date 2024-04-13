@@ -9,23 +9,20 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class CartaController implements Initializable {
+public class ReversoCartaController implements Initializable {
 
     @FXML
     private Label numeroCarta;
 
     @FXML
-    private ImageView imagenPaloCarta;
+    private ImageView imagenReversoCarta;
         
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    public void setNumero(String numero) {
-        numeroCarta.setText(numero);
-    }
-
+    @SuppressWarnings("exports")
     public void setImagen(Image imagen) {
-        imagenPaloCarta.setImage(imagen);
+        imagenReversoCarta.setImage(imagen);
     }
 }

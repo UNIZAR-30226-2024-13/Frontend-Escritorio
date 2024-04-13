@@ -42,7 +42,68 @@
         </GridPane>
     </top>
     <center>
-
+        <BorderPane>
+            <top>
+                <HBox>
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                </HBox>
+            </top>
+            <left>
+                <VBox>
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                </VBox>
+            </left>
+            <center>
+                <GridPane styleClass="game-grid-pane" >
+                </GridPane>
+            </center>
+            <right>
+                <VBox>
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                    <fx:include source="../reversoCarta.fxml" />
+                </VBox>
+            </right>
+            <bottom>
+                <HBox>
+                    <fx:include source="../carta.fxml" />
+                    <fx:include source="../carta.fxml" />
+                    <fx:include source="../carta.fxml" />
+                    <fx:include source="../carta.fxml" />
+                    <fx:include source="../carta.fxml" />
+                    <fx:include source="../carta.fxml" />
+                    <fx:include source="../carta.fxml" />
+                    <fx:include source="../carta.fxml" />
+                    <fx:include source="../carta.fxml" />
+                    <fx:include source="../carta.fxml" />
+                </HBox>
+            </bottom>
+        </BorderPane>
     </center>
     <right>
         <VBox fx:id="opcionesVBox" managed="false" visible= "false" styleClass="right-grid-pane" >
