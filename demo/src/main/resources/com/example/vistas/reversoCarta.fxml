@@ -4,12 +4,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane prefHeight="150" prefWidth="100" stylesheets="@../styles/styles.css"
+<VBox prefHeight="150" prefWidth="100" stylesheets="@../styles/styles.css" styleClass="vbox-carta"
             xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ReversoCartaController" >
-    <GridPane fx:id="cartaPane" styleClass="stack-pane-carta" >
-        <ImageView fx:id="imagenReversoCarta" fitWidth="40" fitHeight="50" GridPane.rowIndex="0" GridPane.columnIndex="1" >
+    <GridPane fx:id="cartaPane" styleClass="stack-pane-carta">
+        <ImageView fx:id="imagenReversoCarta" fitWidth="40" fitHeight="60" GridPane.rowIndex="0" GridPane.columnIndex="1" >
             <Image url="@../imgs/reverso.jpg"/>
         </ImageView>
     </GridPane>
-</GridPane>
+</VBox>

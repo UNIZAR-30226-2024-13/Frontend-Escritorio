@@ -123,10 +123,7 @@ TableView {
 
 /* carta */
 .stack-pane-carta {
-    -fx-background-color: white;
-    -fx-border-color: black; 
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
+    -fx-background-color: darkgreen;
 }
 
 .stack-pane-contenido-carta {
@@ -142,4 +139,10 @@ TableView {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: black;
+}
+
+.vbox-carta {
+    -fx-background-color: darkgreen;
+    -fx-alignment: CENTER;
+    -fx-padding: -10px;
 }

@@ -51,7 +51,8 @@
                     <ColumnConstraints />
                 </columnConstraints>
 
-                <Button fx:id="botonPublica" text="Publica" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" onAction="#partidaPublica"/>
+                <Button fx:id="botonPublica" text="Publica" onAction="#partidaPublica" styleClass="button-clicked"
+                    GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
                 <Button fx:id="botonPrivada" text="Privada" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="CENTER" onAction="#partidaPrivada"/>
                 <Label fx:id="etiquetaPasswd" text="Contraseña: ID PARTIDA" managed="false" visible="false" styleClass="white-label"
                     GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT"/>

@@ -3,7 +3,6 @@ package com.example.juegos;
 import java.io.IOException;
 
 import com.example.CartaController;
-import com.example.ReversoCartaController;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
