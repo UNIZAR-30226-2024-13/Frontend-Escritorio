@@ -81,6 +81,13 @@ Button {
     -fx-pref-height: 65px;
 }
 
+/* Estilo para el botón con carta de 150x100 */
+.carta-button {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 150px;
+    -fx-background-color: darkgreen;
+}
+
 /* Estilos para los GridPane laterales */
 .lateral-grid-pane {
     -fx-padding: 100px;

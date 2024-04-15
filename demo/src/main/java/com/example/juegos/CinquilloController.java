@@ -2,6 +2,8 @@ package com.example.juegos;
 
 import java.io.IOException;
 
+import com.example.App;
+
 import com.example.CartaController;
 
 import javafx.animation.KeyFrame;
@@ -24,6 +26,11 @@ public class CinquilloController {
 
     private boolean opcionesVisible = false;
     private CartaController cartaController = new CartaController();
+
+    @FXML
+    private void switchToMainMenu() throws IOException {
+        App.setRoot("/com/example/vistas/menusPrincipales/menuPrincipal");
+    }
 
     /**
      * Hace visible una etiqueta con un mensaje, pasados 5 segundos la vuelve a ocultar
