@@ -36,6 +36,7 @@
     -fx-border-radius: 10px;
     -fx-background-color: darkgreen;
     -fx-alignment: center;
+    -fx-padding: 5px;
 }
 
 /* Estilos para el GridPane de ventana emergente */
