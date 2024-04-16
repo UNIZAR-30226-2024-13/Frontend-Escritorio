@@ -167,52 +167,52 @@
                         <ColumnConstraints percentWidth="7"/>
                         <ColumnConstraints/>
                     </columnConstraints>
-                    <Button fx:id="botonCarta1" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="carta-button">
+                    <Button fx:id="botonCarta1" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="carta-button" visible="true">
                         <graphic>
                             <fx:include source="../carta.fxml"  />
                         </graphic>
                     </Button>
-                    <Button fx:id="botonCarta2" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button">
+                    <Button fx:id="botonCarta2" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
                         <graphic>
                             <fx:include source="../carta.fxml"  />
                         </graphic>
                     </Button>
-                    <Button fx:id="botonCarta3" GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button">
+                    <Button fx:id="botonCarta3" GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
                         <graphic>
                             <fx:include source="../carta.fxml"  />
                         </graphic>
                     </Button>
-                    <Button fx:id="botonCarta4" GridPane.columnIndex="3" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button">
+                    <Button fx:id="botonCarta4" GridPane.columnIndex="3" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
                         <graphic>
                             <fx:include source="../carta.fxml"  />
                         </graphic>
                     </Button>
-                    <Button fx:id="botonCarta5" GridPane.columnIndex="4" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button">
+                    <Button fx:id="botonCarta5" GridPane.columnIndex="4" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
                         <graphic>
                             <fx:include source="../carta.fxml"  />
                         </graphic>
                     </Button>
-                    <Button fx:id="botonCarta6" GridPane.columnIndex="5" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button">
+                    <Button fx:id="botonCarta6" GridPane.columnIndex="5" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
                         <graphic>
                             <fx:include source="../carta.fxml"  />
                         </graphic>
                     </Button>
-                    <Button fx:id="botonCarta7" GridPane.columnIndex="6" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button">
+                    <Button fx:id="botonCarta7" GridPane.columnIndex="6" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
                         <graphic>
                             <fx:include source="../carta.fxml"  />
                         </graphic>
                     </Button>
-                    <Button fx:id="botonCarta8" GridPane.columnIndex="7" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button">
+                    <Button fx:id="botonCarta8" GridPane.columnIndex="7" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
                         <graphic>
                             <fx:include source="../carta.fxml"  />
                         </graphic>
                     </Button>
-                    <Button fx:id="botonCarta9" GridPane.columnIndex="8" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button">
+                    <Button fx:id="botonCarta9" GridPane.columnIndex="8" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
                         <graphic>
                             <fx:include source="../carta.fxml"  />
                         </graphic>
                     </Button>
-                    <Button fx:id="botonCarta10" GridPane.columnIndex="9" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button">
+                    <Button fx:id="botonCarta10" GridPane.columnIndex="9" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
                         <graphic>
                             <fx:include source="../carta.fxml"  />
                         </graphic>

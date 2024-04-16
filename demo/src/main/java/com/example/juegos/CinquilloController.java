@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
@@ -32,6 +33,36 @@ public class CinquilloController implements Initializable{
 
     @FXML
     private Label etiquetaMensajeAbandono;
+
+    @FXML
+    private Button botonCarta1;
+
+    @FXML
+    private Button botonCarta2;
+
+    @FXML
+    private Button botonCarta3;
+
+    @FXML
+    private Button botonCarta4;
+
+    @FXML
+    private Button botonCarta5;
+
+    @FXML
+    private Button botonCarta6;
+
+    @FXML
+    private Button botonCarta7;
+
+    @FXML
+    private Button botonCarta8;
+
+    @FXML
+    private Button botonCarta9;
+
+    @FXML
+    private Button botonCarta10;
 
     @FXML
     private GridPane unoOros;
@@ -116,6 +147,7 @@ public class CinquilloController implements Initializable{
 
     @FXML
     public void ponerCarta(ActionEvent event) {
+        botonCarta1.setVisible(false);
         cincoOros.setVisible(true);
     }
 }
