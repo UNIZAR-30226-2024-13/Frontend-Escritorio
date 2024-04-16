@@ -65,6 +65,14 @@ Button {
     -fx-font-size: 14px;
 }
 
+/* Estilos para los botones */
+.button-poker {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 30px;
+    -fx-background-color: rgb(255, 179, 0);
+    -fx-font-size: 14px;
+}
+
 /* Estilo cuando se pulsa un boton */
 .button-clicked {
     -fx-pref-width: 200px;

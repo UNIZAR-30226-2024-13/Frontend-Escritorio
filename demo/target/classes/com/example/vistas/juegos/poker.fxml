@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.transform.Rotate?>
+
+
+<BorderPane prefHeight="400" prefWidth="600" stylesheets="@../../styles/styles.css" 
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.juegos.PokerController">
+    <center>
+        <BorderPane>
+            <top>
+                <GridPane style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" >
+                    <fx:include source="../reversoCarta.fxml" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <fx:include source="../reversoCarta.fxml" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                </GridPane>
+            </top>
+            <left>
+                <GridPane style="-fx-margin: 10px; -fx-background-color: darkgreen; -fx-padding: 5px" >
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="15"/>
+                        <ColumnConstraints percentWidth="80"/>
+                        <ColumnConstraints/>
+                    </columnConstraints>
+                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER" />
+                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="CENTER" />
+                </GridPane>
+            </left>
+            <center>
+                <GridPane styleClass="game-grid-pane" style="-fx-margin: -20px;" >
+                    <VBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <fx:include source="../carta.fxml" />
+                    </VBox>
+                    <VBox GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <fx:include source="../carta.fxml" />
+                    </VBox>
+                    <VBox GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <fx:include source="../carta.fxml" />
+                    </VBox>
+                    <VBox fx:id="cuartaCentral" GridPane.columnIndex="3" GridPane.rowIndex="0" visible="false" managed="false">
+                        <fx:include source="../carta.fxml" />
+                    </VBox>
+                    <VBox fx:id="quintaCentral" GridPane.columnIndex="4" GridPane.rowIndex="0" visible="false" managed="false">
+                        <fx:include source="../carta.fxml" />
+                    </VBox>
+                </GridPane>
+            </center>
+            <right>
+                <GridPane style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-padding: 5px" >
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="15"/>
+                        <ColumnConstraints percentWidth="80"/>
+                        <ColumnConstraints/>
+                    </columnConstraints>
+                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER" />
+                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="CENTER" />
+                </GridPane>
+            </right>
+            <bottom>
+                <GridPane style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" >
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="40"/>
+                        <ColumnConstraints percentWidth="10"/>
+                        <ColumnConstraints percentWidth="10"/>
+                        <ColumnConstraints percentWidth="7"/>
+                        <ColumnConstraints percentWidth="7"/>
+                        <ColumnConstraints percentWidth="7"/>
+                        <ColumnConstraints percentWidth="7"/>
+                        <ColumnConstraints percentWidth="1"/>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <Button fx:id="botonCarta1" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="carta-button" visible="true">
+                        <graphic>
+                            <fx:include source="../carta.fxml"  />
+                        </graphic>
+                    </Button>
+                    <Button fx:id="botonCarta2" GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
+                        <graphic>
+                            <fx:include source="../carta.fxml"  />
+                        </graphic>
+                    </Button>
+                    <Button fx:id="botonRetirar" text="Retirarse" GridPane.columnIndex="4" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
+                    <Button fx:id="botonIgualar" text="Igualar" GridPane.columnIndex="5" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="button-poker"/>
+                    <TextField fx:id="campoApuesta" GridPane.columnIndex="6" GridPane.rowIndex="0" />
+                    <Button fx:id="botonApostar" text="Apostar" GridPane.columnIndex="8" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
+                </GridPane>
+            </bottom>
+        </BorderPane>
+    </center>
+</BorderPane>
