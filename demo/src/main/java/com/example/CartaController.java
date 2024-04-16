@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
 public class CartaController implements Initializable {
 
@@ -16,6 +17,9 @@ public class CartaController implements Initializable {
 
     @FXML
     private ImageView imagenPaloCarta;
+
+    @FXML
+    private GridPane cartaPane;
         
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -28,5 +32,9 @@ public class CartaController implements Initializable {
     @SuppressWarnings("exports")
     public void setImagen(Image imagen) {
         imagenPaloCarta.setImage(imagen);
+    }
+
+    public void setVisible(boolean visible) {
+        cartaPane.setVisible(visible);
     }
 }
