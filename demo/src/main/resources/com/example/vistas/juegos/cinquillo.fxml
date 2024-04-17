@@ -97,40 +97,100 @@
                         </GridPane>
                     </VBox>
                     <VBox GridPane.columnIndex="1" GridPane.rowIndex="0">
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
+                        <GridPane fx:id="unoCopas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="dosCopas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="tresCopas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="cuatroCopas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="cincoCopas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="seisCopas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="sieteCopas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="sotaCopas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="caballoCopas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="reyCopas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
                     </VBox>
                     <VBox GridPane.columnIndex="2" GridPane.rowIndex="0">
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
+                        <GridPane fx:id="unoEspadas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="dosEspadas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="tresEspadas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="cuatroEspadas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="cincoEspadas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="seisEspadas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="sieteEspadas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="sotaEspadas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="caballoEspadas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="reyEspadas" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
                     </VBox>
                     <VBox GridPane.columnIndex="3" GridPane.rowIndex="0">
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
-                        <fx:include source="../carta.fxml" />
+                        <GridPane fx:id="unoBastos" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="dosBastos" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="tresBastos" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="cuatroBastos" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="cincoBastos" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="seisBastos" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="sieteBastos" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="sotaBastos" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="caballoBastos" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
+                        <GridPane fx:id="reyBastos" visible="false" >
+                            <fx:include source="../carta.fxml" />
+                        </GridPane>
                     </VBox>
                 </GridPane>
             </center>

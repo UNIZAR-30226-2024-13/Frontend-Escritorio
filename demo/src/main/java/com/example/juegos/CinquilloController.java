@@ -5,10 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.App;
-
 import com.example.CartaController;
-import com.example.ReversoCartaController;
-
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
