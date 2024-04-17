@@ -7,91 +7,24 @@ import java.util.ResourceBundle;
 import com.example.App;
 import com.example.CartaController;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 
 public class CinquilloController implements Initializable{
-
-    @FXML
-    private VBox opcionesVBox;
 
     @FXML
     private CartaController cincoOrosController;
 
     @FXML
-    private Label etiquetaMensajeAbandono;
-
-    @FXML
     private Button botonCarta1;
-
-    @FXML
-    private Button botonCarta2;
-
-    @FXML
-    private Button botonCarta3;
-
-    @FXML
-    private Button botonCarta4;
-
-    @FXML
-    private Button botonCarta5;
-
-    @FXML
-    private Button botonCarta6;
-
-    @FXML
-    private Button botonCarta7;
-
-    @FXML
-    private Button botonCarta8;
-
-    @FXML
-    private Button botonCarta9;
-
-    @FXML
-    private Button botonCarta10;
-
-    @FXML
-    private GridPane unoOros;
-
-    @FXML
-    private GridPane dosOros;
-    
-    @FXML
-    private GridPane tresOros;
-
-    @FXML
-    private GridPane cuatroOros;
 
     @FXML
     private GridPane cincoOros;
 
-    @FXML
-    private GridPane seisOros;
-
-    @FXML
-    private GridPane sieteOros;
-
-    @FXML
-    private GridPane sotaOros;
-
-    @FXML
-    private GridPane caballoOros;
-
-    @FXML
-    private GridPane reyOros;
-
-    private boolean opcionesVisible = false;
     private CartaController cartaController = new CartaController();
 
     @Override
@@ -101,34 +34,6 @@ public class CinquilloController implements Initializable{
     @FXML
     private void switchToMainMenu() throws IOException {
         App.setRoot("/com/example/vistas/menusPrincipales/menuPrincipal");
-    }
-
-    /**
-     * Hace visible una etiqueta con un mensaje, pasados 5 segundos la vuelve a ocultar
-     * @throws IOException
-     */
-    @FXML
-    private void mostrarMensajeAbandono() throws IOException {
-        etiquetaMensajeAbandono.setManaged(true);
-        etiquetaMensajeAbandono.setVisible(true);
-
-        Timeline timeline = new Timeline();
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                etiquetaMensajeAbandono.setManaged(false);
-                etiquetaMensajeAbandono.setVisible(false);
-            }
-        });
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.play();
-    }
-    
-    @FXML
-    private void mostrarOcultarOpciones(ActionEvent event) {
-        opcionesVisible = !opcionesVisible;
-        opcionesVBox.setManaged(opcionesVisible);
-        opcionesVBox.setVisible(opcionesVisible);
     }
 
     @FXML
@@ -142,6 +47,7 @@ public class CinquilloController implements Initializable{
         cartaController.setImagen(imagen);
     }
 
+    @SuppressWarnings("exports")
     @FXML
     public void ponerCarta(ActionEvent event) {
         botonCarta1.setVisible(false);
