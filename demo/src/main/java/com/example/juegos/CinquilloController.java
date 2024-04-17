@@ -9,6 +9,7 @@ import com.example.CartaController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -17,15 +18,13 @@ import javafx.scene.layout.GridPane;
 public class CinquilloController implements Initializable{
 
     @FXML
-    private CartaController cincoOrosController;
+    private CartaController controller ;
 
     @FXML
     private Button botonCarta1;
 
     @FXML
     private GridPane cincoOros;
-
-    private CartaController cartaController = new CartaController();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -42,15 +41,27 @@ public class CinquilloController implements Initializable{
     }
 
     public void configurarCarta() {
-        Image imagen = new Image(getClass().getResourceAsStream("/resources/com/example/imgs/reverso.jpg"));
-        cartaController.setNumero("1");
-        cartaController.setImagen(imagen);
+        controller = obtenerControladorCarta();
+        Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
+        controller.setNumero("1");
+        controller.setImagen(imagen);
     }
 
     @SuppressWarnings("exports")
     @FXML
     public void ponerCarta(ActionEvent event) {
+        configurarCarta();
         botonCarta1.setVisible(false);
         cincoOros.setVisible(true);
+    }
+
+    private CartaController obtenerControladorCarta() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/vistas/carta.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return loader.getController();
     }
 }
