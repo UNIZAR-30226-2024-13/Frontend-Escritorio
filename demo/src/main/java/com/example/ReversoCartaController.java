@@ -23,11 +23,6 @@ public class ReversoCartaController implements Initializable {
         
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (cartaPane != null) {
-            System.out.println("CartaPane se ha cargado correctamente.");
-        } else {
-            System.out.println("CartaPane no se ha inicializado correctamente.");
-        }
     }
 
     @SuppressWarnings("exports")

@@ -20,8 +20,21 @@
         <BorderPane>
             <top>
                 <GridPane style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" >
-                    <fx:include source="../reversoCarta.fxml" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="42"/>
+                        <ColumnConstraints percentWidth="10"/>
+                        <ColumnConstraints percentWidth="10"/>
+                        <ColumnConstraints percentWidth="7"/>
+                        <ColumnConstraints percentWidth="7"/>
+                        <ColumnConstraints percentWidth="7"/>
+                        <ColumnConstraints percentWidth="7"/>
+                        <ColumnConstraints percentWidth="7"/>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <Label fx:id="textoUltApuesta" text="Última apuesta: 200 fichas" styleClass="white-label" />
                     <fx:include source="../reversoCarta.fxml" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <fx:include source="../reversoCarta.fxml" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+
                 </GridPane>
             </top>
             <left>
@@ -31,8 +44,10 @@
                         <ColumnConstraints percentWidth="80"/>
                         <ColumnConstraints/>
                     </columnConstraints>
-                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER" />
-                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="CENTER" />
+                    <Label GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="white-label" />
+                    <Label GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="white-label" />
+                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="3" GridPane.columnIndex="1" />
                 </GridPane>
             </left>
             <center>
@@ -61,8 +76,10 @@
                         <ColumnConstraints percentWidth="80"/>
                         <ColumnConstraints/>
                     </columnConstraints>
-                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER" />
-                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="CENTER" />
+                    <Label GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="white-label" />
+                    <Label GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="white-label" />
+                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="3" GridPane.columnIndex="1" />
                 </GridPane>
             </right>
             <bottom>
@@ -88,8 +105,9 @@
                             <fx:include source="../carta.fxml"  />
                         </graphic>
                     </Button>
+                    <Label fx:id="textoFichas" text="400 fichas disponibles" styleClass="white-label" />
                     <Button fx:id="botonRetirar" text="Retirarse" GridPane.columnIndex="4" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
-                    <Button fx:id="botonIgualar" text="Igualar" GridPane.columnIndex="5" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="button-poker"/>
+                    <Button fx:id="botonIgualar" text="Igualar" GridPane.columnIndex="5" GridPane.rowIndex="0" onAction="#configurarCarta" styleClass="button-poker"/>
                     <TextField fx:id="campoApuesta" GridPane.columnIndex="6" GridPane.rowIndex="0" />
                     <Button fx:id="botonApostar" text="Apostar" GridPane.columnIndex="8" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
                 </GridPane>

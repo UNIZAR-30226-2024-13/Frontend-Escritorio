@@ -44,6 +44,7 @@ public class PokerController implements Initializable{
 
     private boolean cuartaCarta = true;
 
+    @FXML
     private CartaController cartaController = new CartaController();
 
     @Override
@@ -88,8 +89,8 @@ public class PokerController implements Initializable{
         // TODO : Iniciar votacion o votar si / no
     }
 
-    public void configurarCarta() {
-        Image imagen = new Image(getClass().getResourceAsStream("/resources/com/example/imgs/reverso.jpg"));
+    public void configurarCarta() throws IOException {
+        Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
         cartaController.setNumero("1");
         cartaController.setImagen(imagen);
     }
