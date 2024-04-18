@@ -65,6 +65,9 @@
             <center>
                 <GridPane styleClass="game-grid-pane" style="-fx-margin: -20px;" >
                     <GridPane fx:id="escaleraOros" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <GridPane fx:id="escaleraCopas" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <GridPane fx:id="escaleraEspadas" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                    <GridPane fx:id="escaleraBastos" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
                 </GridPane>
             </center>
             <right>
@@ -100,16 +103,16 @@
                         <ColumnConstraints percentWidth="7"/>
                         <ColumnConstraints/>
                     </columnConstraints>
-                    <Button fx:id="botonCarta1" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="carta-button" visible="true"/>
-                    <Button fx:id="botonCarta2" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
-                    <Button fx:id="botonCarta3" GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
-                    <Button fx:id="botonCarta4" GridPane.columnIndex="3" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
-                    <Button fx:id="botonCarta5" GridPane.columnIndex="4" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
-                    <Button fx:id="botonCarta6" GridPane.columnIndex="5" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
-                    <Button fx:id="botonCarta7" GridPane.columnIndex="6" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
-                    <Button fx:id="botonCarta8" GridPane.columnIndex="7" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
-                    <Button fx:id="botonCarta9" GridPane.columnIndex="8" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
-                    <Button fx:id="botonCarta10" GridPane.columnIndex="9" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta1" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#ponerCarta1" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta2" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#ponerCarta2" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta3" GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#ponerCarta3" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta4" GridPane.columnIndex="3" GridPane.rowIndex="0" onAction="#ponerCarta4" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta5" GridPane.columnIndex="4" GridPane.rowIndex="0" onAction="#ponerCarta5" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta6" GridPane.columnIndex="5" GridPane.rowIndex="0" onAction="#ponerCarta6" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta7" GridPane.columnIndex="6" GridPane.rowIndex="0" onAction="#ponerCarta7" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta8" GridPane.columnIndex="7" GridPane.rowIndex="0" onAction="#ponerCarta8" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta9" GridPane.columnIndex="8" GridPane.rowIndex="0" onAction="#ponerCarta9" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta10" GridPane.columnIndex="9" GridPane.rowIndex="0" onAction="#ponerCarta10" styleClass="carta-button" visible="true"/>
                 </GridPane>
             </bottom>
         </BorderPane>
