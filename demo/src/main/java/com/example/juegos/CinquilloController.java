@@ -5,11 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.Carta;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,7 +18,7 @@ public class CinquilloController implements Initializable{
 
 
     @FXML
-    private GridPane cincoOros;
+    private GridPane escaleraOros;
 
     @FXML
     private Button botonCarta1;
@@ -44,8 +41,13 @@ public class CinquilloController implements Initializable{
 
     @FXML
     private void ponerCarta(){
-        cincoOros.setVisible(true);
-        cincoOros.add(new Label("pene"), 0, 0);
-        cincoOros.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 1, 0);
+        escaleraOros.setVisible(true);
+        escaleraOros.add(new Label("pene"), 0, 0);
+        escaleraOros.add(new Label("pene"), 0, 1);
+        escaleraOros.add(new Label("pene"), 0, 2);
+        escaleraOros.add(new Label("pene"), 0, 3);
+        escaleraOros.add(new Label("pene"), 0, 4);
+        escaleraOros.add(new Label("pene"), 0, 5);
+        escaleraOros.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 1, 0);
     }
 }

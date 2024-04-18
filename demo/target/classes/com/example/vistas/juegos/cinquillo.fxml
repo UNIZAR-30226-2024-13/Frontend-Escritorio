@@ -64,134 +64,7 @@
             </left>
             <center>
                 <GridPane styleClass="game-grid-pane" style="-fx-margin: -20px;" >
-                    <VBox GridPane.columnIndex="0" GridPane.rowIndex="0">
-                        <GridPane fx:id="unoOros" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="dosOros" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="tresOros" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="cuatroOros" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane visible="false" fx:id="cincoOros" >
-                            
-                        </GridPane>
-                        <GridPane fx:id="seisOros" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="sieteOros" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="sotaOros" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="caballoOros" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="reyOros" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                    </VBox>
-                    <VBox GridPane.columnIndex="1" GridPane.rowIndex="0">
-                        <GridPane fx:id="unoCopas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="dosCopas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="tresCopas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="cuatroCopas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="cincoCopas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="seisCopas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="sieteCopas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="sotaCopas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="caballoCopas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="reyCopas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                    </VBox>
-                    <VBox GridPane.columnIndex="2" GridPane.rowIndex="0">
-                        <GridPane fx:id="unoEspadas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="dosEspadas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="tresEspadas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="cuatroEspadas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="cincoEspadas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="seisEspadas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="sieteEspadas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="sotaEspadas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="caballoEspadas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="reyEspadas" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                    </VBox>
-                    <VBox GridPane.columnIndex="3" GridPane.rowIndex="0">
-                        <GridPane fx:id="unoBastos" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="dosBastos" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="tresBastos" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="cuatroBastos" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="cincoBastos" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="seisBastos" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="sieteBastos" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="sotaBastos" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="caballoBastos" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                        <GridPane fx:id="reyBastos" visible="false" >
-                            <fx:include source="../carta.fxml" />
-                        </GridPane>
-                    </VBox>
+                    <GridPane fx:id="escaleraOros" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                 </GridPane>
             </center>
             <right>
@@ -227,56 +100,16 @@
                         <ColumnConstraints percentWidth="7"/>
                         <ColumnConstraints/>
                     </columnConstraints>
-                    <Button fx:id="botonCarta1" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="carta-button" visible="true">
-                        <graphic>
-                            <fx:include source="../carta.fxml"  />
-                        </graphic>
-                    </Button>
-                    <Button fx:id="botonCarta2" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
-                        <graphic>
-                            <fx:include source="../carta.fxml"  />
-                        </graphic>
-                    </Button>
-                    <Button fx:id="botonCarta3" GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
-                        <graphic>
-                            <fx:include source="../carta.fxml"  />
-                        </graphic>
-                    </Button>
-                    <Button fx:id="botonCarta4" GridPane.columnIndex="3" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
-                        <graphic>
-                            <fx:include source="../carta.fxml"  />
-                        </graphic>
-                    </Button>
-                    <Button fx:id="botonCarta5" GridPane.columnIndex="4" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
-                        <graphic>
-                            <fx:include source="../carta.fxml"  />
-                        </graphic>
-                    </Button>
-                    <Button fx:id="botonCarta6" GridPane.columnIndex="5" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
-                        <graphic>
-                            <fx:include source="../carta.fxml"  />
-                        </graphic>
-                    </Button>
-                    <Button fx:id="botonCarta7" GridPane.columnIndex="6" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
-                        <graphic>
-                            <fx:include source="../carta.fxml"  />
-                        </graphic>
-                    </Button>
-                    <Button fx:id="botonCarta8" GridPane.columnIndex="7" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
-                        <graphic>
-                            <fx:include source="../carta.fxml"  />
-                        </graphic>
-                    </Button>
-                    <Button fx:id="botonCarta9" GridPane.columnIndex="8" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
-                        <graphic>
-                            <fx:include source="../carta.fxml"  />
-                        </graphic>
-                    </Button>
-                    <Button fx:id="botonCarta10" GridPane.columnIndex="9" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true">
-                        <graphic>
-                            <fx:include source="../carta.fxml"  />
-                        </graphic>
-                    </Button>
+                    <Button fx:id="botonCarta1" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta2" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta3" GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta4" GridPane.columnIndex="3" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta5" GridPane.columnIndex="4" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta6" GridPane.columnIndex="5" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta7" GridPane.columnIndex="6" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta8" GridPane.columnIndex="7" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta9" GridPane.columnIndex="8" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
+                    <Button fx:id="botonCarta10" GridPane.columnIndex="9" GridPane.rowIndex="0" onAction="#switchToMainMenu" styleClass="carta-button" visible="true"/>
                 </GridPane>
             </bottom>
         </BorderPane>
