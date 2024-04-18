@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import com.example.App;
 
-import com.example.CartaController;
+import com.example.Carta;
 import com.example.ReversoCartaController;
 
 
@@ -29,7 +29,7 @@ public class PokerController implements Initializable{
     private VBox opcionesVBox;
 
     @FXML
-    private CartaController cincoOrosController;
+    private Carta cincoOrosController;
 
     @FXML
     private Label etiquetaMensajeAbandono;
@@ -45,7 +45,7 @@ public class PokerController implements Initializable{
     private boolean cuartaCarta = true;
 
     @FXML
-    private CartaController cartaController = new CartaController();
+    private Carta cartaController = new Carta();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

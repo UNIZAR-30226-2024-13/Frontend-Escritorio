@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.CartaController;
+import com.example.Carta;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,6 +46,6 @@ public class CinquilloController implements Initializable{
     private void ponerCarta(){
         cincoOros.setVisible(true);
         cincoOros.add(new Label("pene"), 0, 0);
-        cincoOros.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 0, 1);
+        cincoOros.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 1, 0);
     }
 }
