@@ -9,7 +9,6 @@ import com.example.Carta;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,34 +30,34 @@ public class CinquilloController implements Initializable{
     private GridPane escaleraBastos;
 
     @FXML
-    private Button botonCarta1;
+    private GridPane botonCarta1;
 
     @FXML
-    private Button botonCarta2;
+    private GridPane botonCarta2;
 
     @FXML
-    private Button botonCarta3;
+    private GridPane botonCarta3;
 
     @FXML
-    private Button botonCarta4;
+    private GridPane botonCarta4;
 
     @FXML
-    private Button botonCarta5;
+    private GridPane botonCarta5;
 
     @FXML
-    private Button botonCarta6;
+    private GridPane botonCarta6;
 
     @FXML
-    private Button botonCarta7;
+    private GridPane botonCarta7;
 
     @FXML
-    private Button botonCarta8;
+    private GridPane botonCarta8;
 
     @FXML
-    private Button botonCarta9;
+    private GridPane botonCarta9;
 
     @FXML
-    private Button botonCarta10;
+    private GridPane botonCarta10;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -75,27 +74,31 @@ public class CinquilloController implements Initializable{
     }
 
     private void ponerCarta(int posicionCartaMano){
-        Carta carta = manoUsuario.get(posicionCartaMano); 
+        //Carta carta = manoUsuario.get(posicionCartaMano); 
+        Carta carta = new Carta(5, Carta.OROS); 
         int fila = carta.getNumero();
         
+        Label label = new Label("" + carta.getNumero());
+        label.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;  -fx-text-fill: black;");
+
         switch (carta.getPalo()) {
             case Carta.OROS:
-                escaleraOros.add(new Label("pene"), 0, fila);
+                escaleraOros.add(label, 0, fila);
                 escaleraOros.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 1, fila);
                 break;
         
             case Carta.COPAS:
-                escaleraCopas.add(new Label("pene"), 0, fila);
+                escaleraCopas.add(label, 0, fila);
                 escaleraCopas.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 1, fila);
                 break;
 
             case Carta.ESPADAS:
-                escaleraEspadas.add(new Label("pene"), 0, fila);
+                escaleraEspadas.add(label, 0, fila);
                 escaleraEspadas.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 1, fila);
                 break;
 
             case Carta.BASTOS:
-                escaleraBastos.add(new Label("pene"), 0, fila);
+                escaleraBastos.add(label, 0, fila);
                 escaleraBastos.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 1, fila);
                 break;
         }

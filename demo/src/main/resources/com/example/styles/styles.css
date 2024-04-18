@@ -92,8 +92,9 @@ Button {
 /* Estilo para el botón con carta de 150x100 */
 .carta-button {
     -fx-pref-width: 100px;
-    -fx-pref-height: 150px;
-    -fx-background-color: darkgreen;
+    -fx-pref-height: 30px;
+    -fx-background-color: rgb(255, 179, 0);
+    -fx-font-size: 14px;
 }
 
 /* Estilos para los GridPane laterales */
@@ -149,12 +150,6 @@ TableView {
     -fx-border-radius: 5px;
     -fx-prefHeight: "50";
     -fx-prefWidth: "33";
-}
-
-.label-numero-carta {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-text-fill: black;
 }
 
 .vbox-carta {
