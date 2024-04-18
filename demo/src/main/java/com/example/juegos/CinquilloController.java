@@ -12,19 +12,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public class CinquilloController implements Initializable{
 
+
     @FXML
-    private CartaController controller ;
+    private GridPane cincoOros;
 
     @FXML
     private Button botonCarta1;
 
-    @FXML
-    private GridPane cincoOros;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -40,28 +41,11 @@ public class CinquilloController implements Initializable{
         // TODO : Iniciar votacion o votar si / no
     }
 
-    public void configurarCarta() {
-        controller = obtenerControladorCarta();
-        Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
-        controller.setNumero("1");
-        controller.setImagen(imagen);
-    }
 
-    @SuppressWarnings("exports")
     @FXML
-    public void ponerCarta(ActionEvent event) {
-        configurarCarta();
-        botonCarta1.setVisible(false);
+    private void ponerCarta(){
         cincoOros.setVisible(true);
-    }
-
-    private CartaController obtenerControladorCarta() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/vistas/carta.fxml"));
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return loader.getController();
+        cincoOros.add(new Label("pene"), 0, 0);
+        cincoOros.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 0, 1);
     }
 }

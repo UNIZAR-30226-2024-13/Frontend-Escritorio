@@ -77,8 +77,8 @@
                         <GridPane fx:id="cuatroOros" visible="false" >
                             <fx:include source="../carta.fxml" />
                         </GridPane>
-                        <GridPane fx:id="cincoOros" visible="false" >
-                            <fx:include source="../carta.fxml" />
+                        <GridPane visible="false" fx:id="cincoOros" >
+                            
                         </GridPane>
                         <GridPane fx:id="seisOros" visible="false" >
                             <fx:include source="../carta.fxml" />
