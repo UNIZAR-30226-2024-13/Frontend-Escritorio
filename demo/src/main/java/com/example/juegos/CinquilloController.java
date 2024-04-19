@@ -11,10 +11,10 @@ import com.example.Carta;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 public class CinquilloController implements Initializable{
@@ -33,15 +33,39 @@ public class CinquilloController implements Initializable{
     private GridPane escaleraBastos;
 
     @FXML
-    private List<GridPane> botones;
+    private GridPane cartas;
+
+    private List<Carta> listaCartas = new ArrayList<>();
    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        botones = new ArrayList<>();
-        botones.get(0).addEventFilter(MouseEvent.MOUSE_CLICKED, (patata)->{
-            botones.get(0).setVisible(false);
-            ponerCarta(0);
-        });
+        try {
+            /**
+             * TODO: Conectarse al servidor, recibir las manos
+             * Iterar sobre las manos y añadir a cada caja el contenido individual
+             * Cerrar las conexiones y manejar errores
+             */
+            int n = 0;
+            while (n < 10) { 
+                //  Añadir las cartas a la lista, parseando lo recibido
+                listaCartas.add(new Carta(n, 1));
+                n++;
+        
+            }
+
+            // Eliminar lo que hubiera antes y crear botones para cada carta
+            List<Button> listaBotones = new ArrayList<>();
+            cartas.getChildren().clear();
+            for (Carta carta : listaCartas) {
+                Button boton = new Button(carta.toString());
+                boton.getStyleClass().add("carta-button");
+                listaBotones.add(boton);
+            }
+            cartas.getChildren().addAll(listaBotones);
+        
+        } catch (Exception e) {
+        } finally{
+        }
     }
 
     @FXML

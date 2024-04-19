@@ -32,4 +32,28 @@ public class Carta {
     public void setPalo(int palo) {
         this.palo = palo;
     }
+
+    public String toString() {
+        return this.getNumero() + " de " + paloString(this.getPalo());
+    }
+
+    /**
+     * Tranforma el palo de la carta en un string
+     * @param palo - Representacion en numero entero del palo de la carta
+     * @return - Palo de la carta en forma de cadena de caracteres
+     */
+    public String paloString(int palo){
+        switch (palo) {
+            case OROS:
+                return "oros";
+            case COPAS:
+                return "copas";
+            case ESPADAS:
+                return "espadas";
+            case BASTOS:
+                return "bastos";
+            default:
+                return "";
+        } 
+    }
 }
