@@ -34,7 +34,25 @@ public class Carta {
     }
 
     public String toString() {
-        return this.getNumero() + " de " + paloString(this.getPalo());
+        String numero = "";
+        switch (this.getNumero()) {
+            case 0:
+                numero = "As";
+                break;
+            case 7:
+                numero = "Sota";
+                break;
+            case 8:
+                numero = "Caballo";
+                break;
+            case 9:
+                numero = "Rey";
+                break;
+            default:
+                numero = "" + (this.getNumero() + 1);
+                break;
+        }
+        return numero + " de " + paloString(this.getPalo());
     }
 
     /**

@@ -157,3 +157,14 @@ TableView {
     -fx-alignment: CENTER;
     -fx-padding: -10px;
 }
+
+.cartas-escaleras {
+    -fx-font-size: 16px; 
+    -fx-font-weight: bold; 
+    -fx-text-fill: black; 
+    -fx-background-color: rgb(255, 179, 0); 
+    -fx-background-radius: 10px; 
+    -fx-border-color: black; 
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+}

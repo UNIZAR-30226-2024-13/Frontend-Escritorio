@@ -13,8 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public class CinquilloController implements Initializable{
@@ -58,7 +56,10 @@ public class CinquilloController implements Initializable{
             for (Carta carta : listaCartas) {
                 Button boton = new Button(carta.toString());
                 boton.getStyleClass().add("carta-button");
-                boton.setOnAction(event -> cartas.getChildren().remove(boton));
+                boton.setOnAction(event -> {
+                    ponerCarta(carta);
+                    cartas.getChildren().remove(boton);
+                });
                 cartas.add(boton, n, 0);
                 n++;
             }
@@ -79,32 +80,27 @@ public class CinquilloController implements Initializable{
         // TODO : Iniciar votacion o votar si / no
     }
 
-    private void ponerCarta(int posicionCartaMano){
-        Carta carta = manoUsuario.get(posicionCartaMano);
+    private void ponerCarta(Carta carta){
         int fila = carta.getNumero();
         
-        Label label = new Label("" + carta.getNumero());
-        label.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: black;");
+        Label label = new Label(carta.toString());
+        label.getStyleClass().add("cartas-escaleras");
 
         switch (carta.getPalo()) {
             case Carta.OROS:
                 escaleraOros.add(label, 0, fila);
-                escaleraOros.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 1, fila);
                 break;
         
             case Carta.COPAS:
                 escaleraCopas.add(label, 0, fila);
-                escaleraCopas.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 1, fila);
                 break;
 
             case Carta.ESPADAS:
                 escaleraEspadas.add(label, 0, fila);
-                escaleraEspadas.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 1, fila);
                 break;
 
             case Carta.BASTOS:
                 escaleraBastos.add(label, 0, fila);
-                escaleraBastos.add(new ImageView(new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"))), 1, fila);
                 break;
         }
     }
