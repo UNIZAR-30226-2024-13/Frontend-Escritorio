@@ -90,7 +90,7 @@
                 </GridPane>
             </right>
             <bottom>
-                <GridPane style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" >
+                <GridPane fx:id="botones" style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" >
                     <columnConstraints>
                         <ColumnConstraints percentWidth="7"/>
                         <ColumnConstraints percentWidth="7"/>
@@ -103,34 +103,35 @@
                         <ColumnConstraints percentWidth="7"/>
                         <ColumnConstraints/>
                     </columnConstraints>
-                    <GridPane fx:id="botonCarta1" GridPane.columnIndex="0" GridPane.rowIndex="0" >
+                    <GridPane GridPane.columnIndex="0" GridPane.rowIndex="0" >
+                        <Label text="adad"/>
                         <Button onAction="#ponerCarta1" text="Jugar carta" styleClass="carta-button" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     </GridPane>
-                    <GridPane fx:id="botonCarta2" GridPane.columnIndex="1" GridPane.rowIndex="0" >
+                    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="0" >
                         <Button onAction="#ponerCarta2" text="Jugar carta" styleClass="carta-button" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     </GridPane>
-                    <GridPane fx:id="botonCarta3" GridPane.columnIndex="2" GridPane.rowIndex="0" >
+                    <GridPane GridPane.columnIndex="2" GridPane.rowIndex="0" >
                         <Button onAction="#ponerCarta3" text="Jugar carta" styleClass="carta-button" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     </GridPane>
-                    <GridPane fx:id="botonCarta4" GridPane.columnIndex="3" GridPane.rowIndex="0" >
+                    <GridPane GridPane.columnIndex="3" GridPane.rowIndex="0" >
                         <Button onAction="#ponerCarta4" text="Jugar carta" styleClass="carta-button" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     </GridPane>
-                    <GridPane fx:id="botonCarta5" GridPane.columnIndex="4" GridPane.rowIndex="0" >
+                    <GridPane GridPane.columnIndex="4" GridPane.rowIndex="0" >
                         <Button onAction="#ponerCarta5" text="Jugar carta" styleClass="carta-button" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     </GridPane>
-                    <GridPane fx:id="botonCarta6" GridPane.columnIndex="5" GridPane.rowIndex="0" >
+                    <GridPane GridPane.columnIndex="5" GridPane.rowIndex="0" >
                         <Button onAction="#ponerCarta6" text="Jugar carta" styleClass="carta-button" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     </GridPane>
-                    <GridPane fx:id="botonCarta7" GridPane.columnIndex="6" GridPane.rowIndex="0" >
+                    <GridPane GridPane.columnIndex="6" GridPane.rowIndex="0" >
                         <Button onAction="#ponerCarta7" text="Jugar carta" styleClass="carta-button" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     </GridPane>
-                    <GridPane fx:id="botonCarta8" GridPane.columnIndex="7" GridPane.rowIndex="0" >
+                    <GridPane GridPane.columnIndex="7" GridPane.rowIndex="0" >
                         <Button onAction="#ponerCarta8" text="Jugar carta" styleClass="carta-button" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     </GridPane>
-                    <GridPane fx:id="botonCarta9" GridPane.columnIndex="8" GridPane.rowIndex="0" >
+                    <GridPane GridPane.columnIndex="8" GridPane.rowIndex="0" >
                         <Button onAction="#ponerCarta9" text="Jugar carta" styleClass="carta-button" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     </GridPane>
-                    <GridPane fx:id="botonCarta10" GridPane.columnIndex="9" GridPane.rowIndex="0" >
+                    <GridPane GridPane.columnIndex="9" GridPane.rowIndex="0" >
                         <Button onAction="#ponerCarta10" text="Jugar carta" styleClass="carta-button" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     </GridPane>
                 </GridPane>
