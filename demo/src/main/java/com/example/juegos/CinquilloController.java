@@ -46,7 +46,7 @@ public class CinquilloController implements Initializable{
             int n = 0;
             while (n < 10) { 
                 //  Añadir las cartas a la lista, parseando lo recibido
-                listaCartas.add(new Carta(n, 1));
+                listaCartas.add(new Carta(n, 2));
                 n++;
             }
 
@@ -64,6 +64,10 @@ public class CinquilloController implements Initializable{
                 n++;
             }
             cartas.setHgap(20);
+            escaleraOros.setVgap(10);
+            escaleraCopas.setVgap(10);
+            escaleraEspadas.setVgap(10);
+            escaleraBastos.setVgap(10);
         
         } catch (Exception e) {
         } finally{

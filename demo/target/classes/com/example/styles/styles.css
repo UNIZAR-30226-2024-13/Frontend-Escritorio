@@ -91,7 +91,7 @@ Button {
 
 /* Estilo para el botón con carta de 150x100 */
 .carta-button {
-    -fx-pref-width: 100px;
+    -fx-pref-width: 150px;
     -fx-pref-height: 30px;
     -fx-background-color: rgb(255, 179, 0);
     -fx-font-size: 14px;
@@ -167,4 +167,6 @@ TableView {
     -fx-border-color: black; 
     -fx-border-width: 2px;
     -fx-border-radius: 10px;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 30px
 }
