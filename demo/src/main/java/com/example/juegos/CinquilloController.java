@@ -50,18 +50,19 @@ public class CinquilloController implements Initializable{
                 //  Añadir las cartas a la lista, parseando lo recibido
                 listaCartas.add(new Carta(n, 1));
                 n++;
-        
             }
 
             // Eliminar lo que hubiera antes y crear botones para cada carta
-            List<Button> listaBotones = new ArrayList<>();
+            n = 0;
             cartas.getChildren().clear();
             for (Carta carta : listaCartas) {
                 Button boton = new Button(carta.toString());
                 boton.getStyleClass().add("carta-button");
-                listaBotones.add(boton);
+                boton.setOnAction(event -> cartas.getChildren().remove(boton));
+                cartas.add(boton, n, 0);
+                n++;
             }
-            cartas.getChildren().addAll(listaBotones);
+            cartas.setHgap(20);
         
         } catch (Exception e) {
         } finally{
