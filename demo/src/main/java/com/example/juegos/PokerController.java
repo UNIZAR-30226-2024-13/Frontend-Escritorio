@@ -2,53 +2,96 @@ package com.example.juegos;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.App;
-
 import com.example.Carta;
-import com.example.ReversoCartaController;
+import com.example.CartaFrancesa;
 
-
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 
 public class PokerController implements Initializable{
 
-    @FXML
-    private VBox opcionesVBox;
 
     @FXML
-    private Carta cincoOrosController;
+    private GridPane primeraCartaMesa;
 
     @FXML
-    private Label etiquetaMensajeAbandono;
+    private GridPane segundaCartaMesa;
 
     @FXML
-    private VBox cuartaCentral;
+    private GridPane terceraCartaMesa;
 
     @FXML
-    private VBox quintaCentral;
-
-    private boolean opcionesVisible = false;
-
-    private boolean cuartaCarta = true;
+    private GridPane cuartaCartaMesa;
 
     @FXML
-    private Carta cartaController = new Carta();
+    private GridPane quintaCartaMesa;
 
+    @FXML
+    private GridPane cartas;
+
+    private List<CartaFrancesa> listaCartas = new ArrayList<>();
+
+    private boolean hay_cuarta = false;
+   
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            /**
+             * TODO: Conectarse al servidor, recibir las manos
+             * Iterar sobre las manos y añadir a cada caja el contenido individual
+             * Cerrar las conexiones y manejar errores
+             */
+            int n = 0;
+            while (n < 7) { 
+                //  Añadir las cartas a la lista, parseando lo recibido
+                listaCartas.add(new CartaFrancesa(n, 2));
+                n++;
+            }
+
+            // Eliminar lo que hubiera antes y crear botones para cada carta
+            n = 0;
+            cartas.getChildren().clear();
+            for (CartaFrancesa carta : listaCartas) {
+                if (n == 2) {
+                    Label label = new Label(carta.toString());
+                    label.getStyleClass().add("cartas-escaleras");
+                    primeraCartaMesa.add(label, 0, 0);
+                }
+                else if (n == 3) {
+                    Label label = new Label(carta.toString());
+                    label.getStyleClass().add("cartas-escaleras");
+                    segundaCartaMesa.add(label, 1, 0);
+                }
+                else if (n == 4) {
+                    Label label = new Label(carta.toString());
+                    label.getStyleClass().add("cartas-escaleras");
+                    terceraCartaMesa.add(label, 2, 0);
+                }
+                else if (n == 0 || n == 1) {
+                    Button boton = new Button(carta.toString());
+                    boton.getStyleClass().add("carta-button");
+                    cartas.add(boton, n, 0);
+                }
+                n++;
+            }
+            cartas.setHgap(20);
+            primeraCartaMesa.setVgap(10);
+            segundaCartaMesa.setVgap(10);
+            terceraCartaMesa.setVgap(10);
+            cuartaCartaMesa.setVgap(10);
+            quintaCartaMesa.setVgap(10);
+        
+        } catch (Exception e) {
+        } finally{
+        }
     }
 
     @FXML
@@ -56,55 +99,26 @@ public class PokerController implements Initializable{
         App.setRoot("/com/example/vistas/menusPrincipales/menuPrincipal");
     }
 
-    /**
-     * Hace visible una etiqueta con un mensaje, pasados 5 segundos la vuelve a ocultar
-     * @throws IOException
-     */
-    @FXML
-    private void mostrarMensajeAbandono() throws IOException {
-        etiquetaMensajeAbandono.setManaged(true);
-        etiquetaMensajeAbandono.setVisible(true);
-
-        Timeline timeline = new Timeline();
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                etiquetaMensajeAbandono.setManaged(false);
-                etiquetaMensajeAbandono.setVisible(false);
-            }
-        });
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.play();
-    }
-    
-    @FXML
-    private void mostrarOcultarOpciones(ActionEvent event) {
-        opcionesVisible = !opcionesVisible;
-        opcionesVBox.setManaged(opcionesVisible);
-        opcionesVBox.setVisible(opcionesVisible);
-    }
-
     @FXML
     private void pausarPartida() throws IOException {
         // TODO : Iniciar votacion o votar si / no
     }
 
-    public void configurarCarta() throws IOException {
-        Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
-        cartaController.setNumero("1");
-        cartaController.setImagen(imagen);
-    }
-
     @FXML
-    public void ponerCarta(ActionEvent event) {
-        if (cuartaCarta) {
-            cuartaCentral.setVisible(true);
-            cuartaCentral.setManaged(true);
-            cuartaCarta = false;
+    private void ponerCarta(){
+        CartaFrancesa carta = new CartaFrancesa();
+        if (!hay_cuarta) {
+            carta = listaCartas.get(5);
+            Label label = new Label(carta.toString());
+            label.getStyleClass().add("cartas-escaleras");
+            cuartaCartaMesa.add(label, 3, 0);
+            hay_cuarta = true;
         }
         else {
-            quintaCentral.setVisible(true);
-            quintaCentral.setManaged(true);
+            carta = listaCartas.get(6);
+            Label label = new Label(carta.toString());
+            label.getStyleClass().add("cartas-escaleras");
+            quintaCartaMesa.add(label, 4, 0);
         }
     }
 }
