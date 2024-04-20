@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
 
 
 <BorderPane prefHeight="400" prefWidth="600" stylesheets="@../../styles/styles.css" 
@@ -17,7 +18,9 @@
 
             <columnConstraints>
                 <ColumnConstraints percentWidth="5"/>
-                <ColumnConstraints percentWidth="90"/>
+                <ColumnConstraints percentWidth="75"/>
+                <ColumnConstraints percentWidth="13"/>
+                <ColumnConstraints percentWidth="7"/>
                 <ColumnConstraints/>
             </columnConstraints>
 
@@ -29,7 +32,8 @@
                 </graphic>
             </Button>
             <Label text="CartaVerse" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="LEFT" styleClass="white-label"/>
-            <Button fx:id="botonPerfil" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#mostrarOcultarOpciones" styleClass="image-button" >
+            <Label text="400 Fichas" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" styleClass="white-label"/>
+            <Button fx:id="botonPerfil" GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#mostrarOcultarOpciones" styleClass="image-button">
                 <graphic>
                     <ImageView fitWidth="70" fitHeight="70">
                         <Image url="@../../imgs/default-pic.jpg"/>
@@ -40,7 +44,7 @@
     </top>
     <center>
         <VBox>
-            <Label text="Creando partida del Cinquillo" styleClass="white-label" alignment="CENTER"/>
+            <Label text="Creando partida del Poker" styleClass="white-label" alignment="CENTER"/>
             <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS" hgap="20" >
 
                 <columnConstraints>
@@ -52,12 +56,14 @@
                 </columnConstraints>
 
                 <Button fx:id="botonPublica" text="Publica" onAction="#partidaPublica" styleClass="button-clicked"
-                    GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
-                <Button fx:id="botonPrivada" text="Privada" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="CENTER" onAction="#partidaPrivada"/>
+                    GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="LEFT" />
+                <Button fx:id="botonPrivada" text="Privada" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="LEFT" onAction="#partidaPrivada"/>
                 <Label fx:id="etiquetaPasswd" text="Contraseña: ID PARTIDA" managed="false" visible="false" styleClass="white-label"
                     GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT"/>
-                <Button fx:id="botonConfirmar" text="Confirmar" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#crearPartida"/>
-                <Button fx:id="botonCancelar" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#cancelar"/>
+                <Label text="Introduce las fichas con las que deseas jugar" styleClass="white-label" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="campoFichas" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Button fx:id="botonConfirmar" text="Confirmar" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="LEFT" onAction="#crearPartida"/>
+                <Button fx:id="botonCancelar" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.halignment="LEFT" onAction="#cancelar"/>
             </GridPane>
         </VBox>
     </center>

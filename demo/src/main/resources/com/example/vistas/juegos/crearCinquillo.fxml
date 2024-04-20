@@ -17,7 +17,9 @@
 
             <columnConstraints>
                 <ColumnConstraints percentWidth="5"/>
-                <ColumnConstraints percentWidth="90"/>
+                <ColumnConstraints percentWidth="75"/>
+                <ColumnConstraints percentWidth="13"/>
+                <ColumnConstraints percentWidth="7"/>
                 <ColumnConstraints/>
             </columnConstraints>
 
@@ -29,7 +31,8 @@
                 </graphic>
             </Button>
             <Label text="CartaVerse" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="LEFT" styleClass="white-label"/>
-            <Button fx:id="botonPerfil" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#mostrarOcultarOpciones" styleClass="image-button" >
+            <Label text="400 Fichas" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" styleClass="white-label"/>
+            <Button fx:id="botonPerfil" GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#mostrarOcultarOpciones" styleClass="image-button">
                 <graphic>
                     <ImageView fitWidth="70" fitHeight="70">
                         <Image url="@../../imgs/default-pic.jpg"/>
