@@ -7,7 +7,12 @@ public class Usuario {
     private int dinero;
     private String pais;
 
-    public Usuario() {}
+    public Usuario() {
+        this.nombre = "";
+        this.email = "";
+        this.dinero = 100;
+        this.pais = "";
+    }
 
     public Usuario(String nombre, String email, int dinero, String pais) {
         this.nombre = nombre;
