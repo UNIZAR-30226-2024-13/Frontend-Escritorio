@@ -56,7 +56,7 @@
     <center>
         <VBox>
             <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS">
-                <Button text="Crear Partida" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#switchToMenuElegirJuego" />
+                <Button text="Crear Partida" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#switchToMenuCrear" />
                 <Button text="Unirse a Partida" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#switchToMenuUnirse" />
                 <Button text="Partidas Pausadas" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#switchToMenuPartidas" />
             </GridPane>
