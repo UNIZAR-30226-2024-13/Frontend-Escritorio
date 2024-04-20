@@ -3,6 +3,7 @@ package com.example.menusPrincipales;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -32,28 +33,26 @@ public class ListaAmigosController implements Initializable{
     private TableView<Usuario> tablaAmigos;
     
     @FXML
-    private TableColumn columnaNombre;
+    private TableColumn<Usuario, String> columnaNombre;
     
     @FXML
-    private TableColumn columnaPais;
+    private TableColumn<Usuario, String> columnaPais;
     
     @FXML
-    private TableColumn columnaDinero;
+    private TableColumn<Usuario, Integer> columnaDinero;
     
     
     private ObservableList<Usuario> amigos;
-    private int posicionTabla;
     private boolean opcionesVisible = false;
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        columnaNombre.setCellValueFactory(new PropertyValueFactory<Usuario, String>("columnaNombre"));
-        columnaNombre.setCellValueFactory(new PropertyValueFactory<Usuario, String>("columnaPais"));
-        columnaNombre.setCellValueFactory(new PropertyValueFactory<Usuario, Integer>("columnaDinero"));
+        columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        columnaPais.setCellValueFactory(new PropertyValueFactory<>("pais"));
+        columnaDinero.setCellValueFactory(new PropertyValueFactory<>("dinero"));
         amigos = FXCollections.observableArrayList();
-        tablaAmigos.setItems(amigos);
 
+        /** Conectar bien y mostrar los amigos que ya estan en la BD*/
         try {
             URL url = new URL(App.ip + "");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -72,8 +71,8 @@ public class ListaAmigosController implements Initializable{
                 }
                 scanner.close();
 
-                /** Conectar bien y añadir los amigos */
-                tablaAmigos.setItems(amigos);
+                //TODO:  Añadir la info de la BD
+                //amigos.add();
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -104,16 +103,25 @@ public class ListaAmigosController implements Initializable{
          * TODO: Buscar en la BD por nombre y añadirlos
          */
         amigo.setNombre(nombreAmigo.getText());
+        amigo.setPais("es");
+        amigo.setDinero(100);
         amigos.add(amigo);
+        tablaAmigos.setItems(amigos);
     }
 
     @FXML
     private void eliminarAmigo(ActionEvent event){
         Usuario amigo = new Usuario();
         /**
-         * TODO: Buscar en la BD por nombre y añadirlos
+         * TODO: Buscar en la BD por nombre y eliminarlo
          */
         amigo.setNombre(nombreAmigo.getText());
-        amigos.remove(amigo);
+        List<Usuario> listaAmigos = amigos;
+        for (Usuario usuario : listaAmigos) {
+            if (amigo.getNombre().equals(usuario.getNombre())) {
+                amigos.remove(usuario);
+            }
+        }
+        tablaAmigos.setItems(amigos);
     }
 }
