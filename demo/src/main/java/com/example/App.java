@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    public static final String ip = "90.94.101.49:5432";
+    public static final String ip = "90.94.101.49:5432:20000/api";
 
     private static Scene scene;
 

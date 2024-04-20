@@ -55,9 +55,7 @@
                 </HBox>
                 <TableView fx:id="tablaAmigos" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
                     <columns>
-                        <TableColumn text="Nombre" fx:id="columnaNombre" styleClass="secondary-color" prefWidth="200"/>
-                        <TableColumn text="Pais" fx:id="columnaPais" styleClass="secondary-color" prefWidth="200"/>
-                        <TableColumn text="Dinero" fx:id="columnaDinero" styleClass="secondary-color" prefWidth="200"/>
+                        <TableColumn text="Nombre" fx:id="columnaNombre" styleClass="secondary-color" prefWidth="550"/>
                     </columns>
                 </TableView>
             </GridPane>

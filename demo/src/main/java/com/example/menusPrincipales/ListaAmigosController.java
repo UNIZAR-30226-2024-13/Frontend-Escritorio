@@ -35,12 +35,6 @@ public class ListaAmigosController implements Initializable{
     @FXML
     private TableColumn<Usuario, String> columnaNombre;
     
-    @FXML
-    private TableColumn<Usuario, String> columnaPais;
-    
-    @FXML
-    private TableColumn<Usuario, Integer> columnaDinero;
-    
     
     private ObservableList<Usuario> amigos;
     private boolean opcionesVisible = false;
@@ -48,13 +42,11 @@ public class ListaAmigosController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        columnaPais.setCellValueFactory(new PropertyValueFactory<>("pais"));
-        columnaDinero.setCellValueFactory(new PropertyValueFactory<>("dinero"));
         amigos = FXCollections.observableArrayList();
 
         /** Conectar bien y mostrar los amigos que ya estan en la BD*/
         try {
-            URL url = new URL(App.ip + "");
+            URL url = new URL(App.ip + "/usuarios/getUsuario?value="+ "" + "&tipo=byNombre");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
@@ -103,8 +95,6 @@ public class ListaAmigosController implements Initializable{
          * TODO: Buscar en la BD por nombre y añadirlos
          */
         amigo.setNombre(nombreAmigo.getText());
-        amigo.setPais("es");
-        amigo.setDinero(100);
         amigos.add(amigo);
         tablaAmigos.setItems(amigos);
     }
