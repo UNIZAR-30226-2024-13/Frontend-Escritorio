@@ -81,7 +81,7 @@ public class ListaAmigosController implements Initializable{
 
     @FXML
     private void switchToPerfil() throws IOException {
-        App.setRoot("/com/example/vistas/peerfil/perfil");
+        App.setRoot("/com/example/vistas/perfil/perfil");
     }
 
     @FXML

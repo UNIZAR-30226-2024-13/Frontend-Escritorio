@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 
 <BorderPane prefHeight="400" prefWidth="600" stylesheets="@../../styles/styles.css"
-    xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.menusPrincipales.ListaAmigosController">
+    xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.menusPrincipales.ListaPartidasPausadasController">
     
     <top>
         <GridPane styleClass="top-grid-pane">
@@ -51,7 +51,7 @@
                 <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                 <TableView fx:id="tablaPartidasPausadas" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn text="Juego" fx:id="columnaTipoJuego" styleClass="columna" prefWidth="550" />
+                        <TableColumn text="Juego" fx:id="columnaTipoJuego" styleClass="secondary-color" prefWidth="550" />
                     </columns>
                 </TableView>
             </GridPane>
