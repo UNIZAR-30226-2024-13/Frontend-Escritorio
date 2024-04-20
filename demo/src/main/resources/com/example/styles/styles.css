@@ -133,11 +133,6 @@ TableView {
     -fx-border-width: 1px;
 }
 
-/* Estilo de las columnas de la tabla */
-.columna {
-    -fx-background-color: rgb(255, 179, 0);
-}
-
 /* carta */
 .stack-pane-carta {
     -fx-background-color: darkgreen;

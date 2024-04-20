@@ -50,12 +50,14 @@
             <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS">
                 <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <TextField fx:id="nombreAmigo" promptText="Nombre" prefWidth="90"/>
-                    <Button fx:id="botonAgregar" text="Añadir"/>
-                    <Button fx:id="botonEliminar" text="Eliminar"/>
+                    <Button fx:id="botonAgregar" text="Añadir" onAction="#agregarAmigo"/>
+                    <Button fx:id="botonEliminar" text="Eliminar" onAction="#eliminarAmigo"/>
                 </HBox>
-                <TableView fx:id="tablaPartidasPausadas" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
+                <TableView fx:id="tablaAmigos" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
                     <columns>
-                        <TableColumn text="Nombre" fx:id="columnaNombre" styleClass="columna" prefWidth="550"/>
+                        <TableColumn text="Nombre" fx:id="columnaNombre" styleClass="secondary-color" prefWidth="200"/>
+                        <TableColumn text="Pais" fx:id="columnaPais" styleClass="secondary-color" prefWidth="200"/>
+                        <TableColumn text="Dinero" fx:id="columnaDinero" styleClass="secondary-color" prefWidth="200"/>
                     </columns>
                 </TableView>
             </GridPane>
