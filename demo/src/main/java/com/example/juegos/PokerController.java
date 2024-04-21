@@ -101,7 +101,7 @@ public class PokerController implements Initializable{
 
     @FXML
     private void pausarPartida() throws IOException {
-        // TODO : Iniciar votacion o votar si / no
+        App.setRoot("/com/example/vistas/juegos/votacion");
     }
 
     @FXML
