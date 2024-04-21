@@ -45,30 +45,6 @@ public class ListaAmigosController implements Initializable{
         amigos = FXCollections.observableArrayList();
 
         /** Conectar bien y mostrar los amigos que ya estan en la BD*/
-        try {
-            URL url = new URL(App.ip + "/usuarios/getUsuario?value="+ "" + "&tipo=byNombre");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-
-            int respuesta = conn.getResponseCode();
-            if(respuesta != 200){
-                throw new RuntimeException("Error de codigo " + respuesta);
-            }else{
-                StringBuilder informacion = new StringBuilder();
-                Scanner scanner = new Scanner(url.openStream());
-
-                while (scanner.hasNext()) {
-                    informacion.append(scanner.nextLine());
-                }
-                scanner.close();
-
-                //TODO:  Añadir la info de la BD
-                //amigos.add();
-            }
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
     }
 
     @FXML

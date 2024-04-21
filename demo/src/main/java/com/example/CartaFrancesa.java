@@ -43,7 +43,7 @@ public class CartaFrancesa {
                 numero = "Sota";
                 break;
             case 8:
-                numero = "Caballo";
+                numero = "Dama";
                 break;
             case 9:
                 numero = "Rey";

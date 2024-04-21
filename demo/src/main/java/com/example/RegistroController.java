@@ -1,14 +1,20 @@
 package com.example;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -50,6 +56,11 @@ public class RegistroController implements Initializable {
     @FXML
     private Label marcaErrorPasswd;
 
+    private String pais;
+    private String email;
+    private String user;
+    private String passwd;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Cargar la imagen desde el archivo
@@ -70,21 +81,11 @@ public class RegistroController implements Initializable {
 
     @FXML
     private void guardarDatosRegistro() throws IOException {
-        String nombre = campoNombreReg.getText();
-        String pais = campoPaisReg.getText();
-        String email = campoEmailReg.getText();
-        String user = campoUserReg.getText();
-        String passwd = campoContraseñaReg.getText();
-        if (nombre.isEmpty()) {
-            error.setText("Debes rellenar el campo Nombre completo");
-            error.setVisible(true);
-            marcaErrorNombre.setVisible(true);
-            marcaErrorPais.setVisible(false);
-            marcaErrorEmail.setVisible(false);
-            marcaErrorUser.setVisible(false);
-            marcaErrorPasswd.setVisible(false);
-        }
-        else if (pais.isEmpty()) {
+        pais = campoPaisReg.getText();
+        email = campoEmailReg.getText();
+        user = campoUserReg.getText();
+        passwd = campoContraseñaReg.getText();
+        if (pais.isEmpty()) {
             error.setText("Debes rellenar el campo País");
             error.setVisible(true);
             marcaErrorNombre.setVisible(false);
@@ -148,7 +149,7 @@ public class RegistroController implements Initializable {
             marcaErrorPasswd.setVisible(true);
         }
         else{
-            // Comprobar si el usuario esta en la BD registrado
+            //agregarUsuarioBD();
             switchToMenuPrincipal();
         }
     }
