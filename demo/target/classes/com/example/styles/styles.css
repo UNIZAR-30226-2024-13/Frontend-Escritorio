@@ -97,6 +97,14 @@ Button {
     -fx-font-size: 14px;
 }
 
+/* Estilo para el botón con carta de 150x100 */
+.carta-button-clicked {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 30px;
+    -fx-background-color: lightblue;
+    -fx-font-size: 14px;
+}
+
 /* Estilos para los GridPane laterales */
 .lateral-grid-pane {
     -fx-padding: 100px;
