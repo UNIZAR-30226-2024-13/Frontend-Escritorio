@@ -23,6 +23,10 @@ public class MentirosoController implements Initializable{
     @FXML
     private GridPane cartas;
 
+    private int filaCartas = 0;
+
+    private int contCartas = 0;
+
     private List<Carta> listaCartas = new ArrayList<>();
 
     private List<Button> botonesSeleccionados = new ArrayList<>();
@@ -57,10 +61,17 @@ public class MentirosoController implements Initializable{
                     botonesSeleccionados.add(boton);
                     cartasSeleccionadas.add(carta);
                 });
-                cartas.add(boton, n, 0);
+                if (contCartas == 8) {
+                    filaCartas++;
+                    contCartas = 0;
+                    n=0;
+                }
+                cartas.add(boton, n, filaCartas);
                 n++;
+                contCartas++;
             }
             cartas.setHgap(20);
+            cartas.setVgap(20);
             cartasMesa.setHgap(10);
         } catch (Exception e) {
         } finally{
@@ -78,12 +89,40 @@ public class MentirosoController implements Initializable{
     }
 
     @FXML
-    private void ponerCarta(){ 
+    private void ponerCarta() { 
         for (int i = 0; i < cartasSeleccionadas.size(); i++) {
-            Label label = new Label(cartasSeleccionadas.get(i).toString());
-            label.getStyleClass().add("carta-button");
-            cartasMesa.add(label, i, 0);
+            Button button = new Button(cartasSeleccionadas.get(i).toString());
+            button.getStyleClass().add("carta-button");
+            cartasMesa.add(button, i, 0);
             cartas.getChildren().remove(botonesSeleccionados.get(i));
+            contCartas--;
+            if (contCartas == 7) {
+                filaCartas--;
+            }
         }       
+    }
+
+    @FXML
+    private void levantarCarta() {
+        for (int i = 0; i < cartasSeleccionadas.size(); i++) {
+            Carta carta = cartasSeleccionadas.get(i);
+            Button button = new Button(carta.toString());
+            button.getStyleClass().add("carta-button");
+            button.setOnAction(event -> {
+                button.getStyleClass().remove("carta-button");
+                button.getStyleClass().add("carta-button-clicked");
+                botonesSeleccionados.add(button);
+                cartasSeleccionadas.add(carta);
+            });
+            if (contCartas == 8) {
+                filaCartas++;
+                contCartas = 0;
+            }
+            cartas.add(button, carta.getNumero(), filaCartas);
+            cartasMesa.getChildren().clear();
+            contCartas++;
+        }
+        cartasSeleccionadas.clear();
+        botonesSeleccionados.clear();
     }
 }

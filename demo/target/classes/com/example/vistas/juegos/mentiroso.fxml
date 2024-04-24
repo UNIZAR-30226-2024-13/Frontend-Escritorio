@@ -42,6 +42,7 @@
                     <fx:include source="../reversoCarta.fxml" GridPane.columnIndex="8" GridPane.rowIndex="0" />
                     <fx:include source="../reversoCarta.fxml" GridPane.columnIndex="9" GridPane.rowIndex="0" />
                     <Button fx:id="botonEchar" text="Tirar" GridPane.columnIndex="10" GridPane.rowIndex="0" onAction="#ponerCarta"/>
+                    <Button fx:id="botonLevantar" text="Levantar" GridPane.columnIndex="11" GridPane.rowIndex="0" onAction="#levantarCarta"/>
                 </GridPane>
             </top>
             <left>
@@ -65,7 +66,8 @@
             </left>
             <center>
                 <GridPane styleClass="game-grid-pane" style="-fx-margin: -20px;" >
-                    <GridPane fx:id="cartasMesa" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label fx:id="jugadaAnterior" text="Pareja de 2" styleClass="white-label" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
+                    <GridPane fx:id="cartasMesa" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 </GridPane>
             </center>
             <right>
