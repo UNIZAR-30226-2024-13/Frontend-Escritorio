@@ -114,12 +114,8 @@ public class MentirosoController implements Initializable{
             button.getStyleClass().add("carta-button");
             cartasMesa.add(button, i, 0);
             cartas.getChildren().remove(botonesSeleccionados.get(i));
-            contCartas--;
             columnasCartas.add(cartas.getColumnIndex(botonesSeleccionados.get(i)));
             filasCartas.add(cartas.getRowIndex(botonesSeleccionados.get(i)));
-            if (contCartas == 7) {
-                filaCartas--;
-            }
         } 
         if (primerTurno) {
             pedirNumero();
@@ -137,8 +133,7 @@ public class MentirosoController implements Initializable{
         stage.setScene(scene);
         stage.showAndWait(); // Esperar hasta que se cierre el nuevo Stage
         numeroAJugar = controller.getBoton(); // Obtener el valor del botón seleccionado
-        jugadaAnterior.setText("Pareja de " + numeroAJugar);
-        System.out.println("numero a jugar " + numeroAJugar);
+        jugadaAnterior.setText("Ha tirado " + cartasSeleccionadas.size() + " cartas del número " + numeroAJugar);
     }
 
 
@@ -154,13 +149,8 @@ public class MentirosoController implements Initializable{
                 botonesSeleccionados.add(button);
                 cartasSeleccionadas.add(carta);
             });
-            if (contCartas == 8) {
-                filaCartas++;
-                contCartas = 0;
-            }
             cartas.add(button, columnasCartas.get(i), filasCartas.get(i));
             cartasMesa.getChildren().clear();
-            contCartas++;
         }
         cartasSeleccionadas.clear();
         botonesSeleccionados.clear();
