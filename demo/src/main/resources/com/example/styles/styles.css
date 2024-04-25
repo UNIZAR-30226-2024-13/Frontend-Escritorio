@@ -97,6 +97,13 @@ Button {
     -fx-font-size: 14px;
 }
 
+.ventana-button {
+    -fx-pref-width: 60px;
+    -fx-pref-height: 30px;
+    -fx-background-color: rgb(255, 179, 0);
+    -fx-font-size: 14px;
+}
+
 /* Estilo para el botón con carta de 150x100 */
 .carta-button-clicked {
     -fx-pref-width: 150px;

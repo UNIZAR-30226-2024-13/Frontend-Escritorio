@@ -8,12 +8,21 @@ import java.util.ResourceBundle;
 
 import com.example.App;
 import com.example.Carta;
+import com.example.juegos.VentanaMentirosoController;
+
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.image.Image;
+
 
 public class MentirosoController implements Initializable{
 
@@ -23,9 +32,16 @@ public class MentirosoController implements Initializable{
     @FXML
     private GridPane cartas;
 
+    @FXML
+    private Label jugadaAnterior;
+
     private int filaCartas = 0;
 
     private int contCartas = 0;
+
+    private boolean primerTurno = true;
+
+    private int numeroAJugar = 0;
 
     private List<Carta> listaCartas = new ArrayList<>();
 
@@ -33,6 +49,9 @@ public class MentirosoController implements Initializable{
 
     private List<Carta> cartasSeleccionadas = new ArrayList<>();
 
+    private List<Integer> columnasCartas = new ArrayList<>();
+
+    private List<Integer> filasCartas = new ArrayList<>();
    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -89,18 +108,39 @@ public class MentirosoController implements Initializable{
     }
 
     @FXML
-    private void ponerCarta() { 
+    private void ponerCarta() throws IOException{ 
         for (int i = 0; i < cartasSeleccionadas.size(); i++) {
             Button button = new Button(cartasSeleccionadas.get(i).toString());
             button.getStyleClass().add("carta-button");
             cartasMesa.add(button, i, 0);
             cartas.getChildren().remove(botonesSeleccionados.get(i));
             contCartas--;
+            columnasCartas.add(cartas.getColumnIndex(botonesSeleccionados.get(i)));
+            filasCartas.add(cartas.getRowIndex(botonesSeleccionados.get(i)));
             if (contCartas == 7) {
                 filaCartas--;
             }
-        }       
+        } 
+        if (primerTurno) {
+            pedirNumero();
+            primerTurno = false;
+        }     
     }
+
+    private void pedirNumero() throws IOException{
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/vistas/juegos/ventanaMentiroso.fxml"));
+        Parent root = fxmlLoader.load();
+        VentanaMentirosoController controller = fxmlLoader.getController(); // Obtener el controlador
+        Scene scene = new Scene(root, 600, 300);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/example/imgs/logo.jpg")));
+        stage.setScene(scene);
+        stage.showAndWait(); // Esperar hasta que se cierre el nuevo Stage
+        numeroAJugar = controller.getBoton(); // Obtener el valor del botón seleccionado
+        jugadaAnterior.setText("Pareja de " + numeroAJugar);
+        System.out.println("numero a jugar " + numeroAJugar);
+    }
+
 
     @FXML
     private void levantarCarta() {
@@ -118,11 +158,13 @@ public class MentirosoController implements Initializable{
                 filaCartas++;
                 contCartas = 0;
             }
-            cartas.add(button, carta.getNumero(), filaCartas);
+            cartas.add(button, columnasCartas.get(i), filasCartas.get(i));
             cartasMesa.getChildren().clear();
             contCartas++;
         }
         cartasSeleccionadas.clear();
         botonesSeleccionados.clear();
+        columnasCartas.clear();
+        filasCartas.clear();
     }
 }

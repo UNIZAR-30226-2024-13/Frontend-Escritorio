@@ -66,7 +66,7 @@
             </left>
             <center>
                 <GridPane styleClass="game-grid-pane" style="-fx-margin: -20px;" >
-                    <Label fx:id="jugadaAnterior" text="Pareja de 2" styleClass="white-label" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
+                    <Label fx:id="jugadaAnterior" styleClass="white-label" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
                     <GridPane fx:id="cartasMesa" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 </GridPane>
             </center>
