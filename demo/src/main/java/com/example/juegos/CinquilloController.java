@@ -83,18 +83,14 @@ public class CinquilloController implements Initializable{
                 imagenRev.setFitHeight(60);
 
                 ImageView imagenRev2 = new ImageView();
-
-                Image imagen2 = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
         
-                imagenRev2.setImage(imagen2);
+                imagenRev2.setImage(imagen);
                 imagenRev2.setFitWidth(40);
                 imagenRev2.setFitHeight(60);
 
                 ImageView imagenRev3 = new ImageView();
-
-                Image imagen3 = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
         
-                imagenRev3.setImage(imagen3);
+                imagenRev3.setImage(imagen);
                 imagenRev3.setFitWidth(40);
                 imagenRev3.setFitHeight(60);
 

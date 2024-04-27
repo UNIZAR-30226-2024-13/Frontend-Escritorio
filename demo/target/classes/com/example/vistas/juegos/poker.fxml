@@ -21,35 +21,21 @@
             <top>
                 <GridPane style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" >
                     <columnConstraints>
-                        <ColumnConstraints percentWidth="42"/>
-                        <ColumnConstraints percentWidth="10"/>
-                        <ColumnConstraints percentWidth="10"/>
+                        <ColumnConstraints percentWidth="30"/>
+                        <ColumnConstraints percentWidth="29"/>
+                        <ColumnConstraints percentWidth="5"/>
                         <ColumnConstraints percentWidth="7"/>
                         <ColumnConstraints percentWidth="7"/>
-                        <ColumnConstraints percentWidth="7"/>
-                        <ColumnConstraints percentWidth="2"/>
-                        <ColumnConstraints percentWidth="12"/>
+                        <ColumnConstraints percentWidth="1"/>
                         <ColumnConstraints />
                     </columnConstraints>
-                    <Label fx:id="textoUltApuesta" text="Última apuesta: 200 fichas" styleClass="white-label" />
-                    <fx:include source="../reversoCarta.fxml" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                    <fx:include source="../reversoCarta.fxml" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                    <Button fx:id="botonPausa" text="Pausar Partida" GridPane.columnIndex="7" GridPane.rowIndex="0" onAction="#pausarPartida"/>
-
+                    <Label fx:id="textoUltApuesta" text="Última apuesta: 200 fichas" styleClass="white-label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <GridPane fx:id="cartasUsuario2" style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" GridPane.columnIndex="1" GridPane.rowIndex="0"   />
+                    <Button fx:id="botonPausa" text="Pausar Partida" GridPane.columnIndex="6" GridPane.rowIndex="0" onAction="#pausarPartida"/>
                 </GridPane>
             </top>
             <left>
-                <GridPane style="-fx-margin: 10px; -fx-background-color: darkgreen; -fx-padding: 5px" >
-                    <columnConstraints>
-                        <ColumnConstraints percentWidth="15"/>
-                        <ColumnConstraints percentWidth="80"/>
-                        <ColumnConstraints/>
-                    </columnConstraints>
-                    <Label GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="white-label" />
-                    <Label GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="white-label" />
-                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="3" GridPane.columnIndex="1" />
-                </GridPane>
+                <GridPane fx:id="cartasUsuario3" style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px"  />
             </left>
             <center>
                 <GridPane styleClass="game-grid-pane" style="-fx-margin: -20px;" >
@@ -61,17 +47,7 @@
                 </GridPane>
             </center>
             <right>
-                <GridPane style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-padding: 5px" >
-                    <columnConstraints>
-                        <ColumnConstraints percentWidth="15"/>
-                        <ColumnConstraints percentWidth="80"/>
-                        <ColumnConstraints/>
-                    </columnConstraints>
-                    <Label GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="white-label" />
-                    <Label GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="white-label" />
-                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-                    <fx:include source="../reversoCarta.fxml" GridPane.rowIndex="3" GridPane.columnIndex="1" />
-                </GridPane>
+                <GridPane fx:id="cartasUsuario4" style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px"  />
             </right>
             <bottom>
                 <GridPane style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" >
