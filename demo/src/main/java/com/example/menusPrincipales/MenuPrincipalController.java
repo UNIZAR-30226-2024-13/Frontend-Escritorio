@@ -28,8 +28,8 @@ public class MenuPrincipalController implements Initializable{
     }
 
     @FXML
-    private void switchToMenuElegirJuego() throws IOException {
-        App.setRoot("/com/example/vistas/menusPrincipales/menuElegirJuego");
+    private void switchToMenuCrear() throws IOException {
+        App.setRoot("/com/example/vistas/menusPrincipales/menuCrear");
     }
     
     @FXML

@@ -18,7 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-public class PokerController implements Initializable{
+public class BlackjackController implements Initializable{
 
 
     @FXML
@@ -50,7 +50,7 @@ public class PokerController implements Initializable{
 
     private List<CartaFrancesa> listaCartas = new ArrayList<>();
 
-    private boolean hay_cuarta = false;
+    private int numCartas= 0;
    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -66,30 +66,17 @@ public class PokerController implements Initializable{
                 listaCartas.add(new CartaFrancesa(n, 2));
                 n++;
             }
-
+            cartas.setHgap(10);
+            cartasUsuario2.setHgap(30);
+            cartasUsuario3.setVgap(30);
+            cartasUsuario4.setVgap(30);
             // Eliminar lo que hubiera antes y crear botones para cada carta
-            n = 0;
             cartas.getChildren().clear();
             for (CartaFrancesa carta : listaCartas) {
-                if (n == 2) {
-                    Label label = new Label(carta.toString());
-                    label.getStyleClass().add("cartas-escaleras");
-                    primeraCartaMesa.add(label, 0, 0);
-                }
-                else if (n == 3) {
-                    Label label = new Label(carta.toString());
-                    label.getStyleClass().add("cartas-escaleras");
-                    segundaCartaMesa.add(label, 1, 0);
-                }
-                else if (n == 4) {
-                    Label label = new Label(carta.toString());
-                    label.getStyleClass().add("cartas-escaleras");
-                    terceraCartaMesa.add(label, 2, 0);
-                }
-                else if (n == 0 || n == 1) {
+                if (numCartas == 0 || numCartas == 1) {
                     Button boton = new Button(carta.toString());
                     boton.getStyleClass().add("carta-button");
-                    cartas.add(boton, n, 0);
+                    cartas.add(boton, numCartas, 0);
 
                     ImageView imagenRev = new ImageView();
                     Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
@@ -110,21 +97,13 @@ public class PokerController implements Initializable{
                     imagenRev3.setFitWidth(40);
                     imagenRev3.setFitHeight(60);
 
-                    cartasUsuario2.add(imagenRev, n, 0);
-                    cartasUsuario3.add(imagenRev2, 0, n);
-                    cartasUsuario4.add(imagenRev3, 0, n);
+                    cartasUsuario2.add(imagenRev, numCartas, 0);
+                    cartasUsuario3.add(imagenRev2, 0, numCartas);
+                    cartasUsuario4.add(imagenRev3, 0, numCartas);
+
+                    numCartas++;
                 }
-                n++;
             }
-            cartas.setHgap(20);
-            cartasUsuario2.setHgap(30);
-            cartasUsuario3.setVgap(30);
-            cartasUsuario4.setVgap(30);
-            primeraCartaMesa.setVgap(10);
-            segundaCartaMesa.setVgap(10);
-            terceraCartaMesa.setVgap(10);
-            cuartaCartaMesa.setVgap(10);
-            quintaCartaMesa.setVgap(10);
         
         } catch (Exception e) {
         } finally{
@@ -144,18 +123,10 @@ public class PokerController implements Initializable{
     @FXML
     private void ponerCarta(){
         CartaFrancesa carta = new CartaFrancesa();
-        if (!hay_cuarta) {
-            carta = listaCartas.get(5);
-            Label label = new Label(carta.toString());
-            label.getStyleClass().add("cartas-escaleras");
-            cuartaCartaMesa.add(label, 3, 0);
-            hay_cuarta = true;
-        }
-        else {
-            carta = listaCartas.get(6);
-            Label label = new Label(carta.toString());
-            label.getStyleClass().add("cartas-escaleras");
-            quintaCartaMesa.add(label, 4, 0);
-        }
+        carta = listaCartas.get(numCartas);
+        Label label = new Label(carta.toString());
+        label.getStyleClass().add("carta-button");
+        cartas.add(label, numCartas, 0);
+        numCartas++;
     }
 }

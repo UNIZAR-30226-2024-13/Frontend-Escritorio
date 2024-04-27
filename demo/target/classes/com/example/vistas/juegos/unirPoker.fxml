@@ -8,10 +8,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TextField?>
 
 
 <BorderPane prefHeight="400" prefWidth="600" stylesheets="@../../styles/styles.css" 
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.juegos.CrearUnoController">
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.juegos.UnirPokerController">
     <top>
         <GridPane styleClass="top-grid-pane">
 
@@ -43,7 +46,7 @@
     </top>
     <center>
         <VBox>
-            <Label text="Creando partida del Uno" styleClass="white-label" alignment="CENTER"/>
+            <Label text="Unirse a partida del Poker" styleClass="white-label" alignment="CENTER"/>
             <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS" hgap="20" >
 
                 <columnConstraints>
@@ -53,14 +56,19 @@
                     <ColumnConstraints />
                     <ColumnConstraints />
                 </columnConstraints>
-
-                <Button fx:id="botonPublica" text="Publica" onAction="#partidaPublica" styleClass="button-clicked"
-                    GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
-                <Button fx:id="botonPrivada" text="Privada" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="CENTER" onAction="#partidaPrivada"/>
-                <Label fx:id="etiquetaPasswd" text="Contraseña: ID PARTIDA" managed="false" visible="false" styleClass="white-label"
-                    GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT"/>
+                <Label text="Lista de partidas publicas" styleClass="white-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label text="Unirse a partida privada" styleClass="white-label" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                <TextField fx:id="campoPrivadas" promptText="Introduce el ID de la partida" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                <TableView fx:id="tablaPartidas" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
+                    <columns>
+                        <TableColumn text="ID_Partida" fx:id="columnaId" styleClass="secondary-color" prefWidth="200" />
+                        <TableColumn text="Nº Jugadores" fx:id="columnaJugadores" styleClass="secondary-color" prefWidth="200" />
+                        <TableColumn text="Apuesta" fx:id="columnaApuesta" styleClass="secondary-color" prefWidth="200" />
+                    </columns>
+                </TableView>
                 <Button fx:id="botonConfirmar" text="Confirmar" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#crearPartida"/>
                 <Button fx:id="botonCancelar" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#cancelar"/>
+                <Button fx:id="botonUnirse" text="Unirse" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#crearPartida"/>
             </GridPane>
         </VBox>
     </center>

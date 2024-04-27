@@ -12,7 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 
 
-public class MenuElegirJuegoController implements Initializable{
+public class MenuCrearController implements Initializable{
 
     @FXML
     private VBox opcionesVBox;

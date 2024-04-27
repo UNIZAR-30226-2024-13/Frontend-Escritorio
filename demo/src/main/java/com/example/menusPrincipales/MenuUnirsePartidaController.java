@@ -58,4 +58,34 @@ public class MenuUnirsePartidaController implements Initializable{
         opcionesVBox.setManaged(opcionesVisible);
         opcionesVBox.setVisible(opcionesVisible);
     }
+
+    @FXML
+    private void unirCinquillo() throws IOException {
+        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
+        App.setRoot("/com/example/vistas/juegos/unirCinquillo");
+    }
+
+    @FXML
+    private void unirMentiroso() throws IOException {
+        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
+        App.setRoot("/com/example/vistas/juegos/unirMentiroso");
+    }
+
+    @FXML
+    private void unirPoker() throws IOException {
+        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
+        App.setRoot("/com/example/vistas/juegos/unirPoker");
+    }
+
+    @FXML
+    private void unirBlackJack() throws IOException {
+        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
+        App.setRoot("/com/example/vistas/juegos/unirBlackJack");
+    }
+
+    @FXML
+    private void unirUNO() throws IOException {
+        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
+        App.setRoot("/com/example/vistas/juegos/unirUNO");
+    }
 }

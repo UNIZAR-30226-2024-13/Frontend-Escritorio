@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public class CinquilloController implements Initializable{
@@ -32,6 +34,15 @@ public class CinquilloController implements Initializable{
 
     @FXML
     private GridPane cartas;
+    
+    @FXML
+    private GridPane cartasUsuario2;
+
+    @FXML
+    private GridPane cartasUsuario3;
+    
+    @FXML
+    private GridPane cartasUsuario4;
 
     private List<Carta> listaCartas = new ArrayList<>();
    
@@ -62,8 +73,35 @@ public class CinquilloController implements Initializable{
                 });
                 cartas.add(boton, n, 0);
                 n++;
+
+                ImageView imagenRev = new ImageView();
+
+                Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
+        
+                imagenRev.setImage(imagen);
+                imagenRev.setFitWidth(40);
+                imagenRev.setFitHeight(60);
+
+                ImageView imagenRev2 = new ImageView();
+        
+                imagenRev2.setImage(imagen);
+                imagenRev2.setFitWidth(40);
+                imagenRev2.setFitHeight(60);
+
+                ImageView imagenRev3 = new ImageView();
+        
+                imagenRev3.setImage(imagen);
+                imagenRev3.setFitWidth(40);
+                imagenRev3.setFitHeight(60);
+
+                cartasUsuario2.add(imagenRev, n, 0);
+                cartasUsuario3.add(imagenRev2, 0, n);
+                cartasUsuario4.add(imagenRev3, 0, n);
             }
             cartas.setHgap(20);
+            cartasUsuario2.setHgap(30);
+            cartasUsuario3.setVgap(3);
+            cartasUsuario4.setVgap(3);
             escaleraOros.setVgap(10);
             escaleraCopas.setVgap(10);
             escaleraEspadas.setVgap(10);

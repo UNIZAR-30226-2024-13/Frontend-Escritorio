@@ -47,11 +47,11 @@
                 <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="0" GridPane.rowIndex="1" >
                         <Image url="@../../imgs/cinquillo.jpg"/>
                 </ImageView>
-                <Button fx:id="botonCinquillo" text="Cinquillo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Button fx:id="botonCinquillo" text="Cinquillo" onAction="#unirCinquillo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="4" GridPane.rowIndex="1" >
                         <Image url="@../../imgs/poker.jpg"/>
                 </ImageView>
-                <Button fx:id="botonPoker" text="Poker" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                <Button fx:id="botonPoker" text="Poker" onAction="#unirPoker" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                 <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="0" GridPane.rowIndex="2" >
                         <Image url="@../../imgs/mentiroso.jpg"/>
                 </ImageView>
