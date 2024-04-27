@@ -15,23 +15,25 @@
 
 
 <BorderPane prefHeight="400" prefWidth="600" stylesheets="@../../styles/styles.css" 
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.juegos.PokerController">
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.juegos.BlackjackController">
     <center>
         <BorderPane>
             <top>
                 <GridPane style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" >
                     <columnConstraints>
-                        <ColumnConstraints percentWidth="30"/>
-                        <ColumnConstraints percentWidth="29"/>
-                        <ColumnConstraints percentWidth="5"/>
+                        <ColumnConstraints percentWidth="42"/>
+                        <ColumnConstraints percentWidth="10"/>
+                        <ColumnConstraints percentWidth="10"/>
                         <ColumnConstraints percentWidth="7"/>
                         <ColumnConstraints percentWidth="7"/>
-                        <ColumnConstraints percentWidth="1"/>
+                        <ColumnConstraints percentWidth="7"/>
+                        <ColumnConstraints percentWidth="2"/>
+                        <ColumnConstraints percentWidth="12"/>
                         <ColumnConstraints />
                     </columnConstraints>
-                    <Label fx:id="textoUltApuesta" text="Última apuesta: 200 fichas" styleClass="white-label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <GridPane fx:id="cartasUsuario2" style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" GridPane.columnIndex="1" GridPane.rowIndex="0"   />
-                    <Button fx:id="botonPausa" text="Pausar Partida" GridPane.columnIndex="6" GridPane.rowIndex="0" onAction="#pausarPartida"/>
+                    <Label fx:id="textoFichas" text="400 fichas disponibles" styleClass="white-label" />
+                    <Button fx:id="botonPausa" text="Pausar Partida" GridPane.columnIndex="7" GridPane.rowIndex="0" onAction="#pausarPartida"/>
+
                 </GridPane>
             </top>
             <left>
@@ -39,11 +41,8 @@
             </left>
             <center>
                 <GridPane styleClass="game-grid-pane" style="-fx-margin: -20px;" >
-                    <GridPane fx:id="primeraCartaMesa" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                    <GridPane fx:id="segundaCartaMesa" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                    <GridPane fx:id="terceraCartaMesa" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-                    <GridPane fx:id="cuartaCartaMesa" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
-                    <GridPane fx:id="quintaCartaMesa" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+                    <Label text="Cartas Cuprier" styleClass="white-label" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
+                    <GridPane fx:id="cartasUsuario2" style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.halignment="CENTER" />
                 </GridPane>
             </center>
             <right>
@@ -52,22 +51,17 @@
             <bottom>
                 <GridPane style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" >
                     <columnConstraints>
-                        <ColumnConstraints percentWidth="37"/>
                         <ColumnConstraints percentWidth="22"/>
-                        <ColumnConstraints percentWidth="5"/>
+                        <ColumnConstraints percentWidth="58"/>
                         <ColumnConstraints percentWidth="7"/>
                         <ColumnConstraints percentWidth="7"/>
                         <ColumnConstraints percentWidth="7"/>
-                        <ColumnConstraints percentWidth="7"/>
-                        <ColumnConstraints percentWidth="1"/>
                         <ColumnConstraints />
                     </columnConstraints>
                     <GridPane fx:id="cartas" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" />
-                    <Label fx:id="textoFichas" text="400 fichas disponibles" styleClass="white-label" />
-                    <Button fx:id="botonRetirar" text="Retirarse" GridPane.columnIndex="4" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
-                    <Button fx:id="botonIgualar" text="Igualar" GridPane.columnIndex="5" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
-                    <TextField fx:id="campoApuesta" GridPane.columnIndex="6" GridPane.rowIndex="0" />
-                    <Button fx:id="botonApostar" text="Apostar" GridPane.columnIndex="8" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
+                    <Button fx:id="botonPlatar" text="Plantarse" GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
+                    <Button fx:id="botonPedir" text="Pedir" GridPane.columnIndex="3" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
+                    <Button fx:id="botonApostar" text="Apostar" GridPane.columnIndex="4" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
                 </GridPane>
             </bottom>
         </BorderPane>

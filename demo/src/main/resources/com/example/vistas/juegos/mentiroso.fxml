@@ -14,7 +14,7 @@
 
 
 <BorderPane prefHeight="400" prefWidth="600" stylesheets="@../../styles/styles.css" 
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.juegos.CinquilloController">
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.juegos.MentirosoController">
     <center>
         <BorderPane>
             <top>
@@ -24,11 +24,13 @@
                 <GridPane fx:id="cartasUsuario3" style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px"  />
             </left>
             <center>
-                <GridPane styleClass="game-grid-pane" style="-fx-margin: -20px;" >
-                    <GridPane fx:id="escaleraOros" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                    <GridPane fx:id="escaleraCopas" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                    <GridPane fx:id="escaleraEspadas" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-                    <GridPane fx:id="escaleraBastos" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                <GridPane styleClass="game-grid-pane" style="-fx-margin: -20px;" vgap="30" >
+                    <Label fx:id="jugadaAnterior" styleClass="white-label" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
+                    <GridPane fx:id="cartasMesa" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER" />
+                    <GridPane style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" GridPane.columnIndex="0" GridPane.rowIndex="2" vgap="20" hgap="20" >
+                        <Button fx:id="botonEchar" text="Tirar" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#ponerCarta"/>
+                        <Button fx:id="botonLevantar" text="Levantar" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#levantarCarta"/>
+                    </GridPane>
                 </GridPane>
             </center>
             <right>
