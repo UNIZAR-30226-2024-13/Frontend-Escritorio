@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 public class MentirosoController implements Initializable{
@@ -37,11 +38,18 @@ public class MentirosoController implements Initializable{
 
     private int filaCartas = 0;
 
-    private int contCartas = 0;
-
     private boolean primerTurno = true;
 
     private int numeroAJugar = 0;
+
+    @FXML
+    private GridPane cartasUsuario2;
+
+    @FXML
+    private GridPane cartasUsuario3;
+    
+    @FXML
+    private GridPane cartasUsuario4;
 
     private List<Carta> listaCartas = new ArrayList<>();
 
@@ -70,6 +78,7 @@ public class MentirosoController implements Initializable{
 
             // Eliminar lo que hubiera antes y crear botones para cada carta
             n = 0;
+            int m = 0;
             cartas.getChildren().clear();
             for (Carta carta : listaCartas) {
                 Button boton = new Button(carta.toString());
@@ -80,17 +89,43 @@ public class MentirosoController implements Initializable{
                     botonesSeleccionados.add(boton);
                     cartasSeleccionadas.add(carta);
                 });
-                if (contCartas == 8) {
+                if (n == 8) {
                     filaCartas++;
-                    contCartas = 0;
                     n=0;
                 }
                 cartas.add(boton, n, filaCartas);
+
+                ImageView imagenRev = new ImageView();
+
+                Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
+        
+                imagenRev.setImage(imagen);
+                imagenRev.setFitWidth(40);
+                imagenRev.setFitHeight(60);
+
+                ImageView imagenRev2 = new ImageView();
+        
+                imagenRev2.setImage(imagen);
+                imagenRev2.setFitWidth(40);
+                imagenRev2.setFitHeight(60);
+
+                ImageView imagenRev3 = new ImageView();
+        
+                imagenRev3.setImage(imagen);
+                imagenRev3.setFitWidth(40);
+                imagenRev3.setFitHeight(60);
+
+                cartasUsuario2.add(imagenRev, m, 0);
+                cartasUsuario3.add(imagenRev2, 0, m);
+                cartasUsuario4.add(imagenRev3, 0, m);
                 n++;
-                contCartas++;
+                m++;
             }
             cartas.setHgap(20);
             cartas.setVgap(20);
+            cartasUsuario2.setHgap(30);
+            cartasUsuario3.setVgap(3);
+            cartasUsuario4.setVgap(3);
             cartasMesa.setHgap(10);
         } catch (Exception e) {
         } finally{
@@ -120,7 +155,8 @@ public class MentirosoController implements Initializable{
         if (primerTurno) {
             pedirNumero();
             primerTurno = false;
-        }     
+        }
+        jugadaAnterior.setText("Ha tirado " + cartasSeleccionadas.size() + " cartas del número " + numeroAJugar);     
     }
 
     private void pedirNumero() throws IOException{
@@ -131,9 +167,8 @@ public class MentirosoController implements Initializable{
         Scene scene = new Scene(root, 600, 300);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/example/imgs/logo.jpg")));
         stage.setScene(scene);
-        stage.showAndWait(); // Esperar hasta que se cierre el nuevo Stage
-        numeroAJugar = controller.getBoton(); // Obtener el valor del botón seleccionado
-        jugadaAnterior.setText("Ha tirado " + cartasSeleccionadas.size() + " cartas del número " + numeroAJugar);
+        stage.showAndWait();
+        numeroAJugar = controller.getBoton();
     }
 
 
@@ -152,6 +187,7 @@ public class MentirosoController implements Initializable{
             cartas.add(button, columnasCartas.get(i), filasCartas.get(i));
             cartasMesa.getChildren().clear();
         }
+        jugadaAnterior.setText("");
         cartasSeleccionadas.clear();
         botonesSeleccionados.clear();
         columnasCartas.clear();
