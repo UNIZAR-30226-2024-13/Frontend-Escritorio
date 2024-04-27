@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 public class UnoController implements Initializable{
@@ -40,6 +41,15 @@ public class UnoController implements Initializable{
     private int contCartas = 0;
 
     private int vieneDePoner = 0;
+
+    @FXML
+    private GridPane cartasUsuario2;
+
+    @FXML
+    private GridPane cartasUsuario3;
+    
+    @FXML
+    private GridPane cartasUsuario4;
 
     private List<CartaUno> listaCartas = new ArrayList<>();
 
@@ -63,7 +73,7 @@ public class UnoController implements Initializable{
              * Cerrar las conexiones y manejar errores
              */
             int n = 0;
-            while (n < 15) { 
+            while (n < 8) { 
                 //  Añadir las cartas a la lista, parseando lo recibido
                 listaCartas.add(new CartaUno(n, 2));
                 mazoPrueba.add(new CartaUno(n, 0));
@@ -73,6 +83,7 @@ public class UnoController implements Initializable{
 
             // Eliminar lo que hubiera antes y crear botones para cada carta
             n = 0;
+            int m = 0;
             cartas.getChildren().clear();
             cartasMesa.getChildren().clear();
             for (CartaUno carta : listaCartas) {
@@ -92,14 +103,42 @@ public class UnoController implements Initializable{
                 }
                 else {
                     cartas.add(boton, n, filaCartas);
+                    ImageView imagenRev = new ImageView();
+
+                    Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
+            
+                    imagenRev.setImage(imagen);
+                    imagenRev.setFitWidth(40);
+                    imagenRev.setFitHeight(60);
+    
+                    ImageView imagenRev2 = new ImageView();
+            
+                    imagenRev2.setImage(imagen);
+                    imagenRev2.setFitWidth(40);
+                    imagenRev2.setFitHeight(60);
+    
+                    ImageView imagenRev3 = new ImageView();
+            
+                    imagenRev3.setImage(imagen);
+                    imagenRev3.setFitWidth(40);
+                    imagenRev3.setFitHeight(60);
+    
+                    cartasUsuario2.add(imagenRev, m, 0);
+                    cartasUsuario3.add(imagenRev2, 0, m);
+                    cartasUsuario4.add(imagenRev3, 0, m);
                 }
+                
                 n++;
+                m++;
                 contCartas++;
             }
             columnasCartas.add(n-1);
             filasCartas.add(filaCartas);
             cartas.setHgap(20);
             cartas.setVgap(20);
+            cartasUsuario2.setHgap(30);
+            cartasUsuario3.setVgap(3);
+            cartasUsuario4.setVgap(3);
         } catch (Exception e) {
         } finally{
         }
