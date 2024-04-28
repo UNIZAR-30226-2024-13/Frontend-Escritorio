@@ -1,8 +1,14 @@
 package com.example;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+
+import com.example.App;
+import com.example.Usuario;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import org.json.simple.JSONObject;
 
 public class RegistroController implements Initializable {
 
@@ -148,8 +156,26 @@ public class RegistroController implements Initializable {
             marcaErrorPasswd.setVisible(true);
         }
         else{
-            // Comprobar si el usuario esta en la BD registrado
+            agnadirUsuario();
             switchToMenuPrincipal();
         }
+    }
+    private void agnadirUsuario() {
+        try {
+            URL url = new URL(App.ip + "/usuarios/saveUsuario?tipo=byNombre");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true); 
+
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = jsonUsuario.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    
     }
 }
