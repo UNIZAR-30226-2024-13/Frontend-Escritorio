@@ -78,14 +78,14 @@ public class MenuUnirsePartidaController implements Initializable{
     }
 
     @FXML
-    private void unirBlackJack() throws IOException {
+    private void unirBlackjack() throws IOException {
         // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
-        App.setRoot("/com/example/vistas/juegos/unirBlackJack");
+        App.setRoot("/com/example/vistas/juegos/unirBlackjack");
     }
 
     @FXML
-    private void unirUNO() throws IOException {
+    private void unirUno() throws IOException {
         // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
-        App.setRoot("/com/example/vistas/juegos/unirUNO");
+        App.setRoot("/com/example/vistas/juegos/unirUno");
     }
 }

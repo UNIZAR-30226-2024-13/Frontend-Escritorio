@@ -55,12 +55,12 @@
                 <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="0" GridPane.rowIndex="2" >
                         <Image url="@../../imgs/mentiroso.jpg"/>
                 </ImageView>
-                <Button fx:id="botonMentiroso" text="Mentiroso"  GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Button fx:id="botonMentiroso" text="Mentiroso" onAction="#unirMentiroso" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="4" GridPane.rowIndex="2" >
                         <Image url="@../../imgs/blackjack.jpg"/>
                 </ImageView>
-                <Button fx:id="botonBlackJack" text="BlackJack"  GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                <Button fx:id="botonUNO" text="UNO"  GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <Button fx:id="botonBlackJack" text="BlackJack" onAction="#unirBlackjack" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                <Button fx:id="botonUNO" text="UNO" onAction="#unirUno" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                 <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.halignment="CENTER" >
                     <Image url="@../../imgs/uno.jpg"/>
                 </ImageView>

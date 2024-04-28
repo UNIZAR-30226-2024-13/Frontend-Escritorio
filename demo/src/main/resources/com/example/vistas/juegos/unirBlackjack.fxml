@@ -7,10 +7,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TextField?>
 
 
 <BorderPane prefHeight="400" prefWidth="600" stylesheets="@../../styles/styles.css" 
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.menusPrincipales.MenuUnirsePartidaController">
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.juegos.UnirBlackjackController">
     <top>
         <GridPane styleClass="top-grid-pane">
 
@@ -42,28 +46,29 @@
     </top>
     <center>
         <VBox>
+            <Label text="Unirse a partida del Blacjack" styleClass="white-label" alignment="CENTER"/>
             <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS" hgap="20" >
-                <Label text=" Seleccione el juego" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="white-label" />
-                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="0" GridPane.rowIndex="1" >
-                        <Image url="@../../imgs/cinquillo.jpg"/>
-                </ImageView>
-                <Button fx:id="botonCinquillo" text="Cinquillo" onAction="#unirCinquillo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="4" GridPane.rowIndex="1" >
-                        <Image url="@../../imgs/poker.jpg"/>
-                </ImageView>
-                <Button fx:id="botonPoker" text="Poker" onAction="#unirPoker" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="0" GridPane.rowIndex="2" >
-                        <Image url="@../../imgs/mentiroso.jpg"/>
-                </ImageView>
-                <Button fx:id="botonMentiroso" text="Mentiroso" onAction="#unirMentiroso" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="4" GridPane.rowIndex="2" >
-                        <Image url="@../../imgs/blackjack.jpg"/>
-                </ImageView>
-                <Button fx:id="botonBlackJack" text="BlackJack" onAction="#unirBlackjack" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                <Button fx:id="botonUNO" text="UNO" onAction="#unirUno" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.halignment="CENTER" >
-                    <Image url="@../../imgs/uno.jpg"/>
-                </ImageView>
+
+                <columnConstraints>
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints percentWidth="30"/>
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                </columnConstraints>
+                <Label text="Lista de partidas publicas" styleClass="white-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label text="Unirse a partida privada" styleClass="white-label" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                <TextField fx:id="campoPrivadas" promptText="Introduce el ID de la partida" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                <TableView fx:id="tablaPartidas" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
+                    <columns>
+                        <TableColumn text="ID_Partida" fx:id="columnaId" styleClass="secondary-color" prefWidth="200" />
+                        <TableColumn text="Nº Jugadores" fx:id="columnaJugadores" styleClass="secondary-color" prefWidth="200" />
+                        <TableColumn text="Apuesta" fx:id="columnaApuesta" styleClass="secondary-color" prefWidth="200" />
+                    </columns>
+                </TableView>
+                <Button fx:id="botonConfirmar" text="Confirmar" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#crearPartida"/>
+                <Button fx:id="botonCancelar" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#cancelar"/>
+                <Button fx:id="botonUnirse" text="Unirse" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#crearPartida"/>
             </GridPane>
         </VBox>
     </center>

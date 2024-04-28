@@ -23,7 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class UnirPokerController implements Initializable {
+public class UnirBlackjackController implements Initializable {
     
     @FXML
     private Button botonPublica;
@@ -61,11 +61,11 @@ public class UnirPokerController implements Initializable {
         columnaJugadores.setCellValueFactory(new PropertyValueFactory<>("jugadores"));
         columnaApuesta.setCellValueFactory(new PropertyValueFactory<>("apuesta"));
         partidas = FXCollections.observableArrayList();
-        Partida partida = new Partida("Partida_poker_1", 4, 100);
+        Partida partida = new Partida("Partida_blacjack_1", 4, 100);
         partidas.add(partida);
         tablaPartidas.setItems(partidas);
 
-        Partida partida2 = new Partida("Partida_poker_2", 4, 200);
+        Partida partida2 = new Partida("Partida_blacjack_2", 4, 200);
         partidas.add(partida2);
         tablaPartidas.setItems(partidas);
 
@@ -133,7 +133,7 @@ public class UnirPokerController implements Initializable {
 
     @FXML
     private void crearPartida() throws IOException {
-        App.setRoot("/com/example/vistas/juegos/poker");
+        App.setRoot("/com/example/vistas/juegos/blackjack");
     }
 
     @FXML

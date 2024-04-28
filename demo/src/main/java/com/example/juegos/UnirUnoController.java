@@ -22,8 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
-public class UnirPokerController implements Initializable {
+public class UnirUnoController implements Initializable{
     
     @FXML
     private Button botonPublica;
@@ -36,7 +35,7 @@ public class UnirPokerController implements Initializable {
 
     @FXML
     private Label etiquetaPasswd;
-    
+
     @FXML
     private TableView<Partida> tablaPartidas;
     
@@ -46,26 +45,22 @@ public class UnirPokerController implements Initializable {
     @FXML
     private TableColumn<Partida, String> columnaJugadores;
     
-    @FXML
-    private TableColumn<Partida, String> columnaApuesta;
-    
-    
     private ObservableList<Partida> partidas;
     
     private boolean opcionesVisible = false;
     private boolean passwdVisible = false;
 
+    
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         columnaId.setCellValueFactory(new PropertyValueFactory<>("id_partida"));
         columnaJugadores.setCellValueFactory(new PropertyValueFactory<>("jugadores"));
-        columnaApuesta.setCellValueFactory(new PropertyValueFactory<>("apuesta"));
         partidas = FXCollections.observableArrayList();
-        Partida partida = new Partida("Partida_poker_1", 4, 100);
+        Partida partida = new Partida("Partida_uno_1", 4);
         partidas.add(partida);
         tablaPartidas.setItems(partidas);
 
-        Partida partida2 = new Partida("Partida_poker_2", 4, 200);
+        Partida partida2 = new Partida("Partida_uno_2", 4);
         partidas.add(partida2);
         tablaPartidas.setItems(partidas);
 
@@ -95,7 +90,6 @@ public class UnirPokerController implements Initializable {
             // TODO: handle exception
         }
     }
-
     @FXML
     private void switchToPerfil() throws IOException {
         App.setRoot("/com/example/vistas/perfil/perfil");
@@ -133,7 +127,7 @@ public class UnirPokerController implements Initializable {
 
     @FXML
     private void crearPartida() throws IOException {
-        App.setRoot("/com/example/vistas/juegos/poker");
+        App.setRoot("/com/example/vistas/juegos/uno");
     }
 
     @FXML
