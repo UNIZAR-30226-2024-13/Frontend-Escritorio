@@ -2,6 +2,7 @@ module com.example {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
+    requires json.simple;
 
     opens com.example to javafx.fxml;
     opens com.example.juegos to javafx.fxml;

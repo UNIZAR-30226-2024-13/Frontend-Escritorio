@@ -7,6 +7,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import org.json.simple.JSONObject;
+
 import com.example.App;
 import com.example.Usuario;
 
@@ -18,7 +20,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import org.json.simple.JSONObject;
 
 public class RegistroController implements Initializable {
 
