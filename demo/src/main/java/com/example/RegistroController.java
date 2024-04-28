@@ -59,6 +59,16 @@ public class RegistroController implements Initializable {
     @FXML
     private Label marcaErrorPasswd;
 
+    private String nombre;
+
+    private String pais;
+
+    private String email;
+
+    private String user;
+
+    private String passwd;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Cargar la imagen desde el archivo
@@ -79,11 +89,11 @@ public class RegistroController implements Initializable {
 
     @FXML
     private void guardarDatosRegistro() throws IOException {
-        String nombre = campoNombreReg.getText();
-        String pais = campoPaisReg.getText();
-        String email = campoEmailReg.getText();
-        String user = campoUserReg.getText();
-        String passwd = campoContraseñaReg.getText();
+        nombre = campoNombreReg.getText();
+        pais = campoPaisReg.getText();
+        email = campoEmailReg.getText();
+        user = campoUserReg.getText();
+        passwd = campoContraseñaReg.getText();
         if (nombre.isEmpty()) {
             error.setText("Debes rellenar el campo Nombre completo");
             error.setVisible(true);
@@ -163,15 +173,23 @@ public class RegistroController implements Initializable {
     }
     private void agnadirUsuario() {
         try {
-            URL url = new URL(App.ip + "/usuarios/saveUsuario?tipo=byNombre");
+            URL url = new URL(App.ip + "/usuarios/saveUsuario");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true); 
-
             conn.setRequestProperty("Content-Type", "application/json");
 
+            JSONObject jsonUsuario = new JSONObject();
+
+            jsonUsuario.put("Nombre", nombre);
+            jsonUsuario.put("Pais", pais);
+            jsonUsuario.put("Email", email);
+            jsonUsuario.put("User", user);
+            jsonUsuario.put("Passwd", passwd);
+
             try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = jsonUsuario.getBytes("utf-8");
+                String jsonString = jsonUsuario.toJSONString();
+                byte[] input = jsonString.getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
         } catch (Exception e) {
