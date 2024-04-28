@@ -51,6 +51,8 @@ public class MentirosoController implements Initializable{
     @FXML
     private GridPane cartasUsuario4;
 
+    private int botones = 0;
+
     private List<Carta> listaCartas = new ArrayList<>();
 
     private List<Button> botonesSeleccionados = new ArrayList<>();
@@ -144,13 +146,14 @@ public class MentirosoController implements Initializable{
 
     @FXML
     private void ponerCarta() throws IOException{ 
-        for (int i = 0; i < cartasSeleccionadas.size(); i++) {
-            Button button = new Button(cartasSeleccionadas.get(i).toString());
+        while (botones < cartasSeleccionadas.size()) {
+            Button button = new Button(cartasSeleccionadas.get(botones).toString());
             button.getStyleClass().add("carta-button");
-            cartasMesa.add(button, i, 0);
-            cartas.getChildren().remove(botonesSeleccionados.get(i));
-            columnasCartas.add(cartas.getColumnIndex(botonesSeleccionados.get(i)));
-            filasCartas.add(cartas.getRowIndex(botonesSeleccionados.get(i)));
+            cartasMesa.add(button, botones, 0);
+            cartas.getChildren().remove(botonesSeleccionados.get(botones));
+            columnasCartas.add(cartas.getColumnIndex(botonesSeleccionados.get(botones)));
+            filasCartas.add(cartas.getRowIndex(botonesSeleccionados.get(botones)));
+            botones++;
         } 
         if (primerTurno) {
             pedirNumero();
@@ -192,5 +195,7 @@ public class MentirosoController implements Initializable{
         botonesSeleccionados.clear();
         columnasCartas.clear();
         filasCartas.clear();
+        primerTurno = true;
+        botones = 0;
     }
 }
