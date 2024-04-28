@@ -173,7 +173,7 @@ public class RegistroController implements Initializable {
     }
     private void agnadirUsuario() {
         try {
-            URL url = new URL(App.ip + "/usuarios/saveUsuario");
+            URL url = new URL("http://" + App.ip + "/usuarios/newUsuario");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true); 
@@ -193,7 +193,7 @@ public class RegistroController implements Initializable {
                 os.write(input, 0, input.length);
             }
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
     
     }
