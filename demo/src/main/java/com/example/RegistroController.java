@@ -1,8 +1,11 @@
 package com.example;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -173,7 +176,7 @@ public class RegistroController implements Initializable {
     }
     private void agnadirUsuario() {
         try {
-            URL url = new URL("http://" + App.ip + "/usuarios/newUsuario");
+            URL url = new URL("http://localhost:20000/api" + "/usuarios/newUsuario");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true); 
@@ -181,20 +184,35 @@ public class RegistroController implements Initializable {
 
             JSONObject jsonUsuario = new JSONObject();
 
-            jsonUsuario.put("Nombre", nombre);
-            jsonUsuario.put("Pais", pais);
-            jsonUsuario.put("Email", email);
-            jsonUsuario.put("User", user);
-            jsonUsuario.put("Passwd", passwd);
+            jsonUsuario.put("nombre", nombre);
+            jsonUsuario.put("pais", pais);
+            jsonUsuario.put("email", email);
+            jsonUsuario.put("fichas", 50);
 
             try (OutputStream os = conn.getOutputStream()) {
                 String jsonString = jsonUsuario.toJSONString();
                 byte[] input = jsonString.getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
+
+                        // Leer la respuesta del servidor
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("Respuesta del servidor: " + response.toString());
+            }
+        } catch (MalformedURLException e) {
+            // Manejar la excepción de URL mal formada
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Manejar la excepción de entrada/salida, que incluye la conexión rechazada
+            e.printStackTrace();
         } catch (Exception e) {
+            // Manejar otras excepciones no previstas
             e.printStackTrace();
         }
-    
     }
 }

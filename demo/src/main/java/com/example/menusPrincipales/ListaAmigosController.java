@@ -46,7 +46,7 @@ public class ListaAmigosController implements Initializable{
 
         /** Conectar bien y mostrar los amigos que ya estan en la BD*/
         try {
-            URL url = new URL(App.ip + "/usuarios/getUsuario?value="+ "" + "&tipo=byNombre");
+            URL url = new URL("localhost" + "/usuarios/getUsuario?value="+ "" + "&tipo=byNombre");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
