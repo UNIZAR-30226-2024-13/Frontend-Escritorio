@@ -8,18 +8,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 import org.json.simple.JSONObject;
-
-import com.example.App;
-import com.example.Usuario;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -178,9 +174,10 @@ public class RegistroController implements Initializable {
     /**
      * Añade el usuario registrado a la Base de Datos mediante un JSON
      */
+    @SuppressWarnings("unchecked")
     private void agnadirUsuario() {
         try {
-            URL url = new URL("http://localhost:20000/api" + "/usuarios/newUsuario");
+            URL url = new URL(App.ip + "/usuarios/newUsuario");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true); 
@@ -199,7 +196,7 @@ public class RegistroController implements Initializable {
                 os.write(input, 0, input.length);
             }
 
-                        // Leer la respuesta del servidor
+            // Leer la respuesta del servidor
             try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine;

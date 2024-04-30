@@ -2,19 +2,22 @@ package com.example;
 
 public class Usuario {
 
+    private String id;
     private String nombre;
     private String email;
     private int dinero;
     private String pais;
 
     public Usuario() {
+        this.id = "";
         this.nombre = "";
         this.email = "";
         this.dinero = 100;
         this.pais = "";
     }
 
-    public Usuario(String nombre, String email, int dinero, String pais) {
+    public Usuario(String id, String nombre, String email, int dinero, String pais) {
+        this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.dinero = dinero;
@@ -51,5 +54,13 @@ public class Usuario {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
