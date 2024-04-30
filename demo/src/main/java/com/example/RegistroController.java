@@ -174,6 +174,10 @@ public class RegistroController implements Initializable {
             switchToMenuPrincipal();
         }
     }
+
+    /**
+     * Añade el usuario registrado a la Base de Datos mediante un JSON
+     */
     private void agnadirUsuario() {
         try {
             URL url = new URL("http://localhost:20000/api" + "/usuarios/newUsuario");
