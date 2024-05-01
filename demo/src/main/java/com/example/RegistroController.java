@@ -180,7 +180,7 @@ public class RegistroController implements Initializable {
      */
     private void agnadirUsuario() {
         try {
-            URL url = new URL("http://localhost:20000/api" + "/usuarios/newUsuario");
+            URL url = new URL(App.host + "/usuarios/newUsuario");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true); 

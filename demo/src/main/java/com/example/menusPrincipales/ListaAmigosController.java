@@ -1,11 +1,17 @@
 package com.example.menusPrincipales;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+
+import org.json.simple.JSONObject;
 
 import com.example.App;
 import com.example.Usuario;
@@ -46,28 +52,35 @@ public class ListaAmigosController implements Initializable{
 
         /** Conectar bien y mostrar los amigos que ya estan en la BD*/
         try {
-            URL url = new URL("localhost" + "/usuarios/getUsuario?value="+ "" + "&tipo=byNombre");
+            URL url = new URL(App.host + "/usuarios/getUsuario?value="+ "" + "&tipo=byNombre");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-            conn.connect();
-
-            int respuesta = conn.getResponseCode();
-            if(respuesta != 200){
-                throw new RuntimeException("Error de codigo " + respuesta);
-            }else{
-                StringBuilder informacion = new StringBuilder();
-                Scanner scanner = new Scanner(url.openStream());
-
-                while (scanner.hasNext()) {
-                    informacion.append(scanner.nextLine());
+            conn.setDoInput(true); 
+            // Leer la respuesta del servidor
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
+                StringBuilder amigoString = new StringBuilder();
+                String amigoLine;
+                while ((amigoLine = br.readLine()) != null) {
+                    amigoString.append(amigoLine.trim());
+                    Usuario amigo = new Usuario();
+                    /**
+                     * TODO: Buscar en la BD por nombre y añadirlos
+                     */
+                    amigo.setNombre(amigoLine);
+                    amigos.add(amigo);
                 }
-                scanner.close();
-
-                //TODO:  Añadir la info de la BD
-                //amigos.add();
+                System.out.println("Amigo de la lista: " + amigoString.toString());
             }
+                //TODO:  Añadir la info de la BD
+            //amigos.add();
+        } catch (MalformedURLException e) {
+            // Manejar la excepción de URL mal formada
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Manejar la excepción de entrada/salida, que incluye la conexión rechazada
+            e.printStackTrace();
         } catch (Exception e) {
-            // TODO: handle exception
+            // Manejar otras excepciones no previstas
         }
     }
 
@@ -91,12 +104,36 @@ public class ListaAmigosController implements Initializable{
     @FXML
     private void agregarAmigo(ActionEvent event){
         Usuario amigo = new Usuario();
-        /**
-         * TODO: Buscar en la BD por nombre y añadirlos
-         */
         amigo.setNombre(nombreAmigo.getText());
-        amigos.add(amigo);
-        tablaAmigos.setItems(amigos);
+        try {
+            URL url = new URL(App.host + "/usuarios/addAmigo?idUsuario="+ "" + "&idAmigo=");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true); 
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            JSONObject parametros = new JSONObject();
+
+            parametros.put("idUsuario", App.Usuario.getId());
+            parametros.put("idAmigo", amigo.getNombre());
+
+            try (OutputStream os = conn.getOutputStream()) {
+                String jsonString = parametros.toJSONString();
+                byte[] input = jsonString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }    
+            amigos.add(amigo);
+            tablaAmigos.setItems(amigos);
+
+        } catch (MalformedURLException e) {
+            // Manejar la excepción de URL mal formada
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Manejar la excepción de entrada/salida, que incluye la conexión rechazada
+            e.printStackTrace();
+        } catch (Exception e) {
+            // Manejar otras excepciones no previstas
+        }
     }
 
     @FXML
