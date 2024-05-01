@@ -177,11 +177,7 @@ public class RegistroController implements Initializable {
     @SuppressWarnings("unchecked")
     private void agnadirUsuario() {
         try {
-<<<<<<< HEAD
-            URL url = new URL(App.host + "/usuarios/newUsuario");
-=======
             URL url = new URL(App.ip + "/usuarios/newUsuario");
->>>>>>> 2bc811439eb36e2622af1f3b30f75941e990aa9a
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true); 

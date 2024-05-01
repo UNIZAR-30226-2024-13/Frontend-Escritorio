@@ -14,13 +14,9 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-<<<<<<< HEAD
-    public static final String host = "http://localhost:20000/api";
-=======
     //public static final String ip = "http://90.94.101.49:20000/api";
     public static final String ip = "http://localhost:20000/api";
     public static Usuario usuario;
->>>>>>> 2bc811439eb36e2622af1f3b30f75941e990aa9a
 
     private static Scene scene;
 

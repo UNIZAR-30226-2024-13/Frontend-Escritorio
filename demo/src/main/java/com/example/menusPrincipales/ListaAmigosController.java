@@ -52,7 +52,7 @@ public class ListaAmigosController implements Initializable{
 
         /** Conectar bien y mostrar los amigos que ya estan en la BD*/
         try {
-            URL url = new URL(App.host + "/usuarios/getUsuario?value="+ "" + "&tipo=byNombre");
+            URL url = new URL(App.ip + "/usuarios/getUsuario?value="+ "" + "&tipo=byNombre");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setDoInput(true); 
@@ -106,7 +106,7 @@ public class ListaAmigosController implements Initializable{
         Usuario amigo = new Usuario();
         amigo.setNombre(nombreAmigo.getText());
         try {
-            URL url = new URL(App.host + "/usuarios/addAmigo?idUsuario="+ "" + "&idAmigo=");
+            URL url = new URL(App.ip + "/usuarios/addAmigo?idUsuario="+ "" + "&idAmigo=");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true); 
@@ -114,7 +114,7 @@ public class ListaAmigosController implements Initializable{
 
             JSONObject parametros = new JSONObject();
 
-            parametros.put("idUsuario", App.Usuario.getId());
+            parametros.put("idUsuario", App.usuario.getId());
             parametros.put("idAmigo", amigo.getNombre());
 
             try (OutputStream os = conn.getOutputStream()) {
@@ -139,16 +139,40 @@ public class ListaAmigosController implements Initializable{
     @FXML
     private void eliminarAmigo(ActionEvent event){
         Usuario amigo = new Usuario();
-        /**
-         * TODO: Buscar en la BD por nombre y eliminarlo
-         */
         amigo.setNombre(nombreAmigo.getText());
-        List<Usuario> listaAmigos = amigos;
-        for (Usuario usuario : listaAmigos) {
-            if (amigo.getNombre().equals(usuario.getNombre())) {
-                amigos.remove(usuario);
+        try {
+            URL url = new URL(App.ip + "/usuarios/deleteAmigo?idUsuario="+ "" + "&idAmigo=");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("DELETE");
+            conn.setDoOutput(true); 
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            JSONObject parametros = new JSONObject();
+
+            parametros.put("idUsuario", App.usuario.getId());
+            parametros.put("idAmigo", amigo.getNombre());
+
+            try (OutputStream os = conn.getOutputStream()) {
+                String jsonString = parametros.toJSONString();
+                byte[] input = jsonString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }    
+            List<Usuario> listaAmigos = amigos;
+            for (Usuario usuario : listaAmigos) {
+                if (amigo.getNombre().equals(usuario.getNombre())) {
+                    amigos.remove(usuario);
+                }
             }
+            tablaAmigos.setItems(amigos);
+
+        } catch (MalformedURLException e) {
+            // Manejar la excepción de URL mal formada
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Manejar la excepción de entrada/salida, que incluye la conexión rechazada
+            e.printStackTrace();
+        } catch (Exception e) {
+            // Manejar otras excepciones no previstas
         }
-        tablaAmigos.setItems(amigos);
     }
 }
