@@ -1,8 +1,13 @@
 package com.example;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import org.json.simple.JSONObject;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -74,8 +79,57 @@ public class LoginController implements Initializable{
             marcaErrorUser.setVisible(false);
         }
         else{
-            // Comprobar si el usuario esta en la BD
-            switchToMenuPrincipal();
+            if(comprobarLogin()){
+                switchToMenuPrincipal();
+            } else {
+                errorPasswd.setText("Los datos introducidos no coinciden con lo esperado");
+                errorUser.setVisible(true);
+                marcaErrorUser.setVisible(true);
+                errorPasswd.setVisible(true);
+                marcaErrorPasswd.setVisible(true);
+            }
         }
+    }
+
+    /**
+     * Compara los datos introducidos en las casillas de texto con los recibidos de la base de datos
+     * @return - Devuelve verdadero si los datos coinciden
+     */
+    private boolean comprobarLogin(){
+        try {
+            URL url = new URL(App.ip + "");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                
+                JSONObject jsonResponse = new JSONObject();
+                String id = (String)jsonResponse.get("id");
+                String nombre = (String)jsonResponse.get("nombre");
+                String email = (String)jsonResponse.get("email");
+                int dinero = (Integer)jsonResponse.get("fichas");
+                String pais = (String)jsonResponse.get("pais");
+                
+                
+                Usuario usuario = new Usuario(id, nombre, email, dinero, pais);
+                App.usuario = usuario;
+
+                conn.disconnect();
+                return true;
+            }
+        } catch (IOException e) {
+            // Manejar la excepción de entrada/salida
+            e.printStackTrace();
+        } catch (Exception e) {
+            // Manejar otras excepciones no previstas
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }
