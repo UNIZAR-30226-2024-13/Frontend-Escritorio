@@ -49,6 +49,8 @@ public class UnirPokerController implements Initializable {
     @FXML
     private TableColumn<Partida, String> columnaApuesta;
     
+    @FXML
+    private Label labelFichas;
     
     private ObservableList<Partida> partidas;
     
@@ -57,6 +59,7 @@ public class UnirPokerController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        labelFichas.setText(App.usuario.getDinero() + " Fichas");
         columnaId.setCellValueFactory(new PropertyValueFactory<>("id_partida"));
         columnaJugadores.setCellValueFactory(new PropertyValueFactory<>("jugadores"));
         columnaApuesta.setCellValueFactory(new PropertyValueFactory<>("apuesta"));

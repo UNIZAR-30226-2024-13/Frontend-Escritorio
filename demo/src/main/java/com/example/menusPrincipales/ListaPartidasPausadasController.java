@@ -10,6 +10,7 @@ import com.example.Partida;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,13 +26,16 @@ public class ListaPartidasPausadasController implements Initializable{
     
     @FXML
     private TableColumn<Partida, String> columnaTipoJuego;
-
+    
+    @FXML
+    private Label labelFichas;
     
     private boolean opcionesVisible = false;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         columnaTipoJuego.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        labelFichas.setText(App.usuario.getDinero() + " Fichas");
     }
 
     @FXML

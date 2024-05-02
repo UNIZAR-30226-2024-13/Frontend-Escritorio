@@ -9,6 +9,7 @@ import com.example.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 
@@ -16,11 +17,15 @@ public class MenuCrearController implements Initializable{
 
     @FXML
     private VBox opcionesVBox;
+    
+    @FXML
+    private Label labelFichas;
 
     private boolean opcionesVisible = false;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        labelFichas.setText(App.usuario.getDinero() + " Fichas");
     }
 
     @FXML

@@ -22,6 +22,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -42,12 +43,15 @@ public class ListaAmigosController implements Initializable{
     @FXML
     private TableColumn<Usuario, String> columnaNombre;
     
+    @FXML
+    private Label labelFichas;
     
     private ObservableList<Usuario> amigos;
     private boolean opcionesVisible = false;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        labelFichas.setText(App.usuario.getDinero() + " Fichas");
         columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         amigos = FXCollections.observableArrayList(App.usuario.getAmigos());
         tablaAmigos.setItems(amigos);
