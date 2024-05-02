@@ -94,6 +94,19 @@ public class ListaAmigosController implements Initializable{
             amigos.add(amigo);
             tablaAmigos.setItems(amigos);
 
+            //Añadir al usuario como amigo también en la cuenta de su amigo
+
+            JSONObject parametros2 = new JSONObject();
+
+            parametros2.put("idUsuario", amigo.getNombre());
+            parametros2.put("idAmigo", App.usuario.getId());
+
+            try (OutputStream os = conn.getOutputStream()) {
+                String jsonString = parametros2.toJSONString();
+                byte[] input = jsonString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
         } catch (MalformedURLException e) {
             // Manejar la excepción de URL mal formada
             e.printStackTrace();
@@ -133,6 +146,17 @@ public class ListaAmigosController implements Initializable{
                 }
             }
             tablaAmigos.setItems(amigos);
+
+            JSONObject parametros2 = new JSONObject();
+
+            parametros2.put("idUsuario", amigo.getNombre());
+            parametros2.put("idAmigo", App.usuario.getId());
+
+            try (OutputStream os = conn.getOutputStream()) {
+                String jsonString = parametros2.toJSONString();
+                byte[] input = jsonString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }    
 
         } catch (MalformedURLException e) {
             // Manejar la excepción de URL mal formada
