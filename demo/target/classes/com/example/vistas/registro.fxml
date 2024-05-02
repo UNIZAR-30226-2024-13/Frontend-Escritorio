@@ -14,9 +14,9 @@
     </GridPane>
     
     <GridPane alignment="CENTER" hgap="10" vgap="10">
-        <Label text="Nombre completo:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="white-label"/>
-        <TextField fx:id="campoNombreReg" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-        <Label fx:id="marcaErrorNombre" text="*" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="error-label" visible= "false" />
+        <Label text="Nombre de usuario:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="white-label"/>
+        <TextField fx:id="campoUserReg" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <Label fx:id="marcaErrorUser" text="*" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="error-label" visible= "false" />  
 
         <Label text="País:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="white-label"/>
         <TextField fx:id="campoPaisReg" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
@@ -24,18 +24,14 @@
 
         <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="white-label"/>
         <TextField fx:id="campoEmailReg" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        <Label fx:id="marcaErrorEmail" text="*" GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="error-label" visible= "false" />
+        <Label fx:id="marcaErrorEmail" text="*" GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="error-label" visible= "false" />      
 
-        <Label text="Nombre de usuario:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="white-label"/>
-        <TextField fx:id="campoUserReg" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-        <Label fx:id="marcaErrorUser" text="*" GridPane.columnIndex="2" GridPane.rowIndex="3" styleClass="error-label" visible= "false" />        
+        <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="white-label"/>
+        <PasswordField fx:id="campoContraseñaReg" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label fx:id="marcaErrorPasswd" text="*" GridPane.columnIndex="2" GridPane.rowIndex="3" styleClass="error-label" visible= "false" />
 
-        <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="white-label"/>
-        <PasswordField fx:id="campoContraseñaReg" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-        <Label fx:id="marcaErrorPasswd" text="*" GridPane.columnIndex="2" GridPane.rowIndex="4" styleClass="error-label" visible= "false" />
-
-        <Button text="Atrás" onAction="#switchToLogin" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <Button text="Continuar" onAction="#guardarDatosRegistro" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+        <Button text="Atrás" onAction="#switchToLogin" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Button text="Continuar" onAction="#guardarDatosRegistro" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
     </GridPane>
         <GridPane alignment="CENTER" hgap="10" vgap="10" styleClass="main-color">
         <Label fx:id="error" visible= "false" styleClass="error-label"/>

@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.json.simple.JSONObject;
@@ -95,6 +97,7 @@ public class LoginController implements Initializable{
      * Compara los datos introducidos en las casillas de texto con los recibidos de la base de datos
      * @return - Devuelve verdadero si los datos coinciden
      */
+    @SuppressWarnings("unchecked")
     private boolean comprobarLogin(){
         try {
             URL url = new URL(App.ip + "");
@@ -114,9 +117,11 @@ public class LoginController implements Initializable{
                 String email = (String)jsonResponse.get("email");
                 int dinero = (Integer)jsonResponse.get("fichas");
                 String pais = (String)jsonResponse.get("pais");
+                List<Usuario> amigos = (List<Usuario>)jsonResponse.get("amigos");
+                List<Partida> partidas = (List<Partida>)jsonResponse.get("partidas");
                 
                 
-                Usuario usuario = new Usuario(id, nombre, email, dinero, pais);
+                Usuario usuario = new Usuario(id, nombre, email, dinero, pais, amigos, partidas); 
                 App.usuario = usuario;
 
                 conn.disconnect();

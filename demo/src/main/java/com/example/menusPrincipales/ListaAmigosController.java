@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -48,40 +49,8 @@ public class ListaAmigosController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        amigos = FXCollections.observableArrayList();
-
-        /** Conectar bien y mostrar los amigos que ya estan en la BD*/
-        try {
-            URL url = new URL(App.ip + "/usuarios/getUsuario?value="+ "" + "&tipo=byNombre");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true); 
-            // Leer la respuesta del servidor
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
-                StringBuilder amigoString = new StringBuilder();
-                String amigoLine;
-                while ((amigoLine = br.readLine()) != null) {
-                    amigoString.append(amigoLine.trim());
-                    Usuario amigo = new Usuario();
-                    /**
-                     * TODO: Buscar en la BD por nombre y añadirlos
-                     */
-                    amigo.setNombre(amigoLine);
-                    amigos.add(amigo);
-                }
-                System.out.println("Amigo de la lista: " + amigoString.toString());
-            }
-                //TODO:  Añadir la info de la BD
-            //amigos.add();
-        } catch (MalformedURLException e) {
-            // Manejar la excepción de URL mal formada
-            e.printStackTrace();
-        } catch (IOException e) {
-            // Manejar la excepción de entrada/salida, que incluye la conexión rechazada
-            e.printStackTrace();
-        } catch (Exception e) {
-            // Manejar otras excepciones no previstas
-        }
+        amigos = FXCollections.observableArrayList(App.usuario.getAmigos());
+        tablaAmigos.setItems(amigos);
     }
 
     @FXML

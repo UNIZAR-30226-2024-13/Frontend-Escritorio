@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.json.simple.JSONObject;
@@ -24,9 +26,6 @@ public class RegistroController implements Initializable {
 
     @FXML
     private ImageView imagenLogo;
-
-    @FXML
-    private TextField campoNombreReg;
 
     @FXML
     private TextField campoPaisReg;
@@ -58,8 +57,6 @@ public class RegistroController implements Initializable {
     @FXML
     private Label marcaErrorPasswd;
 
-    private String nombre;
-
     private String pais;
 
     private String email;
@@ -88,21 +85,11 @@ public class RegistroController implements Initializable {
 
     @FXML
     private void guardarDatosRegistro() throws IOException {
-        nombre = campoNombreReg.getText();
         pais = campoPaisReg.getText();
         email = campoEmailReg.getText();
         user = campoUserReg.getText();
         passwd = campoContraseñaReg.getText();
-        if (nombre.isEmpty()) {
-            error.setText("Debes rellenar el campo Nombre completo");
-            error.setVisible(true);
-            marcaErrorNombre.setVisible(true);
-            marcaErrorPais.setVisible(false);
-            marcaErrorEmail.setVisible(false);
-            marcaErrorUser.setVisible(false);
-            marcaErrorPasswd.setVisible(false);
-        }
-        else if (pais.isEmpty()) {
+        if (pais.isEmpty()) {
             error.setText("Debes rellenar el campo País");
             error.setVisible(true);
             marcaErrorNombre.setVisible(false);
@@ -166,8 +153,9 @@ public class RegistroController implements Initializable {
             marcaErrorPasswd.setVisible(true);
         }
         else{
-            agnadirUsuario();
-            switchToMenuPrincipal();
+            if(agnadirUsuario()){
+                switchToMenuPrincipal();
+            }
         }
     }
 
@@ -175,27 +163,34 @@ public class RegistroController implements Initializable {
      * Añade el usuario registrado a la Base de Datos mediante un JSON
      */
     @SuppressWarnings("unchecked")
-    private void agnadirUsuario() {
+    private boolean agnadirUsuario() {
         try {
             URL url = new URL(App.ip + "/usuarios/newUsuario");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true); 
             conn.setRequestProperty("Content-Type", "application/json");
+    
+            List<Usuario> amigos = new ArrayList<>();
+            List<Partida> partidas = new ArrayList<>();
+            Usuario usuario = new Usuario(user, email, 50, pais, amigos, partidas);
+            App.usuario = usuario;
 
             JSONObject jsonUsuario = new JSONObject();
 
-            jsonUsuario.put("nombre", nombre);
+            jsonUsuario.put("nombre", user);
             jsonUsuario.put("pais", pais);
             jsonUsuario.put("email", email);
-            jsonUsuario.put("fichas", 50);
-
+            jsonUsuario.put("fichas", 100);
+            jsonUsuario.put("amigos", amigos);
+            jsonUsuario.put("partidas", partidas);
+            
             try (OutputStream os = conn.getOutputStream()) {
                 String jsonString = jsonUsuario.toJSONString();
                 byte[] input = jsonString.getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
-
+                
             // Leer la respuesta del servidor
             try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
                 StringBuilder response = new StringBuilder();
@@ -205,6 +200,9 @@ public class RegistroController implements Initializable {
                 }
                 System.out.println("Respuesta del servidor: " + response.toString());
             }
+
+            conn.disconnect();
+            return true;
         } catch (MalformedURLException e) {
             // Manejar la excepción de URL mal formada
             e.printStackTrace();
@@ -215,5 +213,6 @@ public class RegistroController implements Initializable {
             // Manejar otras excepciones no previstas
             e.printStackTrace();
         }
+        return false;
     }
 }
