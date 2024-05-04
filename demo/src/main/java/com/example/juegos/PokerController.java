@@ -11,12 +11,16 @@ import com.example.Carta;
 import com.example.CartaFrancesa;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class PokerController implements Initializable{
 
@@ -138,7 +142,13 @@ public class PokerController implements Initializable{
 
     @FXML
     private void pausarPartida() throws IOException {
-        App.setRoot("/com/example/vistas/juegos/votacion");
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/vistas/juegos/votacion.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root, 600, 450);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/example/imgs/logo.jpg")));
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     @FXML

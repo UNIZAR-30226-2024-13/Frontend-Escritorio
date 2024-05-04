@@ -41,9 +41,6 @@ public class RegistroController implements Initializable {
 
     @FXML
     private Label error;
-
-    @FXML
-    private Label marcaErrorNombre;
     
     @FXML
     private Label marcaErrorPais;
@@ -92,7 +89,6 @@ public class RegistroController implements Initializable {
         if (pais.isEmpty()) {
             error.setText("Debes rellenar el campo País");
             error.setVisible(true);
-            marcaErrorNombre.setVisible(false);
             marcaErrorPais.setVisible(true);
             marcaErrorEmail.setVisible(false);
             marcaErrorUser.setVisible(false);
@@ -101,7 +97,6 @@ public class RegistroController implements Initializable {
         else if (email.isEmpty()) {
             error.setText("Debes rellenar el campo Email");
             error.setVisible(true);
-            marcaErrorNombre.setVisible(false);
             marcaErrorPais.setVisible(false);
             marcaErrorEmail.setVisible(true);
             marcaErrorUser.setVisible(false);
@@ -110,7 +105,6 @@ public class RegistroController implements Initializable {
         else if (user.isEmpty()) {
             error.setText("Debes rellenar el campo Nombre de usuario");
             error.setVisible(true);
-            marcaErrorNombre.setVisible(false);
             marcaErrorPais.setVisible(false);
             marcaErrorEmail.setVisible(false);
             marcaErrorUser.setVisible(true);
@@ -119,7 +113,6 @@ public class RegistroController implements Initializable {
         else if (passwd.isEmpty()) {
             error.setText("Debes rellenar el campo Contraseña");
             error.setVisible(true);
-            marcaErrorNombre.setVisible(false);
             marcaErrorPais.setVisible(false);
             marcaErrorEmail.setVisible(false);
             marcaErrorUser.setVisible(false);
@@ -128,7 +121,6 @@ public class RegistroController implements Initializable {
         else if (!email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
             error.setText("Introduce un email válido");
             error.setVisible(true);
-            marcaErrorNombre.setVisible(false);
             marcaErrorPais.setVisible(false);
             marcaErrorEmail.setVisible(true);
             marcaErrorUser.setVisible(false);
@@ -137,7 +129,6 @@ public class RegistroController implements Initializable {
         else if (passwd.length() < 8) {
             error.setText("La contraseña debe ser mayor a 7 carácteres");
             error.setVisible(true);
-            marcaErrorNombre.setVisible(false);
             marcaErrorPais.setVisible(false);
             marcaErrorEmail.setVisible(false);
             marcaErrorUser.setVisible(false);
@@ -146,7 +137,6 @@ public class RegistroController implements Initializable {
         else if (!passwd.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+")) {
             error.setText("La contraseña debe contener al menos una mayúscula, una minúscula y un dígito");
             error.setVisible(true);
-            marcaErrorNombre.setVisible(false);
             marcaErrorPais.setVisible(false);
             marcaErrorEmail.setVisible(false);
             marcaErrorUser.setVisible(false);
@@ -155,6 +145,14 @@ public class RegistroController implements Initializable {
         else{
             if(agnadirUsuario()){
                 switchToMenuPrincipal();
+            }
+            else {
+                error.setText("Ya existe un usuario con este nombre");
+                error.setVisible(true);
+                marcaErrorUser.setVisible(true);
+                marcaErrorPasswd.setVisible(false);
+                marcaErrorPais.setVisible(false);
+                marcaErrorEmail.setVisible(false);
             }
         }
     }
