@@ -16,7 +16,7 @@ import com.example.Usuario;
 import com.google.gson.Gson;
 =======
 import com.example.entidades.CartaFrancesa;
->>>>>>> 777372f507b634cae1bb44c95e2445bf4a43584e
+import com.example.entidades.Poker;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -74,7 +74,7 @@ public class PokerController implements Initializable{
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/getPoker").asJson();
             Gson gson = new Gson();
-            PartidaPoker partida = gson.fromJson(apiResponse.getBody().toString(), PartidaPoker.class);
+            Poker partida = gson.fromJson(apiResponse.getBody().toString(), Poker.class);
             App.partidaPasswd = partida.getId();
             /**
              * TODO: Conectarse al servidor, recibir las manos
