@@ -17,6 +17,7 @@ public class App extends Application {
     //public static final String ip = "http://90.94.101.49:20000/api";
     public static final String ip = "http://localhost:20000/api";
     public static Usuario usuario;
+    public static String partidaPasswd;
 
     private static Scene scene;
 

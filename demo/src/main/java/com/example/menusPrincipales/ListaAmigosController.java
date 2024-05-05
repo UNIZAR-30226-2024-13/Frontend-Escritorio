@@ -1,21 +1,15 @@
 package com.example.menusPrincipales;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Scanner;
-
-import org.json.simple.JSONObject;
 
 import com.example.App;
 import com.example.Usuario;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,101 +69,54 @@ public class ListaAmigosController implements Initializable{
     }
 
     @FXML
-    private void agregarAmigo(ActionEvent event){
+    private boolean agregarAmigo(ActionEvent event){
         Usuario amigo = new Usuario();
         amigo.setNombre(nombreAmigo.getText());
+
         try {
-            URL url = new URL(App.ip + "/usuarios/addAmigo?idUsuario="+ "" + "&idAmigo=");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true); 
-            conn.setRequestProperty("Content-Type", "application/json");
+            HttpResponse<JsonNode> response = Unirest.post(App.ip + "/usuarios/addAmigo?idUsuario=" + "" + "&idAmigo=")
+                .field("idUsuario", App.usuario.getId())
+                .field("idAmigo", amigo.getNombre())
+                .asJson();
 
-            JSONObject parametros = new JSONObject();
+            HttpResponse<JsonNode> responseAmigo = Unirest.post(App.ip + "/usuarios/addAmigo?idUsuario=" + "" + "&idAmigo=")
+                .field("idUsuario", amigo.getNombre())
+                .field("idAmigo", App.usuario.getId())
+                .asJson();
 
-            parametros.put("idUsuario", App.usuario.getId());
-            parametros.put("idAmigo", amigo.getNombre());
-
-            try (OutputStream os = conn.getOutputStream()) {
-                String jsonString = parametros.toJSONString();
-                byte[] input = jsonString.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }    
             amigos.add(amigo);
             tablaAmigos.setItems(amigos);
-
-            //Añadir al usuario como amigo también en la cuenta de su amigo
-
-            JSONObject parametros2 = new JSONObject();
-
-            parametros2.put("idUsuario", amigo.getNombre());
-            parametros2.put("idAmigo", App.usuario.getId());
-
-            try (OutputStream os = conn.getOutputStream()) {
-                String jsonString = parametros2.toJSONString();
-                byte[] input = jsonString.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }
-
-        } catch (MalformedURLException e) {
-            // Manejar la excepción de URL mal formada
+            return true;
+        } catch (UnirestException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (IOException e) {
-            // Manejar la excepción de entrada/salida, que incluye la conexión rechazada
-            e.printStackTrace();
-        } catch (Exception e) {
-            // Manejar otras excepciones no previstas
+            return false;
         }
     }
 
     @FXML
-    private void eliminarAmigo(ActionEvent event){
+    private boolean eliminarAmigo(ActionEvent event){
         Usuario amigo = new Usuario();
         amigo.setNombre(nombreAmigo.getText());
+
         try {
-            URL url = new URL(App.ip + "/usuarios/deleteAmigo?idUsuario="+ "" + "&idAmigo=");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("DELETE");
-            conn.setDoOutput(true); 
-            conn.setRequestProperty("Content-Type", "application/json");
+            HttpResponse<JsonNode> response = Unirest.delete(App.ip + "/usuarios/deleteAmigo?idUsuario="+ "" + "&idAmigo=")
+                .field("idUsuario", App.usuario.getId())
+                .field("idAmigo", amigo.getNombre())
+                .asJson();
 
-            JSONObject parametros = new JSONObject();
+            HttpResponse<JsonNode> responseAmigo = Unirest.delete(App.ip + "/usuarios/deleteAmigo?idUsuario="+ "" + "&idAmigo=")
+                .field("idUsuario", amigo.getNombre())
+                .field("idAmigo", App.usuario.getId())
+                .asJson();
 
-            parametros.put("idUsuario", App.usuario.getId());
-            parametros.put("idAmigo", amigo.getNombre());
-
-            try (OutputStream os = conn.getOutputStream()) {
-                String jsonString = parametros.toJSONString();
-                byte[] input = jsonString.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }    
-            List<Usuario> listaAmigos = amigos;
-            for (Usuario usuario : listaAmigos) {
-                if (amigo.getNombre().equals(usuario.getNombre())) {
-                    amigos.remove(usuario);
-                }
-            }
+            amigos.add(amigo);
             tablaAmigos.setItems(amigos);
-
-            JSONObject parametros2 = new JSONObject();
-
-            parametros2.put("idUsuario", amigo.getNombre());
-            parametros2.put("idAmigo", App.usuario.getId());
-
-            try (OutputStream os = conn.getOutputStream()) {
-                String jsonString = parametros2.toJSONString();
-                byte[] input = jsonString.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }    
-
-        } catch (MalformedURLException e) {
-            // Manejar la excepción de URL mal formada
+            return true;
+        } catch (UnirestException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (IOException e) {
-            // Manejar la excepción de entrada/salida, que incluye la conexión rechazada
-            e.printStackTrace();
-        } catch (Exception e) {
-            // Manejar otras excepciones no previstas
+            return false;
         }
     }
 }
