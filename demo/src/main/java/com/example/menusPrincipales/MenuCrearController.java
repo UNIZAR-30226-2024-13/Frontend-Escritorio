@@ -35,26 +35,6 @@ public class MenuCrearController implements Initializable{
     }
 
     @FXML
-    private void switchToAmigos() throws IOException {
-        App.setRoot("/com/example/vistas/menusPrincipales/menuAmigos");
-    }
-
-    @FXML
-    private void switchToMenuCrearPartida() throws IOException {
-        App.setRoot("/com/example/vistas/menusPrincipales/menuCrearPartida");
-    }
-    
-    @FXML
-    private void switchToMenuUnirse() throws IOException {
-        App.setRoot("/com/example/vistas/menusPrincipales/menuUnirsePartida");
-    }
-
-    @FXML
-    private void switchToMenuPartidas() throws IOException {
-        App.setRoot("/com/example/vistas/menusPrincipales/menuPartidasPausadas");
-    }
-
-    @FXML
     private void switchToPerfil() throws IOException {
         App.setRoot("/com/example/vistas/perfil/perfil");
     }
@@ -108,6 +88,8 @@ public class MenuCrearController implements Initializable{
 
     /**
      * Añade la partida creada a la Base de Datos mediante un JSON
+     * @param apiJuego - Ruta de acceso con la terminacion para la llamada a la API
+     * @return - True si se crea la partida de forma correcta
      */
     private boolean agnadirPartida(String apiJuego) {
         String llamada = App.ip + apiJuego;
