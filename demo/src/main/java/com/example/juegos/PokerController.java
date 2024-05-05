@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.Carta;
-import com.example.CartaFrancesa;
+import com.example.entidades.CartaFrancesa;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

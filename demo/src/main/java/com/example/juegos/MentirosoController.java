@@ -7,22 +7,19 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.Carta;
-import com.example.juegos.VentanaMentirosoController;
-
+import com.example.entidades.Carta;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 
 public class MentirosoController implements Initializable{
@@ -144,6 +141,7 @@ public class MentirosoController implements Initializable{
         // TODO : Iniciar votacion o votar si / no
     }
 
+    @SuppressWarnings("static-access")
     @FXML
     private void ponerCarta() throws IOException{ 
         while (botones < cartasSeleccionadas.size()) {

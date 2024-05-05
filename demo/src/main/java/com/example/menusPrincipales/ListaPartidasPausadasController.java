@@ -5,8 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.Partida;
-import com.example.Usuario;
+import com.example.entidades.Partida;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -19,4 +19,5 @@ module com.example {
     exports com.example.juegos;
     exports com.example.menusPrincipales;
     exports com.example.perfil;
+    exports com.example.entidades;
 }
