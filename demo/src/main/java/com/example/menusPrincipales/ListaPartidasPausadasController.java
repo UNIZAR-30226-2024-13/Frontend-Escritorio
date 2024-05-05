@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.Partida;
+import com.example.entidades.Partida;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -7,22 +7,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.CartaUno;
-import com.example.juegos.VentanaMentirosoController;
-
+import com.example.entidades.CartaUno;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Pagination;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
 
 public class UnoController implements Initializable{
@@ -154,6 +147,7 @@ public class UnoController implements Initializable{
         // TODO : Iniciar votacion o votar si / no
     }
 
+    @SuppressWarnings("static-access")
     private void ponerCarta() { 
         cartasMesa.getChildren().clear();
         Button button = new Button(cartaSeleccionada.toString());
