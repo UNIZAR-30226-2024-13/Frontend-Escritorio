@@ -2,6 +2,7 @@ package com.example.juegos;
 
 import java.io.IOException;
 import java.net.URL;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -10,6 +11,8 @@ import com.example.App;
 import com.example.Carta;
 import com.example.CartaFrancesa;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +24,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import com.fasterxml.jackson.databind.JsonNode;
+
 
 public class PokerController implements Initializable{
 
@@ -59,6 +65,7 @@ public class PokerController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/getPoker").asJson();
             /**
              * TODO: Conectarse al servidor, recibir las manos
              * Iterar sobre las manos y añadir a cada caja el contenido individual
