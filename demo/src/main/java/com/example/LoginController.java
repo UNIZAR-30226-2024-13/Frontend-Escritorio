@@ -11,6 +11,12 @@ import java.util.ResourceBundle;
 
 import org.json.simple.JSONObject;
 
+import com.google.gson.Gson;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -97,44 +103,15 @@ public class LoginController implements Initializable{
      * Compara los datos introducidos en las casillas de texto con los recibidos de la base de datos
      * @return - Devuelve verdadero si los datos coinciden
      */
-    @SuppressWarnings("unchecked")
     private boolean comprobarLogin(){
         try {
-            URL url = new URL(App.ip + "");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
-                StringBuilder response = new StringBuilder();
-                String responseLine;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-                
-                JSONObject jsonResponse = new JSONObject();
-                String id = (String)jsonResponse.get("id");
-                String nombre = (String)jsonResponse.get("nombre");
-                String email = (String)jsonResponse.get("email");
-                int dinero = (Integer)jsonResponse.get("fichas");
-                String pais = (String)jsonResponse.get("pais");
-                List<Usuario> amigos = (List<Usuario>)jsonResponse.get("amigos");
-                List<Partida> partidas = (List<Partida>)jsonResponse.get("partidas");
-                
-                
-                Usuario usuario = new Usuario(id, nombre, email, dinero, pais, amigos, partidas); 
-                App.usuario = usuario;
-
-                conn.disconnect();
-                return true;
-            }
-        } catch (IOException e) {
-            // Manejar la excepción de entrada/salida
+            HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "").asJson();
+            App.usuario = new Gson().fromJson(apiResponse.getBody().toString(), Usuario.class); 
+            return true;
+        } catch (UnirestException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (Exception e) {
-            // Manejar otras excepciones no previstas
-            e.printStackTrace();
+            return false;
         }
-
-        return false;
     }
 }

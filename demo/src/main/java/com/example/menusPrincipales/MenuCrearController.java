@@ -5,6 +5,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.App;
+import com.example.Partida;
+import com.google.gson.Gson;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,31 +73,54 @@ public class MenuCrearController implements Initializable{
 
     @FXML
     private void crearCinquillo() throws IOException {
-        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
-        App.setRoot("/com/example/vistas/juegos/crearCinquillo");
+        if(agnadirPartida("/partidas/addCinquillo")){
+            App.setRoot("/com/example/vistas/juegos/crearCinquillo");
+        }
     }
 
     @FXML
     private void crearMentiroso() throws IOException {
-        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
-        App.setRoot("/com/example/vistas/juegos/crearMentiroso");
+        if(agnadirPartida("/partidas/addMentiroso")){
+            App.setRoot("/com/example/vistas/juegos/crearMentiroso");
+        }
     }
 
     @FXML
     private void crearPoker() throws IOException {
-        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
-        App.setRoot("/com/example/vistas/juegos/crearPoker");
+        if(agnadirPartida("/partidas/addPoker")){
+            App.setRoot("/com/example/vistas/juegos/crearPoker");
+        }
     }
 
     @FXML
     private void crearBlackJack() throws IOException {
-        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
-        App.setRoot("/com/example/vistas/juegos/crearBlackJack");
+        if(agnadirPartida("/partidas/addBlackJack")){
+            App.setRoot("/com/example/vistas/juegos/crearBlackJack");
+        }
     }
 
     @FXML
     private void crearUNO() throws IOException {
-        // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
-        App.setRoot("/com/example/vistas/juegos/crearUNO");
+        if(agnadirPartida("/partidas/addUNO")){
+            App.setRoot("/com/example/vistas/juegos/crearUNO");
+        }
+    }
+
+    /**
+     * Añade la partida creada a la Base de Datos mediante un JSON
+     */
+    private boolean agnadirPartida(String apiJuego) {
+        String llamada = App.ip + apiJuego;
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.post(llamada).asJson();
+            Gson gson = new Gson();
+            Partida partida = gson.fromJson(apiResponse.getBody().toString(), Partida.class);
+            App.partidaPasswd = partida.getId();
+            return true;
+        } catch (UnirestException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
     }
 }

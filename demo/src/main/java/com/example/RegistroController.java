@@ -1,17 +1,16 @@
 package com.example;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import org.json.simple.JSONObject;
+import com.google.gson.Gson;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -160,57 +159,30 @@ public class RegistroController implements Initializable {
     /**
      * Añade el usuario registrado a la Base de Datos mediante un JSON
      */
-    @SuppressWarnings("unchecked")
     private boolean agnadirUsuario() {
+
+        Unirest.setTimeouts(0, 0);
+        List<Usuario> amigos = new ArrayList<>();
+        List<Partida> partidas = new ArrayList<>();
+        Usuario usuario = new Usuario(user, email, 100, pais, amigos, partidas);
+        App.usuario = usuario;
+
         try {
-            URL url = new URL(App.ip + "/usuarios/newUsuario");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true); 
-            conn.setRequestProperty("Content-Type", "application/json");
-    
-            List<Usuario> amigos = new ArrayList<>();
-            List<Partida> partidas = new ArrayList<>();
-            Usuario usuario = new Usuario(user, email, 100, pais, amigos, partidas);
-            App.usuario = usuario;
-
-            JSONObject jsonUsuario = new JSONObject();
-
-            jsonUsuario.put("nombre", user);
-            jsonUsuario.put("pais", pais);
-            jsonUsuario.put("email", email);
-            jsonUsuario.put("fichas", 100);
-            jsonUsuario.put("amigos", amigos);
-            jsonUsuario.put("partidas", partidas);
-            
-            try (OutputStream os = conn.getOutputStream()) {
-                String jsonString = jsonUsuario.toJSONString();
-                byte[] input = jsonString.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }
-                
-            // Leer la respuesta del servidor
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
-                StringBuilder response = new StringBuilder();
-                String responseLine;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-                System.out.println("Respuesta del servidor: " + response.toString());
-            }
-
-            conn.disconnect();
+            HttpResponse<JsonNode> response = Unirest.post(App.ip + "/usuarios/newUsuario")
+                .field("nombre", user)
+                .field("pais", pais)
+                .field("email", email)
+                .field("fichas", 100)
+                .field("amigos", amigos)
+                .field("partidas", partidas)
+                .asJson();
+            Gson gson = new Gson();
+            App.usuario = gson.fromJson(response.getBody().toString(), Usuario.class);
             return true;
-        } catch (MalformedURLException e) {
-            // Manejar la excepción de URL mal formada
+        } catch (UnirestException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (IOException e) {
-            // Manejar la excepción de entrada/salida, que incluye la conexión rechazada
-            e.printStackTrace();
-        } catch (Exception e) {
-            // Manejar otras excepciones no previstas
-            e.printStackTrace();
+            return false;
         }
-        return false;
     }
 }
