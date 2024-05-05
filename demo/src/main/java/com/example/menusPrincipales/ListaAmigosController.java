@@ -100,7 +100,7 @@ public class ListaAmigosController implements Initializable{
         amigo.setNombre(nombreAmigo.getText());
 
         try {
-            HttpResponse<JsonNode> response = Unirest.post(App.ip + "/usuarios/deleteAmigo?idUsuario="+ "" + "&idAmigo=")
+            HttpResponse<JsonNode> response = Unirest.delete(App.ip + "/usuarios/deleteAmigo?idUsuario="+ "" + "&idAmigo=")
                 .field("idUsuario", App.usuario.getId())
                 .field("idAmigo", amigo.getNombre())
                 .asJson();
