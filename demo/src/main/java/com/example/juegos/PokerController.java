@@ -10,6 +10,9 @@ import java.util.ResourceBundle;
 import com.example.App;
 import com.example.Carta;
 import com.example.CartaFrancesa;
+import com.example.Partida;
+import com.example.Usuario;
+import com.google.gson.Gson;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -25,8 +28,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import com.fasterxml.jackson.databind.JsonNode;
-
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
 
 public class PokerController implements Initializable{
 
@@ -66,6 +69,9 @@ public class PokerController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/getPoker").asJson();
+            Gson gson = new Gson();
+            PartidaPoker partida = gson.fromJson(apiResponse.getBody().toString(), PartidaPoker.class);
+            App.partidaPasswd = partida.getId();
             /**
              * TODO: Conectarse al servidor, recibir las manos
              * Iterar sobre las manos y añadir a cada caja el contenido individual
