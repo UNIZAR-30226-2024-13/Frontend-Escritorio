@@ -8,11 +8,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.App;
+<<<<<<< HEAD
 import com.example.Carta;
 import com.example.CartaFrancesa;
 import com.example.Partida;
 import com.example.Usuario;
 import com.google.gson.Gson;
+=======
+import com.example.entidades.CartaFrancesa;
+>>>>>>> 777372f507b634cae1bb44c95e2445bf4a43584e
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

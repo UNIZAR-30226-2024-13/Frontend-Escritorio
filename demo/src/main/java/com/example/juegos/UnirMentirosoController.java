@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import com.example.App;
-import com.example.Partida;
+import com.example.entidades.Partida;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

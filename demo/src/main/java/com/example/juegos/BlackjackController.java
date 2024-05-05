@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.Carta;
-import com.example.CartaFrancesa;
+import com.example.entidades.CartaFrancesa;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
