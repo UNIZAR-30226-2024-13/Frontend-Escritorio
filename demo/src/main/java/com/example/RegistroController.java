@@ -172,7 +172,6 @@ public class RegistroController implements Initializable {
             List<Usuario> amigos = new ArrayList<>();
             List<Partida> partidas = new ArrayList<>();
             Usuario usuario = new Usuario(user, email, 100, pais, amigos, partidas);
-            App.usuario = usuario;
 
             JSONObject jsonUsuario = new JSONObject();
 
@@ -198,6 +197,7 @@ public class RegistroController implements Initializable {
                 }
                 System.out.println("Respuesta del servidor: " + response.toString());
             }
+
 
             conn.disconnect();
             return true;

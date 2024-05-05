@@ -6,7 +6,10 @@ import java.util.ResourceBundle;
 
 import com.example.App;
 import com.example.Partida;
+import com.example.Usuario;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,12 +33,16 @@ public class ListaPartidasPausadasController implements Initializable{
     @FXML
     private Label labelFichas;
     
+    private ObservableList<Partida> partidas;
+
     private boolean opcionesVisible = false;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        columnaTipoJuego.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        columnaTipoJuego.setCellValueFactory(new PropertyValueFactory<>("id_partida"));
         labelFichas.setText(App.usuario.getDinero() + " Fichas");
+        partidas = FXCollections.observableArrayList(App.usuario.getPartidas());
+        tablaPartidasPausadas.setItems(partidas);
     }
 
     @FXML
