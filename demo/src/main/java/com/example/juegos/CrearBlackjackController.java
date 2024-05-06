@@ -36,6 +36,7 @@ public class CrearBlackjackController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         labelFichas.setText(App.usuario.getDinero() + " Fichas");
+        etiquetaPasswd.setText(App.partidaPasswd);
     }
 
     @FXML

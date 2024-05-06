@@ -10,7 +10,6 @@ import com.google.gson.Gson;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -99,7 +98,7 @@ public class MenuCrearController implements Initializable{
             Partida partida = gson.fromJson(apiResponse.getBody().toString(), Partida.class);
             App.partidaPasswd = partida.getId();
             return true;
-        } catch (UnirestException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
