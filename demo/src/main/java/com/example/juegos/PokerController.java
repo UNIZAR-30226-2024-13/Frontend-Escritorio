@@ -80,12 +80,7 @@ public class PokerController implements Initializable{
             App.partidaPasswd = partida.getId();      
             mazo = new CartaFrancesa().parseStringCartas(partida.getMazo());
             cartasMesa = new CartaFrancesa().parseStringCartas(partida.getCartasMesa());
-            /**
-             * TODO: Conectarse al servidor, recibir las manos
-             * Iterar sobre las manos y añadir a cada caja el contenido individual
-             * Cerrar las conexiones y manejar errores
-             */
-            // Eliminar lo que hubiera antes y crear botones para cada carta
+
             int n = 0;
             cartas.getChildren().clear();
             for (CartaFrancesa carta : cartasMesa) {
@@ -146,6 +141,8 @@ public class PokerController implements Initializable{
             cuartaCartaMesa.setVgap(10);
             quintaCartaMesa.setVgap(10);
         
+        } catch (UnirestException e) {
+            e.printStackTrace();
         } catch (Exception e) {
         } finally{
         }
