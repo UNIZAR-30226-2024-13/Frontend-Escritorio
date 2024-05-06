@@ -1,5 +1,8 @@
 package com.example.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Carta {
 
     public final static int OROS = 0;
@@ -73,5 +76,33 @@ public class Carta {
             default:
                 return "";
         } 
+    }
+
+    /**
+     * 
+     * @param cadenaCartas, contiene la cadena de carecteres recibida desde la Base de Datos
+     * @return retVal, contiene la lista de Carta que representa la baraja de juego
+     */
+    public List<Carta> parseStringCartas(String cadenaCartas){
+        List<Carta> retVal = new ArrayList<>();
+        String[] cartas_mazo = cadenaCartas.split(";");
+        for (String carta : cartas_mazo){
+            String[] parte_carta = carta.split(",");
+            int parte = 0;
+            Carta carta2 = new Carta();
+            for (String info_carta : parte_carta){
+                if (parte == 0) {
+                    int color = Integer.parseInt(info_carta);
+                    carta2.setPalo(color);
+                    parte = 1;
+                }
+                else{
+                    int numero = Integer.parseInt(info_carta);
+                    carta2.setNumero(numero);
+                }
+            }
+            retVal.add(carta2);
+        }
+        return retVal;
     }
 }
