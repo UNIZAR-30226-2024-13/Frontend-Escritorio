@@ -6,6 +6,7 @@ module com.example {
     requires java.net.http;
     requires unirest.java;
     requires com.google.gson;
+    requires spring.security.crypto;
 
     opens com.example to javafx.fxml, com.google.gson;
     opens com.example.juegos to javafx.fxml, com.google.gson;

@@ -2,17 +2,16 @@ package com.example;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import com.example.entidades.Partida;
+import org.json.simple.JSONObject;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import com.example.entidades.Usuario;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,11 +55,8 @@ public class RegistroController implements Initializable {
     private Label marcaErrorPasswd;
 
     private String pais;
-
     private String email;
-
     private String user;
-
     private String passwd;
 
     @Override
@@ -161,25 +157,34 @@ public class RegistroController implements Initializable {
     /**
      * Añade el usuario registrado a la Base de Datos mediante un JSON
      */
+    @SuppressWarnings("unchecked")
     private boolean agnadirUsuario() {
 
         Unirest.setTimeouts(0, 0);
-        List<Usuario> amigos = new ArrayList<>();
-        List<Partida> partidas = new ArrayList<>();
 
         try {
+            JSONObject usuarioJson = new JSONObject();
+            usuarioJson.put("nombre", user);
+            usuarioJson.put("pais", pais);
+            usuarioJson.put("email", email);
+        
+            JSONObject loginJson = new JSONObject();
+            String hashPasswd = BCrypt.hashpw(passwd, BCrypt.gensalt());
+            loginJson.put("hashPasswd", hashPasswd); 
+        
+            JSONObject requestBody = new JSONObject();
+            requestBody.put("usuario", usuarioJson);
+            requestBody.put("login", loginJson);
+        
             HttpResponse<JsonNode> response = Unirest.post(App.ip + "/usuarios/newUsuario")
-                .field("nombre", user)
-                .field("pais", pais)
-                .field("email", email)
-                .field("fichas", 100)
-                .field("amigos", amigos)
-                .field("partidas", partidas)
-                .asJson();
+                    .header("Content-Type", "application/json")
+                    .body(requestBody.toString())
+                    .asJson();
+                
             Gson gson = new Gson();
             App.usuario = gson.fromJson(response.getBody().toString(), Usuario.class);
             return true;
-        } catch (UnirestException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
