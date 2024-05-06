@@ -11,6 +11,7 @@ module com.example {
     opens com.example.juegos to javafx.fxml, com.google.gson;
     opens com.example.menusPrincipales to javafx.fxml, com.google.gson;
     opens com.example.perfil to javafx.fxml, com.google.gson;
+    opens com.example.entidades to javafx.fxml, com.google.gson;
     
     exports com.example;
     exports com.example.juegos;

@@ -166,8 +166,6 @@ public class RegistroController implements Initializable {
         Unirest.setTimeouts(0, 0);
         List<Usuario> amigos = new ArrayList<>();
         List<Partida> partidas = new ArrayList<>();
-        Usuario usuario = new Usuario(user, email, 100, pais, amigos, partidas);
-        App.usuario = usuario;
 
         try {
             HttpResponse<JsonNode> response = Unirest.post(App.ip + "/usuarios/newUsuario")
