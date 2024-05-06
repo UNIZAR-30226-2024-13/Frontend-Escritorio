@@ -108,4 +108,20 @@ public class CartaUno {
         }
         return retVal;
     }
+
+    /**
+     * 
+     * @param listaCartas, contiene la lista de Carta que representa la baraja de juego
+     * @return resultado, contiene la cadena de carecteres a enviar a la Base de Datos
+     */
+    public String parseCartasString(List<CartaUno> listaCartas) {
+        StringBuilder resultado = new StringBuilder();
+        for (CartaUno carta : listaCartas) {
+            resultado.append(carta.getPalo()).append(",").append(carta.getNumero()).append(";");
+        }
+        if (resultado.length() > 0) {
+            resultado.deleteCharAt(resultado.length() - 1);
+        }
+        return resultado.toString();
+    }
 }

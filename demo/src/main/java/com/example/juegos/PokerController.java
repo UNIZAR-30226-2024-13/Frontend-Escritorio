@@ -2,19 +2,15 @@ package com.example.juegos;
 
 import java.io.IOException;
 import java.net.URL;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.App;
-<<<<<<< HEAD
-import com.example.Carta;
-import com.example.CartaFrancesa;
-import com.example.Partida;
-import com.example.Usuario;
-import com.google.gson.Gson;
-=======
+import com.example.entidades.Carta;
+import com.example.entidades.CartaFrancesa;
+import com.example.entidades.Partida;
+import com.example.entidades.Usuario;
 import com.example.entidades.CartaFrancesa;
 import com.example.entidades.Poker;
 
@@ -34,6 +30,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.google.gson.Gson;
+import com.mashape.unirest.http.HttpResponse;
+
 
 public class PokerController implements Initializable{
 
@@ -65,7 +65,9 @@ public class PokerController implements Initializable{
     @FXML
     private GridPane cartas;
 
-    private List<CartaFrancesa> listaCartas = new ArrayList<>();
+    private List<CartaFrancesa> mazo = new ArrayList<>();
+
+    private List<CartaFrancesa> cartasMesa = new ArrayList<>();
 
     private boolean hay_cuarta = false;
    
@@ -75,66 +77,63 @@ public class PokerController implements Initializable{
             HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/getPoker").asJson();
             Gson gson = new Gson();
             Poker partida = gson.fromJson(apiResponse.getBody().toString(), Poker.class);
-            App.partidaPasswd = partida.getId();
+            App.partidaPasswd = partida.getId();      
+            mazo = new CartaFrancesa().parseStringCartas(partida.getMazo());
+            cartasMesa = new CartaFrancesa().parseStringCartas(partida.getCartasMesa());
             /**
              * TODO: Conectarse al servidor, recibir las manos
              * Iterar sobre las manos y añadir a cada caja el contenido individual
              * Cerrar las conexiones y manejar errores
              */
+            // Eliminar lo que hubiera antes y crear botones para cada carta
             int n = 0;
-            while (n < 7) { 
-                //  Añadir las cartas a la lista, parseando lo recibido
-                listaCartas.add(new CartaFrancesa(n, 2));
+            cartas.getChildren().clear();
+            for (CartaFrancesa carta : cartasMesa) {
+                if (n == 0) {
+                    Label label = new Label(carta.toString());
+                    label.getStyleClass().add("cartas-escaleras");
+                    primeraCartaMesa.add(label, n, 0);
+                }
+                else if (n == 1) {
+                    Label label = new Label(carta.toString());
+                    label.getStyleClass().add("cartas-escaleras");
+                    segundaCartaMesa.add(label, n, 0);
+                }
+                else if (n == 2) {
+                    Label label = new Label(carta.toString());
+                    label.getStyleClass().add("cartas-escaleras");
+                    terceraCartaMesa.add(label, n, 0);
+                }
                 n++;
             }
-
-            // Eliminar lo que hubiera antes y crear botones para cada carta
             n = 0;
-            cartas.getChildren().clear();
-            for (CartaFrancesa carta : listaCartas) {
-                if (n == 2) {
-                    Label label = new Label(carta.toString());
-                    label.getStyleClass().add("cartas-escaleras");
-                    primeraCartaMesa.add(label, 0, 0);
-                }
-                else if (n == 3) {
-                    Label label = new Label(carta.toString());
-                    label.getStyleClass().add("cartas-escaleras");
-                    segundaCartaMesa.add(label, 1, 0);
-                }
-                else if (n == 4) {
-                    Label label = new Label(carta.toString());
-                    label.getStyleClass().add("cartas-escaleras");
-                    terceraCartaMesa.add(label, 2, 0);
-                }
-                else if (n == 0 || n == 1) {
-                    Button boton = new Button(carta.toString());
-                    boton.getStyleClass().add("carta-button");
-                    cartas.add(boton, n, 0);
+            for (CartaFrancesa cartaMano : mazo) {
+                Button boton = new Button(cartaMano.toString());
+                boton.getStyleClass().add("carta-button");
+                cartas.add(boton, n, 0);
 
-                    ImageView imagenRev = new ImageView();
-                    Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
-            
-                    imagenRev.setImage(imagen);
-                    imagenRev.setFitWidth(40);
-                    imagenRev.setFitHeight(60);
+                ImageView imagenRev = new ImageView();
+                Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
+        
+                imagenRev.setImage(imagen);
+                imagenRev.setFitWidth(40);
+                imagenRev.setFitHeight(60);
 
-                    ImageView imagenRev2 = new ImageView();
-            
-                    imagenRev2.setImage(imagen);
-                    imagenRev2.setFitWidth(40);
-                    imagenRev2.setFitHeight(60);
+                ImageView imagenRev2 = new ImageView();
+        
+                imagenRev2.setImage(imagen);
+                imagenRev2.setFitWidth(40);
+                imagenRev2.setFitHeight(60);
 
-                    ImageView imagenRev3 = new ImageView();
-            
-                    imagenRev3.setImage(imagen);
-                    imagenRev3.setFitWidth(40);
-                    imagenRev3.setFitHeight(60);
+                ImageView imagenRev3 = new ImageView();
+        
+                imagenRev3.setImage(imagen);
+                imagenRev3.setFitWidth(40);
+                imagenRev3.setFitHeight(60);
 
-                    cartasUsuario2.add(imagenRev, n, 0);
-                    cartasUsuario3.add(imagenRev2, 0, n);
-                    cartasUsuario4.add(imagenRev3, 0, n);
-                }
+                cartasUsuario2.add(imagenRev, n, 0);
+                cartasUsuario3.add(imagenRev2, 0, n);
+                cartasUsuario4.add(imagenRev3, 0, n);
                 n++;
             }
             cartas.setHgap(20);
@@ -172,14 +171,14 @@ public class PokerController implements Initializable{
     private void ponerCarta(){
         CartaFrancesa carta = new CartaFrancesa();
         if (!hay_cuarta) {
-            carta = listaCartas.get(5);
+            carta = cartasMesa.get(3);
             Label label = new Label(carta.toString());
             label.getStyleClass().add("cartas-escaleras");
             cuartaCartaMesa.add(label, 3, 0);
             hay_cuarta = true;
         }
         else {
-            carta = listaCartas.get(6);
+            carta = cartasMesa.get(4);
             Label label = new Label(carta.toString());
             label.getStyleClass().add("cartas-escaleras");
             quintaCartaMesa.add(label, 4, 0);
