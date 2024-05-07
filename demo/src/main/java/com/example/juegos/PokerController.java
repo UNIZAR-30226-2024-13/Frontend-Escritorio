@@ -7,15 +7,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.entidades.Carta;
-import com.example.entidades.CartaFrancesa;
-import com.example.entidades.Partida;
-import com.example.entidades.Usuario;
 import com.example.entidades.CartaFrancesa;
 import com.example.entidades.Poker;
+import com.google.gson.Gson;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,12 +26,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-import com.google.gson.Gson;
-import com.mashape.unirest.http.HttpResponse;
 
 
 public class PokerController implements Initializable{
@@ -107,22 +100,19 @@ public class PokerController implements Initializable{
                 boton.getStyleClass().add("carta-button");
                 cartas.add(boton, n, 0);
 
-                ImageView imagenRev = new ImageView();
                 Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
-        
-                imagenRev.setImage(imagen);
+                
+                ImageView imagenRev = new ImageView(imagen);
                 imagenRev.setFitWidth(40);
                 imagenRev.setFitHeight(60);
 
-                ImageView imagenRev2 = new ImageView();
-        
-                imagenRev2.setImage(imagen);
+                
+                ImageView imagenRev2 = new ImageView(imagen);
                 imagenRev2.setFitWidth(40);
                 imagenRev2.setFitHeight(60);
 
-                ImageView imagenRev3 = new ImageView();
-        
-                imagenRev3.setImage(imagen);
+                
+                ImageView imagenRev3 = new ImageView(imagen);
                 imagenRev3.setFitWidth(40);
                 imagenRev3.setFitHeight(60);
 
