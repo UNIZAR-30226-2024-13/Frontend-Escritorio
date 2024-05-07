@@ -13,6 +13,18 @@ public class Partida {
         this.turno = 0;
     }
 
+    public Partida(String id, int jugadores) {
+        this.id = id;
+        this.jugadores = jugadores;
+        this.apuesta = apuesta;
+    }
+
+    public Partida(String id, int jugadores, int apuesta) {
+        this.id = id;
+        this.jugadores = jugadores;
+        this.apuesta = apuesta;
+    }
+
     public Partida(String id, int jugadores, int apuesta, int turno) {
         this.id = id;
         this.jugadores = jugadores;

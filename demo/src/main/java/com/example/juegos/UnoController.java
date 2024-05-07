@@ -81,7 +81,7 @@ public class UnoController implements Initializable{
             cartasMesa.getChildren().clear();
             for (CartaUno carta : listaCartas) {
                 Button boton = new Button(carta.toString());
-                boton.getStyleClass().add("carta-button");
+                boton.getStyleClass().add(App.estiloCartas);
                 boton.setOnAction(event -> {
                     botonSeleccionado = boton;
                     cartaSeleccionada = carta;
@@ -151,7 +151,7 @@ public class UnoController implements Initializable{
     private void ponerCarta() { 
         cartasMesa.getChildren().clear();
         Button button = new Button(cartaSeleccionada.toString());
-        button.getStyleClass().add("carta-button");
+        button.getStyleClass().add(App.estiloCartas);
         cartasMesa.add(button, 0, 0);
         cartas.getChildren().remove(botonSeleccionado);
         columnasCartas.add(cartas.getColumnIndex(botonSeleccionado));
@@ -164,7 +164,7 @@ public class UnoController implements Initializable{
         CartaUno carta = mazoPrueba.get(0);
         mazoPrueba.remove(0);
         Button button = new Button(carta.toString());
-        button.getStyleClass().add("carta-button");
+        button.getStyleClass().add(App.estiloCartas);
         button.setOnAction(event -> {
             botonSeleccionado = button;
             cartaSeleccionada = carta;

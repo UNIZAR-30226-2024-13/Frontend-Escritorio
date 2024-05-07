@@ -81,9 +81,9 @@ public class MentirosoController implements Initializable{
             cartas.getChildren().clear();
             for (Carta carta : listaCartas) {
                 Button boton = new Button(carta.toString());
-                boton.getStyleClass().add("carta-button");
+                boton.getStyleClass().add(App.estiloCartas);
                 boton.setOnAction(event -> {
-                    boton.getStyleClass().remove("carta-button");
+                    boton.getStyleClass().remove(App.estiloCartas);
                     boton.getStyleClass().add("carta-button-clicked");
                     botonesSeleccionados.add(boton);
                     cartasSeleccionadas.add(carta);
@@ -146,7 +146,7 @@ public class MentirosoController implements Initializable{
     private void ponerCarta() throws IOException{ 
         while (botones < cartasSeleccionadas.size()) {
             Button button = new Button(cartasSeleccionadas.get(botones).toString());
-            button.getStyleClass().add("carta-button");
+            button.getStyleClass().add(App.estiloCartas);
             cartasMesa.add(button, botones, 0);
             cartas.getChildren().remove(botonesSeleccionados.get(botones));
             columnasCartas.add(cartas.getColumnIndex(botonesSeleccionados.get(botones)));
@@ -178,9 +178,9 @@ public class MentirosoController implements Initializable{
         for (int i = 0; i < cartasSeleccionadas.size(); i++) {
             Carta carta = cartasSeleccionadas.get(i);
             Button button = new Button(carta.toString());
-            button.getStyleClass().add("carta-button");
+            button.getStyleClass().add(App.estiloCartas);
             button.setOnAction(event -> {
-                button.getStyleClass().remove("carta-button");
+                button.getStyleClass().remove(App.estiloCartas);
                 button.getStyleClass().add("carta-button-clicked");
                 botonesSeleccionados.add(button);
                 cartasSeleccionadas.add(carta);

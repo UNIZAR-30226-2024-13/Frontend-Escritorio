@@ -12,7 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class PerfilController implements Initializable{
+public class CambiarCartasController implements Initializable{
 
     @FXML
     private VBox opcionesVBox;
@@ -38,23 +38,27 @@ public class PerfilController implements Initializable{
     }
 
     @FXML
-    private void switchToCambiarUsuario() throws IOException {
-        App.setRoot("/com/example/vistas/perfil/cambiarUsuario");
+    private void cambiarAmarillo() {
+        App.estiloCartas = "carta-button";
+        App.estiloEscaleras = "cartas-escaleras";
     }
 
     @FXML
-    private void switchToCambiarContrasegna() throws IOException {
-        App.setRoot("/com/example/vistas/perfil/cambiarContrasegna");
+    private void cambiarAzul() {
+        App.estiloCartas = "carta-button-azul";
+        App.estiloEscaleras = "cartas-escaleras-azul";
     }
 
     @FXML
-    private void switchToCambiarFoto() throws IOException {
-        App.setRoot("/com/example/vistas/perfil/cambiarFoto");
+    private void cambiarNaranja() {
+        App.estiloCartas = "carta-button-naranja";
+        App.estiloEscaleras = "cartas-escaleras-naranja";
     }
 
     @FXML
-    private void switchToCambiarCartas() throws IOException {
-        App.setRoot("/com/example/vistas/perfil/cambiarCartas");
+    private void cambiarMorado() {
+        App.estiloCartas = "carta-button-morado";
+        App.estiloEscaleras = "cartas-escaleras-morado";
     }
 
     @FXML

@@ -74,7 +74,7 @@ public class BlackjackController implements Initializable{
             for (CartaFrancesa carta : listaCartas) {
                 if (numCartas == 0 || numCartas == 1) {
                     Button boton = new Button(carta.toString());
-                    boton.getStyleClass().add("carta-button");
+                    boton.getStyleClass().add(App.estiloCartas);
                     cartas.add(boton, numCartas, 0);
 
                     ImageView imagenRev = new ImageView();
@@ -124,7 +124,7 @@ public class BlackjackController implements Initializable{
         CartaFrancesa carta = new CartaFrancesa();
         carta = listaCartas.get(numCartas);
         Label label = new Label(carta.toString());
-        label.getStyleClass().add("carta-button");
+        label.getStyleClass().add(App.estiloCartas);
         cartas.add(label, numCartas, 0);
         numCartas++;
     }

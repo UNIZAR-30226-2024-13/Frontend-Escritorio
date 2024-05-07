@@ -66,7 +66,7 @@ public class CinquilloController implements Initializable{
             cartas.getChildren().clear();
             for (Carta carta : listaCartas) {
                 Button boton = new Button(carta.toString());
-                boton.getStyleClass().add("carta-button");
+                boton.getStyleClass().add(App.estiloCartas);
                 boton.setOnAction(event -> {
                     ponerCarta(carta);
                     cartas.getChildren().remove(boton);
@@ -114,7 +114,7 @@ public class CinquilloController implements Initializable{
         int fila = carta.getNumero();
         
         Label label = new Label(carta.toString());
-        label.getStyleClass().add("cartas-escaleras");
+        label.getStyleClass().add(App.estiloEscaleras);
 
         switch (carta.getPalo()) {
             case Carta.OROS:

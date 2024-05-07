@@ -7,9 +7,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.control.TextField?>
 
 <BorderPane prefHeight="400" prefWidth="600" stylesheets="@../../styles/styles.css"
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.perfil.PerfilController" >
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.perfil.CambiarCartasController" >
     <top>
         <GridPane styleClass="top-grid-pane">
 
@@ -42,10 +43,12 @@
     <center>
         <VBox>
             <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS" hgap="20" >
-                <Button fx:id="botonCambiarUsuario" text="Cambiar Usuario" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#switchToCambiarUsuario" />
-                <Button fx:id="botonCambiarContraseña" text="Cambiar Contraseña" GridPane.columnIndex="0" GridPane.rowIndex="1" onAction="#switchToCambiarContrasegna" />
-                <Button fx:id="botonCambiarFoto" text="Cambiar Foto Perfil" GridPane.columnIndex="0" GridPane.rowIndex="2" onAction="#switchToCambiarFoto" />
-                <Button fx:id="botonCambiarCartas" text="Cambiar color cartas" GridPane.columnIndex="0" GridPane.rowIndex="3" onAction="#switchToCambiarCartas" />
+                <Button fx:id="botonAmarillo" text="Cartas amarillas"  GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#cambiarAmarillo" />
+                <Button fx:id="botonAzul" text="Cartas azules"  GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#cambiarAzul" />
+                <Button fx:id="botonNaranja" text="Cartas naranjas"  GridPane.columnIndex="0" GridPane.rowIndex="1" onAction="#cambiarNaranja" />
+                <Button fx:id="botonMorado" text="Cartas moradas"  GridPane.columnIndex="2" GridPane.rowIndex="1" onAction="#cambiarMorado" />
+                <Button fx:id="botonConfirmar" text="Confirmar" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#switchToPerfil" />
+
             </GridPane>
         </VBox>
     </center>
