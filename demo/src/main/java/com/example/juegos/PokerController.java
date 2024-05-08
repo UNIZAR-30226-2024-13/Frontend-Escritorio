@@ -87,9 +87,7 @@ public class PokerController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         recogerPoker();
-        App.partidaPasswd = partida.getId(); 
-        mazo = new CartaFrancesa().parseStringCartas(partida.getMazo());
-        cartasMesa = new CartaFrancesa().parseStringCartas(partida.getCartasMesa());
+        App.partidaPasswd = partida.getId();
 
         int n = 0;
         cartas.getChildren().clear();
@@ -149,11 +147,16 @@ public class PokerController implements Initializable{
         quintaCartaMesa.setVgap(10);
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.seconds(5), event -> {
+                int otraCarta = cartasMesa.size();
                 recogerPoker();
+                if (otraCarta > cartasMesa.size()) {
+                    ponerCarta();
+                }
             })
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+
         botonApostar.setOnAction(event -> {
             apostar(Integer.parseInt(campoApuesta.getText()));
         });
@@ -183,7 +186,6 @@ public class PokerController implements Initializable{
         stage.showAndWait();
     }
 
-    @FXML
     private void ponerCarta(){
         CartaFrancesa carta = new CartaFrancesa();
         if (!hay_cuarta) {
@@ -206,6 +208,8 @@ public class PokerController implements Initializable{
             HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/getPoker").asJson();
             Gson gson = new Gson();
             partida = gson.fromJson(apiResponse.getBody().toString(), Poker.class);
+            mazo = new CartaFrancesa().parseStringCartas(partida.getMazo());
+            cartasMesa = new CartaFrancesa().parseStringCartas(partida.getCartasMesa());
         } catch (UnirestException e) {
             e.printStackTrace();
         } 
@@ -215,6 +219,7 @@ public class PokerController implements Initializable{
         try {
             JSONObject pokerJson = new JSONObject();
             pokerJson.put("id", partida.getId());
+            pokerJson.put("turno", partida.getTurno());
             pokerJson.put("bote", partida.getBote());
             pokerJson.put("ultimaApuesta", partida.getUltimaApuesta());
             pokerJson.put("cartasMesa", partida.getCartasMesa());
@@ -231,6 +236,7 @@ public class PokerController implements Initializable{
     private void apostar(int apuesta) {
         partida.setBote(partida.getBote() + apuesta);
         partida.setUltimaApuesta(apuesta);
+        partida.setTurno(partida.getTurno()+1);
         mandarPoker();
     }
 }

@@ -101,7 +101,7 @@ Button {
 .carta-button-azul {
     -fx-pref-width: 150px;
     -fx-pref-height: 30px;
-    -fx-background-color: rgb(13, 74, 216);
+    -fx-background-color: rgb(13, 165, 216);
     -fx-font-size: 14px;
 }
 
@@ -209,7 +209,7 @@ TableView {
     -fx-font-size: 16px; 
     -fx-font-weight: bold; 
     -fx-text-fill: black; 
-    -fx-background-color: rgb(13, 74, 216);
+    -fx-background-color: rgb(13, 165, 216);
     -fx-background-radius: 10px; 
     -fx-border-color: black; 
     -fx-border-width: 2px;
