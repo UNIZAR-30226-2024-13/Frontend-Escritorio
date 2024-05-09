@@ -187,9 +187,7 @@ public class RegistroController implements Initializable {
 
             JSONParser parser = new JSONParser();
             JSONObject root = (JSONObject) parser.parse(response.getBody().toString());
-            System.out.println(root.toString());
             JSONObject datos = (JSONObject) root.get("datos");
-            System.out.println(datos.toString());
 
             Usuario aux = new Usuario();
 
