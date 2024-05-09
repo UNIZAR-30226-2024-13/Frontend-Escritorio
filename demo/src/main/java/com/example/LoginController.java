@@ -4,8 +4,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.json.simple.JSONObject;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import com.example.entidades.Usuario;
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -42,6 +47,9 @@ public class LoginController implements Initializable{
     @FXML
     private Label marcaErrorPasswd;
     
+    private String user;
+
+    private String passwd;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,8 +72,8 @@ public class LoginController implements Initializable{
 
     @FXML
     private void guardarDatosLogin() throws IOException {
-        String user = campoUser.getText();
-        String passwd = campoContrasegna.getText();
+        user = campoUser.getText();
+        passwd = campoContrasegna.getText();
         if (user.isEmpty()) {
             errorUser.setText("Debes rellenar el campo Nombre de usuario");
             errorPasswd.setVisible(false);
@@ -99,8 +107,21 @@ public class LoginController implements Initializable{
      */
     private boolean comprobarLogin(){
         try {
-            HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "").asJson();
-            App.usuario = new Gson().fromJson(apiResponse.getBody().toString(), Usuario.class); 
+            String hashPasswd = BCrypt.hashpw(passwd, BCrypt.gensalt());
+            System.out.println(hashPasswd);
+            JSONObject usuarioJson = new JSONObject();
+            usuarioJson.put("usuario", user);
+            usuarioJson.put("hashPasswd", hashPasswd);
+
+            HttpResponse<JsonNode> response = Unirest.post(App.ip + "/usuarios/login")
+            .header("Content-Type", "application/json")
+            .body(usuarioJson.toString())
+            .asJson();
+            JsonNode datosNode = response.getBody();
+            System.out.println(datosNode.toString());
+            Gson gson = new Gson();
+            App.usuario = gson.fromJson(response.getBody().toString(), Usuario.class);
+            System.out.println(App.usuario.getNombre());
             return true;
         } catch (UnirestException e) {
             // TODO Auto-generated catch block

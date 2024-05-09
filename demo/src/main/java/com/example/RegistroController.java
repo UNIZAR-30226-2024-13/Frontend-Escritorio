@@ -2,11 +2,15 @@ package com.example;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import com.example.entidades.Partida;
 import com.example.entidades.Usuario;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.HttpResponse;
@@ -180,9 +184,24 @@ public class RegistroController implements Initializable {
                     .header("Content-Type", "application/json")
                     .body(requestBody.toString())
                     .asJson();
-                
-            Gson gson = new Gson();
-            App.usuario = gson.fromJson(response.getBody().toString(), Usuario.class);
+
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(response.getBody().toString());
+            System.out.println(root.toString());
+            JSONObject datos = (JSONObject) root.get("datos");
+            System.out.println(datos.toString());
+
+            Usuario aux = new Usuario();
+
+            aux.setId((String) datos.get("id"));
+            aux.setNombre((String) datos.get("nombre"));
+            aux.setEmail((String) datos.get("email"));
+            aux.setDinero(((Long) datos.get("fichas")).intValue());
+            aux.setPais((String) datos.get("pais"));
+            aux.setAmigos((List<Usuario>) datos.get("amigos"));
+            aux.setPartidas((List<Partida>) datos.get("partidas"));
+            // Usar el objeto usuario como necesites
+            App.usuario = aux;
             return true;
         } catch (Exception e) {
             // TODO Auto-generated catch block
