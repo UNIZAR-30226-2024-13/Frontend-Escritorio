@@ -20,6 +20,7 @@ public class App extends Application {
     public static final String ip = "http://localhost:20000/api";
     public static Usuario usuario;
     public static String partidaPasswd;
+    public static String tokenSesion = "";
 
     private static Scene scene;
 

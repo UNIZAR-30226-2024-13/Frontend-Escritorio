@@ -200,7 +200,6 @@ public class RegistroController implements Initializable {
             aux.setPais((String) datos.get("pais"));
             aux.setAmigos((List<Usuario>) datos.get("amigos"));
             aux.setPartidas((List<Partida>) datos.get("partidas"));
-            // Usar el objeto usuario como necesites
             App.usuario = aux;
             return true;
         } catch (Exception e) {

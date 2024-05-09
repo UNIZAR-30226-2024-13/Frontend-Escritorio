@@ -2,11 +2,14 @@ package com.example;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import com.example.entidades.Partida;
 import com.example.entidades.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -108,22 +111,39 @@ public class LoginController implements Initializable{
     private boolean comprobarLogin(){
         try {
             String hashPasswd = BCrypt.hashpw(passwd, BCrypt.gensalt());
-            System.out.println(hashPasswd);
             JSONObject usuarioJson = new JSONObject();
             usuarioJson.put("usuario", user);
-            usuarioJson.put("hashPasswd", hashPasswd);
+            usuarioJson.put("hashPasswd", "0");
 
             HttpResponse<JsonNode> response = Unirest.post(App.ip + "/usuarios/login")
-            .header("Content-Type", "application/json")
-            .body(usuarioJson.toString())
-            .asJson();
-            JsonNode datosNode = response.getBody();
-            System.out.println(datosNode.toString());
-            Gson gson = new Gson();
-            App.usuario = gson.fromJson(response.getBody().toString(), Usuario.class);
-            System.out.println(App.usuario.getNombre());
+                    .header("Content-Type", "application/json")
+                    .body(usuarioJson.toString())
+                    .asJson();
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(response.getBody().toString());
+            JSONObject datos = (JSONObject) root.get("datos");
+            JSONObject datosUsuario = (JSONObject) datos.get("usuario");
+            JSONObject datosSesion = (JSONObject) datos.get("sessionToken");
+
+            Usuario aux = new Usuario();
+
+            aux.setId((String) datosUsuario.get("id"));
+            aux.setNombre((String) datosUsuario.get("nombre"));
+            aux.setEmail((String) datosUsuario.get("email"));
+            aux.setDinero(((Long) datosUsuario.get("fichas")).intValue());
+            aux.setPais((String) datosUsuario.get("pais"));
+            aux.setAmigos((List<Usuario>) datosUsuario.get("amigos"));
+            aux.setPartidas((List<Partida>) datosUsuario.get("partidas"));
+            App.usuario = aux;
+
+            App.tokenSesion = (String) datosSesion.get("sessionToken");
+
             return true;
         } catch (UnirestException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
