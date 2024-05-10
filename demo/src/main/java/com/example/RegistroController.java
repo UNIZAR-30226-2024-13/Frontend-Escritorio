@@ -199,6 +199,19 @@ public class RegistroController implements Initializable {
             aux.setAmigos((List<Usuario>) datos.get("amigos"));
             aux.setPartidas((List<Partida>) datos.get("partidas"));
             App.usuario = aux;
+
+            JSONObject usuarioLogJson = new JSONObject();
+            usuarioLogJson.put("usuario", user);
+            usuarioLogJson.put("hashPasswd", hashPasswd);
+
+            response = Unirest.post(App.ip + "/usuarios/login")
+                    .header("Content-Type", "application/json")
+                    .body(usuarioLogJson.toString())
+                    .asJson();
+            root = (JSONObject) parser.parse(response.getBody().toString());
+            datos = (JSONObject) root.get("datos");
+            JSONObject datosSesion = (JSONObject) datos.get("sessionToken");
+            App.tokenSesion = (String) datosSesion.get("sessionToken");
             return true;
         } catch (Exception e) {
             // TODO Auto-generated catch block

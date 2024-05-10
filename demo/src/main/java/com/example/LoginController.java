@@ -113,7 +113,7 @@ public class LoginController implements Initializable{
             String hashPasswd = BCrypt.hashpw(passwd, BCrypt.gensalt());
             JSONObject usuarioJson = new JSONObject();
             usuarioJson.put("usuario", user);
-            usuarioJson.put("hashPasswd", "0");
+            usuarioJson.put("hashPasswd", hashPasswd);
 
             HttpResponse<JsonNode> response = Unirest.post(App.ip + "/usuarios/login")
                     .header("Content-Type", "application/json")
