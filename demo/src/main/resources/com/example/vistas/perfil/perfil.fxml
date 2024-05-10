@@ -46,6 +46,7 @@
                 <Button fx:id="botonCambiarContraseña" text="Cambiar Contraseña" GridPane.columnIndex="0" GridPane.rowIndex="1" onAction="#switchToCambiarContrasegna" />
                 <Button fx:id="botonCambiarFoto" text="Cambiar Foto Perfil" GridPane.columnIndex="0" GridPane.rowIndex="2" onAction="#switchToCambiarFoto" />
                 <Button fx:id="botonCambiarCartas" text="Cambiar color cartas" GridPane.columnIndex="0" GridPane.rowIndex="3" onAction="#switchToCambiarCartas" />
+                <Button fx:id="botonCambiarReverso" text="Cambiar reverso cartas" GridPane.columnIndex="0" GridPane.rowIndex="4" onAction="#switchToCambiarReverso" />
             </GridPane>
         </VBox>
     </center>

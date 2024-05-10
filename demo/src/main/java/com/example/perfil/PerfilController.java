@@ -58,6 +58,11 @@ public class PerfilController implements Initializable{
     }
 
     @FXML
+    private void switchToCambiarReverso() throws IOException {
+        App.setRoot("/com/example/vistas/perfil/cambiarReverso");
+    }
+
+    @FXML
     private void mostrarOcultarOpciones(ActionEvent event) {
         opcionesVisible = !opcionesVisible;
         opcionesVBox.setManaged(opcionesVisible);

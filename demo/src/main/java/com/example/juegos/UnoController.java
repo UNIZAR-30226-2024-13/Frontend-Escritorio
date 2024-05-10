@@ -98,7 +98,7 @@ public class UnoController implements Initializable{
                     cartas.add(boton, n, filaCartas);
                     ImageView imagenRev = new ImageView();
 
-                    Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
+                    Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
             
                     imagenRev.setImage(imagen);
                     imagenRev.setFitWidth(40);

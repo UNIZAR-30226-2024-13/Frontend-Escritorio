@@ -78,7 +78,7 @@ public class BlackjackController implements Initializable{
                     cartas.add(boton, numCartas, 0);
 
                     ImageView imagenRev = new ImageView();
-                    Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
+                    Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
             
                     imagenRev.setImage(imagen);
                     imagenRev.setFitWidth(40);

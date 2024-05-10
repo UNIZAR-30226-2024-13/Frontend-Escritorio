@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import com.example.App;
 import com.example.entidades.CartaFrancesa;
+import com.example.entidades.Partida;
 import com.example.entidades.Poker;
+import com.example.entidades.Usuario;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -80,7 +83,7 @@ public class PokerController implements Initializable{
 
     private List<CartaFrancesa> cartasMesa = new ArrayList<>();
 
-    private Poker partida;
+    private Poker partida = new Poker();
 
     private boolean hay_cuarta = false;
    
@@ -115,7 +118,7 @@ public class PokerController implements Initializable{
             boton.getStyleClass().add(App.estiloCartas);
             cartas.add(boton, n, 0);
 
-            Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
+            Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
             
             ImageView imagenRev = new ImageView(imagen);
             imagenRev.setFitWidth(40);
@@ -206,13 +209,27 @@ public class PokerController implements Initializable{
     private void recogerPoker() {
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/getPoker").asJson();
-            Gson gson = new Gson();
-            partida = gson.fromJson(apiResponse.getBody().toString(), Poker.class);
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(apiResponse.getBody().toString());
+            // Estas tres lineas no son asi, ahi un se sabe el formato de los datos
+            JSONObject datos = (JSONObject) root.get("datos");
+            JSONObject datosUsuario = (JSONObject) datos.get("usuario");
+            JSONObject datosSesion = (JSONObject) datos.get("sessionToken");
+
+            partida.setId((String) datosUsuario.get("id"));
+            partida.setTurno(((Long) datosUsuario.get("turno")).intValue());
+            partida.setBote(((Long) datosUsuario.get("bote")).intValue());
+            partida.setUltimaApuesta(((Long) datosUsuario.get("ultima_apuesta")).intValue());
+            partida.setCartasMesa((String) datosUsuario.get("cartas_mesa"));
+            partida.setMazo((String) datosUsuario.get("mazo"));
+
             mazo = new CartaFrancesa().parseStringCartas(partida.getMazo());
             cartasMesa = new CartaFrancesa().parseStringCartas(partida.getCartasMesa());
         } catch (UnirestException e) {
             e.printStackTrace();
-        } 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void mandarPoker() {
