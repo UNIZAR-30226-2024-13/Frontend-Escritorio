@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -83,10 +84,16 @@ public class PokerController implements Initializable{
 
     private List<CartaFrancesa> cartasMesa = new ArrayList<>();
 
+    private List<CartaFrancesa> cartasUsuario = new ArrayList<>();
+
     private Poker partida = new Poker();
 
     private boolean hay_cuarta = false;
+
+    private JSONArray usuarioArray = new JSONArray();
    
+    private int fichas;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         recogerPoker();
@@ -113,7 +120,7 @@ public class PokerController implements Initializable{
             n++;
         }
         n = 0;
-        for (CartaFrancesa cartaMano : mazo) {
+        for (CartaFrancesa cartaMano : cartasUsuario) {
             Button boton = new Button(cartaMano.toString());
             boton.getStyleClass().add(App.estiloCartas);
             cartas.add(boton, n, 0);
@@ -216,13 +223,24 @@ public class PokerController implements Initializable{
             JSONObject datosUsuario = (JSONObject) datos.get("usuario");
             JSONObject datosSesion = (JSONObject) datos.get("sessionToken");
 
-            partida.setId((String) datosUsuario.get("id"));
-            partida.setTurno(((Long) datosUsuario.get("turno")).intValue());
-            partida.setBote(((Long) datosUsuario.get("bote")).intValue());
-            partida.setUltimaApuesta(((Long) datosUsuario.get("ultima_apuesta")).intValue());
-            partida.setCartasMesa((String) datosUsuario.get("cartas_mesa"));
-            partida.setMazo((String) datosUsuario.get("mazo"));
+            partida.setId((String) datosUsuario.get("ID"));
+            partida.setTurno(((Long) datosUsuario.get("Turno")).intValue());
+            partida.setBote(((Long) datosUsuario.get("Bote")).intValue());
+            partida.setUltimaApuesta(((Long) datosUsuario.get("Ultima_apuesta")).intValue());
+            partida.setCartasMesa((String) datosUsuario.get("Cartas_mesa"));
+            partida.setMazo((String) datosUsuario.get("Cartas_mazo"));
 
+            usuarioArray = (JSONArray) datosUsuario.get("usuarios");
+            for (Object object : usuarioArray) {
+                JSONObject infoUsuario = (JSONObject) object;
+               
+                String id = (String) infoUsuario.get("ID");
+                if (App.usuario.getId() == id) {
+                    partida.setCartasUsuario((String) infoUsuario.get("Cartas"));
+                    fichas = (Integer) infoUsuario.get("Fichas");
+                }
+            }
+            cartasUsuario =  new CartaFrancesa().parseStringCartas(partida.getCartasUsuario());
             mazo = new CartaFrancesa().parseStringCartas(partida.getMazo());
             cartasMesa = new CartaFrancesa().parseStringCartas(partida.getCartasMesa());
         } catch (UnirestException e) {
@@ -235,12 +253,28 @@ public class PokerController implements Initializable{
     private void mandarPoker() {
         try {
             JSONObject pokerJson = new JSONObject();
-            pokerJson.put("id", partida.getId());
-            pokerJson.put("turno", partida.getTurno());
-            pokerJson.put("bote", partida.getBote());
-            pokerJson.put("ultimaApuesta", partida.getUltimaApuesta());
-            pokerJson.put("cartasMesa", partida.getCartasMesa());
-            pokerJson.put("mazo", partida.getMazo());
+            int indice = 0;
+            for (Object object : usuarioArray) {
+                JSONObject infoUsuario = (JSONObject) object;
+               
+                String id = (String) infoUsuario.get("ID");
+                if (App.usuario.getId() == id) {
+                    JSONObject usuarioJSON = new JSONObject();
+                    usuarioJSON.put("ID", App.usuario.getId());
+                    usuarioJSON.put("Fichas", fichas);
+                    usuarioJSON.put("Cartas", partida.getCartasUsuario());
+                    usuarioArray.set(indice, usuarioJSON);
+                }
+                indice++;
+            }
+    
+            pokerJson.put("ID", partida.getId());
+            pokerJson.put("Turno", partida.getTurno());
+            pokerJson.put("Bote", partida.getBote());
+            pokerJson.put("Ultima_apuesta", partida.getUltimaApuesta());
+            pokerJson.put("Cartas_mesa", partida.getCartasMesa());
+            pokerJson.put("Cartas_mazo", partida.getMazo());
+            pokerJson.put("Usuarios", usuarioArray);
             HttpResponse<JsonNode> response = Unirest.post(App.ip + "/juegos/addPoker")
             .header("Content-Type", "application/json")
             .body(pokerJson.toString())
@@ -253,7 +287,6 @@ public class PokerController implements Initializable{
     private void apostar(int apuesta) {
         partida.setBote(partida.getBote() + apuesta);
         partida.setUltimaApuesta(apuesta);
-        partida.setTurno(partida.getTurno()+1);
         mandarPoker();
     }
 }
