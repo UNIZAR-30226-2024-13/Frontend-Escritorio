@@ -2,7 +2,6 @@ package com.example;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -12,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.example.entidades.Partida;
 import com.example.entidades.Usuario;
-import com.google.gson.Gson;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -173,7 +171,7 @@ public class RegistroController implements Initializable {
             usuarioJson.put("email", email);
         
             JSONObject loginJson = new JSONObject();
-            String hashPasswd = BCrypt.hashpw(passwd, BCrypt.gensalt());
+            String hashPasswd = BCrypt.hashpw(passwd, App.salt);
             loginJson.put("hashPasswd", hashPasswd); 
         
             JSONObject requestBody = new JSONObject();

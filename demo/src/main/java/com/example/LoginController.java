@@ -11,9 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.example.entidades.Partida;
 import com.example.entidades.Usuario;
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -108,9 +105,10 @@ public class LoginController implements Initializable{
      * Compara los datos introducidos en las casillas de texto con los recibidos de la base de datos
      * @return - Devuelve verdadero si los datos coinciden
      */
+    @SuppressWarnings("unchecked")
     private boolean comprobarLogin(){
         try {
-            String hashPasswd = BCrypt.hashpw(passwd, BCrypt.gensalt());
+            String hashPasswd = BCrypt.hashpw(passwd, App.salt);
             JSONObject usuarioJson = new JSONObject();
             usuarioJson.put("usuario", user);
             usuarioJson.put("hashPasswd", hashPasswd);
