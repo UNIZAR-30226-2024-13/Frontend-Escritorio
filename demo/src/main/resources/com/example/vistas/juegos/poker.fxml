@@ -64,10 +64,10 @@
                     </columnConstraints>
                     <GridPane fx:id="cartas" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-margin: -10px; -fx-background-color: darkgreen; -fx-alignment: center; -fx-padding: 5px" />
                     <Label fx:id="textoFichas" text="400 fichas disponibles" styleClass="white-label" />
-                    <Button fx:id="botonRetirar" text="Retirarse" GridPane.columnIndex="4" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
-                    <Button fx:id="botonIgualar" text="Igualar" GridPane.columnIndex="5" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
+                    <Button fx:id="botonRetirar" text="Retirarse" GridPane.columnIndex="4" GridPane.rowIndex="0" styleClass="button-poker"/>
+                    <Button fx:id="botonIgualar" text="Igualar" GridPane.columnIndex="5" GridPane.rowIndex="0" styleClass="button-poker"/>
                     <TextField fx:id="campoApuesta" GridPane.columnIndex="6" GridPane.rowIndex="0" />
-                    <Button fx:id="botonApostar" text="Apostar" GridPane.columnIndex="8" GridPane.rowIndex="0" onAction="#ponerCarta" styleClass="button-poker"/>
+                    <Button fx:id="botonApostar" text="Apostar" GridPane.columnIndex="8" GridPane.rowIndex="0" styleClass="button-poker"/>
                 </GridPane>
             </bottom>
         </BorderPane>

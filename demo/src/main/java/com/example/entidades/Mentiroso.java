@@ -3,17 +3,19 @@ package com.example.entidades;
 public class Mentiroso {
     
     private String id;
+    private int turno;
     private String cartasMesa;
-    private int numero;
-    private int ultimasCartas;
+    private int numeroActual;
+    private int cartasUltimaJugada;
 
     public Mentiroso() {}
 
-    public Mentiroso(String id, String cartasMesa, int numero, int ultimasCartas) {
+    public Mentiroso(String id, int turno, String cartasMesa, int numeroActual, int cartasUltimaJugada) {
         this.id = id;
+        this.turno = turno;
         this.cartasMesa = cartasMesa;
-        this.numero = numero;
-        this.ultimasCartas = ultimasCartas;
+        this.numeroActual = numeroActual;
+        this.cartasUltimaJugada = cartasUltimaJugada;
     }
 
     public String getId() {
@@ -24,6 +26,14 @@ public class Mentiroso {
         this.id = id;
     }
 
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+
     public String getCartasMesa() {
         return cartasMesa;
     }
@@ -32,19 +42,20 @@ public class Mentiroso {
         this.cartasMesa = cartasMesa;
     }
 
-    public int getNumero() {
-        return numero;
+    public int getNumeroActual() {
+        return numeroActual;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setNumeroActual(int numeroActual) {
+        this.numeroActual = numeroActual;
     }
 
-    public int getUltimasCartas() {
-        return ultimasCartas;
+    public int getCartasUltimaJugada() {
+        return cartasUltimaJugada;
     }
 
-    public void setUltimasCartas(int ultimasCartas) {
-        this.ultimasCartas = ultimasCartas;
-    }   
+    public void setCartasUltimaJugada(int cartasUltimaJugada) {
+        this.cartasUltimaJugada = cartasUltimaJugada;
+    }
+    
 }

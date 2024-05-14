@@ -7,9 +7,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.control.TextField?>
 
 <BorderPane prefHeight="400" prefWidth="600" stylesheets="@../../styles/styles.css"
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.perfil.PerfilController" >
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.perfil.CambiarReversoController" >
     <top>
         <GridPane styleClass="top-grid-pane">
 
@@ -42,11 +43,12 @@
     <center>
         <VBox>
             <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS" hgap="20" >
-                <Button fx:id="botonCambiarUsuario" text="Cambiar Usuario" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#switchToCambiarUsuario" />
-                <Button fx:id="botonCambiarContraseña" text="Cambiar Contraseña" GridPane.columnIndex="0" GridPane.rowIndex="1" onAction="#switchToCambiarContrasegna" />
-                <Button fx:id="botonCambiarFoto" text="Cambiar Foto Perfil" GridPane.columnIndex="0" GridPane.rowIndex="2" onAction="#switchToCambiarFoto" />
-                <Button fx:id="botonCambiarCartas" text="Cambiar color cartas" GridPane.columnIndex="0" GridPane.rowIndex="3" onAction="#switchToCambiarCartas" />
-                <Button fx:id="botonCambiarReverso" text="Cambiar reverso cartas" GridPane.columnIndex="0" GridPane.rowIndex="4" onAction="#switchToCambiarReverso" />
+                <Button fx:id="botonAmarillo" text="Reverso azul"  GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#cambiarAzul" />
+                <Button fx:id="botonAzul" text="Reverso rojo"  GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#cambiarRojo" />
+                <Button fx:id="botonNaranja" text="Reverso naranja"  GridPane.columnIndex="0" GridPane.rowIndex="1" onAction="#cambiarNaranja" />
+                <Button fx:id="botonMorado" text="Reverso morado"  GridPane.columnIndex="2" GridPane.rowIndex="1" onAction="#cambiarMorado" />
+                <ImageView fx:id="previsualizacionImagen" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Button fx:id="botonConfirmar" text="Confirmar" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#switchToPerfil" />
             </GridPane>
         </VBox>
     </center>

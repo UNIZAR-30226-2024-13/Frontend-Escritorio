@@ -21,6 +21,10 @@ public class App extends Application {
     public static Usuario usuario;
     public static String partidaPasswd;
     public static String tokenSesion = "";
+    public static String estiloCartas = "carta-button";
+    public static String estiloEscaleras = "cartas-escaleras";
+    public static String reversoCartas = "/com/example/imgs/reverso_azul.jpg";
+
 
     private static Scene scene;
 

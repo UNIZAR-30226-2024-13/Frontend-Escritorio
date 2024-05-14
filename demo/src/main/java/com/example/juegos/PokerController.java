@@ -2,21 +2,24 @@ package com.example.juegos;
 
 import java.io.IOException;
 import java.net.URL;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import com.example.App;
-<<<<<<< HEAD
-import com.example.Carta;
-import com.example.CartaFrancesa;
-import com.example.Partida;
-import com.example.Usuario;
-import com.google.gson.Gson;
-=======
 import com.example.entidades.CartaFrancesa;
+import com.example.entidades.Partida;
 import com.example.entidades.Poker;
+import com.example.entidades.Usuario;
+import com.google.gson.Gson;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -27,13 +30,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
+
 
 public class PokerController implements Initializable{
 
@@ -65,91 +68,116 @@ public class PokerController implements Initializable{
     @FXML
     private GridPane cartas;
 
-    private List<CartaFrancesa> listaCartas = new ArrayList<>();
+    @FXML
+    private Button botonApostar;
+
+    @FXML
+    private Button botonRetirar;
+
+    @FXML
+    private Button botonIgualar;
+
+    @FXML
+    private TextField campoApuesta;
+
+    private List<CartaFrancesa> mazo = new ArrayList<>();
+
+    private List<CartaFrancesa> cartasMesa = new ArrayList<>();
+
+    private List<CartaFrancesa> cartasUsuario = new ArrayList<>();
+
+    private Poker partida = new Poker();
 
     private boolean hay_cuarta = false;
+
+    private JSONArray usuarioArray = new JSONArray();
    
+    private int fichas;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/getPoker").asJson();
-            Gson gson = new Gson();
-            Poker partida = gson.fromJson(apiResponse.getBody().toString(), Poker.class);
-            App.partidaPasswd = partida.getId();
-            /**
-             * TODO: Conectarse al servidor, recibir las manos
-             * Iterar sobre las manos y añadir a cada caja el contenido individual
-             * Cerrar las conexiones y manejar errores
-             */
-            int n = 0;
-            while (n < 7) { 
-                //  Añadir las cartas a la lista, parseando lo recibido
-                listaCartas.add(new CartaFrancesa(n, 2));
-                n++;
+        recogerPoker();
+        App.partidaPasswd = partida.getId();
+
+        int n = 0;
+        cartas.getChildren().clear();
+        for (CartaFrancesa carta : cartasMesa) {
+            if (n == 0) {
+                Label label = new Label(carta.toString());
+                label.getStyleClass().add(App.estiloEscaleras);
+                primeraCartaMesa.add(label, n, 0);
             }
-
-            // Eliminar lo que hubiera antes y crear botones para cada carta
-            n = 0;
-            cartas.getChildren().clear();
-            for (CartaFrancesa carta : listaCartas) {
-                if (n == 2) {
-                    Label label = new Label(carta.toString());
-                    label.getStyleClass().add("cartas-escaleras");
-                    primeraCartaMesa.add(label, 0, 0);
-                }
-                else if (n == 3) {
-                    Label label = new Label(carta.toString());
-                    label.getStyleClass().add("cartas-escaleras");
-                    segundaCartaMesa.add(label, 1, 0);
-                }
-                else if (n == 4) {
-                    Label label = new Label(carta.toString());
-                    label.getStyleClass().add("cartas-escaleras");
-                    terceraCartaMesa.add(label, 2, 0);
-                }
-                else if (n == 0 || n == 1) {
-                    Button boton = new Button(carta.toString());
-                    boton.getStyleClass().add("carta-button");
-                    cartas.add(boton, n, 0);
-
-                    ImageView imagenRev = new ImageView();
-                    Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
-            
-                    imagenRev.setImage(imagen);
-                    imagenRev.setFitWidth(40);
-                    imagenRev.setFitHeight(60);
-
-                    ImageView imagenRev2 = new ImageView();
-            
-                    imagenRev2.setImage(imagen);
-                    imagenRev2.setFitWidth(40);
-                    imagenRev2.setFitHeight(60);
-
-                    ImageView imagenRev3 = new ImageView();
-            
-                    imagenRev3.setImage(imagen);
-                    imagenRev3.setFitWidth(40);
-                    imagenRev3.setFitHeight(60);
-
-                    cartasUsuario2.add(imagenRev, n, 0);
-                    cartasUsuario3.add(imagenRev2, 0, n);
-                    cartasUsuario4.add(imagenRev3, 0, n);
-                }
-                n++;
+            else if (n == 1) {
+                Label label = new Label(carta.toString());
+                label.getStyleClass().add(App.estiloEscaleras);
+                segundaCartaMesa.add(label, n, 0);
             }
-            cartas.setHgap(20);
-            cartasUsuario2.setHgap(30);
-            cartasUsuario3.setVgap(30);
-            cartasUsuario4.setVgap(30);
-            primeraCartaMesa.setVgap(10);
-            segundaCartaMesa.setVgap(10);
-            terceraCartaMesa.setVgap(10);
-            cuartaCartaMesa.setVgap(10);
-            quintaCartaMesa.setVgap(10);
-        
-        } catch (Exception e) {
-        } finally{
+            else if (n == 2) {
+                Label label = new Label(carta.toString());
+                label.getStyleClass().add(App.estiloEscaleras);
+                terceraCartaMesa.add(label, n, 0);
+            }
+            n++;
         }
+        n = 0;
+        for (CartaFrancesa cartaMano : cartasUsuario) {
+            Button boton = new Button(cartaMano.toString());
+            boton.getStyleClass().add(App.estiloCartas);
+            cartas.add(boton, n, 0);
+
+            Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
+            
+            ImageView imagenRev = new ImageView(imagen);
+            imagenRev.setFitWidth(40);
+            imagenRev.setFitHeight(60);
+
+            
+            ImageView imagenRev2 = new ImageView(imagen);
+            imagenRev2.setFitWidth(40);
+            imagenRev2.setFitHeight(60);
+
+            
+            ImageView imagenRev3 = new ImageView(imagen);
+            imagenRev3.setFitWidth(40);
+            imagenRev3.setFitHeight(60);
+
+            cartasUsuario2.add(imagenRev, n, 0);
+            cartasUsuario3.add(imagenRev2, 0, n);
+            cartasUsuario4.add(imagenRev3, 0, n);
+            n++;
+        }
+        cartas.setHgap(20);
+        cartasUsuario2.setHgap(30);
+        cartasUsuario3.setVgap(30);
+        cartasUsuario4.setVgap(30);
+        primeraCartaMesa.setVgap(10);
+        segundaCartaMesa.setVgap(10);
+        terceraCartaMesa.setVgap(10);
+        cuartaCartaMesa.setVgap(10);
+        quintaCartaMesa.setVgap(10);
+        Timeline timeline = new Timeline(
+            new KeyFrame(Duration.seconds(5), event -> {
+                int otraCarta = cartasMesa.size();
+                recogerPoker();
+                if (otraCarta > cartasMesa.size()) {
+                    ponerCarta();
+                }
+            })
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+        botonApostar.setOnAction(event -> {
+            apostar(Integer.parseInt(campoApuesta.getText()));
+        });
+
+        botonIgualar.setOnAction(event -> {
+            apostar(partida.getUltimaApuesta());
+        });
+
+        botonRetirar.setOnAction(event -> {
+            apostar(0);
+        });
     }
 
     @FXML
@@ -168,21 +196,97 @@ public class PokerController implements Initializable{
         stage.showAndWait();
     }
 
-    @FXML
     private void ponerCarta(){
         CartaFrancesa carta = new CartaFrancesa();
         if (!hay_cuarta) {
-            carta = listaCartas.get(5);
+            carta = cartasMesa.get(3);
             Label label = new Label(carta.toString());
-            label.getStyleClass().add("cartas-escaleras");
+            label.getStyleClass().add(App.estiloEscaleras);
             cuartaCartaMesa.add(label, 3, 0);
             hay_cuarta = true;
         }
         else {
-            carta = listaCartas.get(6);
+            carta = cartasMesa.get(4);
             Label label = new Label(carta.toString());
-            label.getStyleClass().add("cartas-escaleras");
+            label.getStyleClass().add(App.estiloEscaleras);
             quintaCartaMesa.add(label, 4, 0);
         }
+    }
+
+    private void recogerPoker() {
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/getPoker").asJson();
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(apiResponse.getBody().toString());
+            // Estas tres lineas no son asi, ahi un se sabe el formato de los datos
+            JSONObject datos = (JSONObject) root.get("datos");
+            JSONObject datosUsuario = (JSONObject) datos.get("usuario");
+            JSONObject datosSesion = (JSONObject) datos.get("sessionToken");
+
+            partida.setId((String) datosUsuario.get("ID"));
+            partida.setTurno(((Long) datosUsuario.get("Turno")).intValue());
+            partida.setBote(((Long) datosUsuario.get("Bote")).intValue());
+            partida.setUltimaApuesta(((Long) datosUsuario.get("Ultima_apuesta")).intValue());
+            partida.setCartasMesa((String) datosUsuario.get("Cartas_mesa"));
+            partida.setMazo((String) datosUsuario.get("Cartas_mazo"));
+
+            usuarioArray = (JSONArray) datosUsuario.get("usuarios");
+            for (Object object : usuarioArray) {
+                JSONObject infoUsuario = (JSONObject) object;
+               
+                String id = (String) infoUsuario.get("ID");
+                if (App.usuario.getId() == id) {
+                    partida.setCartasUsuario((String) infoUsuario.get("Cartas"));
+                    fichas = (Integer) infoUsuario.get("Fichas");
+                }
+            }
+            cartasUsuario =  new CartaFrancesa().parseStringCartas(partida.getCartasUsuario());
+            mazo = new CartaFrancesa().parseStringCartas(partida.getMazo());
+            cartasMesa = new CartaFrancesa().parseStringCartas(partida.getCartasMesa());
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void mandarPoker() {
+        try {
+            JSONObject pokerJson = new JSONObject();
+            int indice = 0;
+            for (Object object : usuarioArray) {
+                JSONObject infoUsuario = (JSONObject) object;
+               
+                String id = (String) infoUsuario.get("ID");
+                if (App.usuario.getId() == id) {
+                    JSONObject usuarioJSON = new JSONObject();
+                    usuarioJSON.put("ID", App.usuario.getId());
+                    usuarioJSON.put("Fichas", fichas);
+                    usuarioJSON.put("Cartas", partida.getCartasUsuario());
+                    usuarioArray.set(indice, usuarioJSON);
+                }
+                indice++;
+            }
+    
+            pokerJson.put("ID", partida.getId());
+            pokerJson.put("Turno", partida.getTurno());
+            pokerJson.put("Bote", partida.getBote());
+            pokerJson.put("Ultima_apuesta", partida.getUltimaApuesta());
+            pokerJson.put("Cartas_mesa", partida.getCartasMesa());
+            pokerJson.put("Cartas_mazo", partida.getMazo());
+            pokerJson.put("Usuarios", usuarioArray);
+            HttpResponse<JsonNode> response = Unirest.post(App.ip + "/juegos/addPoker")
+            .header("Content-Type", "application/json")
+            .body(pokerJson.toString())
+            .asJson();
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        } 
+    }
+
+    private void apostar(int apuesta) {
+        partida.setBote(partida.getBote() + apuesta);
+        partida.setUltimaApuesta(apuesta);
+        mandarPoker();
     }
 }

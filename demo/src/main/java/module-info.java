@@ -6,7 +6,10 @@ module com.example {
     requires java.net.http;
     requires unirest.java;
     requires com.google.gson;
+<<<<<<< HEAD
     requires spring.security.crypto;
+=======
+>>>>>>> origin/Estetica
 
     opens com.example to javafx.fxml, com.google.gson;
     opens com.example.juegos to javafx.fxml, com.google.gson;

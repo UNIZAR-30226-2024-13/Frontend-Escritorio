@@ -1,5 +1,8 @@
 package com.example.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CartaFrancesa {
 
     public static final int PICAS = 0;
@@ -73,5 +76,49 @@ public class CartaFrancesa {
             default:
                 return "";
         } 
+    }
+
+    /**
+     * 
+     * @param cadenaCartas, contiene la cadena de carecteres recibida desde la Base de Datos
+     * @return retVal, contiene la lista de Carta que representa la baraja de juego
+     */
+    public List<CartaFrancesa> parseStringCartas(String cadenaCartas){
+        List<CartaFrancesa> retVal = new ArrayList<>();
+        String[] cartas_mazo = cadenaCartas.split(";");
+        for (String carta : cartas_mazo){
+            String[] parte_carta = carta.split(",");
+            int parte = 0;
+            CartaFrancesa carta2 = new CartaFrancesa();
+            for (String info_carta : parte_carta){
+                if (parte == 0) {
+                    int color = Integer.parseInt(info_carta);
+                    carta2.setPalo(color);
+                    parte = 1;
+                }
+                else{
+                    int numero = Integer.parseInt(info_carta);
+                    carta2.setNumero(numero);
+                }
+            }
+            retVal.add(carta2);
+        }
+        return retVal;
+    }
+
+    /**
+     * 
+     * @param listaCartas, contiene la lista de Carta que representa la baraja de juego
+     * @return resultado, contiene la cadena de carecteres a enviar a la Base de Datos
+     */
+    public String parseCartasString(List<CartaFrancesa> listaCartas) {
+        StringBuilder resultado = new StringBuilder();
+        for (CartaFrancesa carta : listaCartas) {
+            resultado.append(carta.getPalo()).append(",").append(carta.getNumero()).append(";");
+        }
+        if (resultado.length() > 0) {
+            resultado.deleteCharAt(resultado.length() - 1);
+        }
+        return resultado.toString();
     }
 }
