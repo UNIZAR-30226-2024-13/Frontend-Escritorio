@@ -52,35 +52,35 @@ public class MenuCrearController implements Initializable{
 
     @FXML
     private void crearCinquillo() throws IOException {
-        if(agnadirPartida("/partidas/addCinquillo")){
+        if(agnadirPartida("/juegos/cinquillo/addCinquillo")){
             App.setRoot("/com/example/vistas/juegos/crearCinquillo");
         }
     }
 
     @FXML
     private void crearMentiroso() throws IOException {
-        if(agnadirPartida("/partidas/addMentiroso")){
+        if(agnadirPartida("/juegos/mentiroso/addMentiroso")){
             App.setRoot("/com/example/vistas/juegos/crearMentiroso");
         }
     }
 
     @FXML
     private void crearPoker() throws IOException {
-        if(agnadirPartida("/partidas/addPoker")){
+        if(agnadirPartida("/juegos/poker/addPoker")){
             App.setRoot("/com/example/vistas/juegos/crearPoker");
         }
     }
 
     @FXML
     private void crearBlackJack() throws IOException {
-        if(agnadirPartida("/partidas/addBlackJack")){
+        if(agnadirPartida("/juegos/blackJack/addBlackJack")){
             App.setRoot("/com/example/vistas/juegos/crearBlackJack");
         }
     }
 
     @FXML
     private void crearUNO() throws IOException {
-        if(agnadirPartida("/partidas/addUNO")){
+        if(agnadirPartida("/juegos/uno/addUNO")){
             App.setRoot("/com/example/vistas/juegos/crearUNO");
         }
     }
