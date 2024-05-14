@@ -9,17 +9,10 @@ import com.example.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class CrearBlackjackController implements Initializable{
-    
-    @FXML
-    private Button botonPublica;
-    
-    @FXML
-    private Button botonPrivada;
 
     @FXML
     private VBox opcionesVBox;
@@ -31,12 +24,12 @@ public class CrearBlackjackController implements Initializable{
     private Label labelFichas;
     
     private boolean opcionesVisible = false;
-    private boolean passwdVisible = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         labelFichas.setText(App.usuario.getDinero() + " Fichas");
-        etiquetaPasswd.setText(App.partidaPasswd);
+        etiquetaPasswd.setText("Contraseña: " + App.partida.getId());
+        etiquetaPasswd.setVisible(App.partida.isPrivada());
     }
 
     @FXML
@@ -54,24 +47,6 @@ public class CrearBlackjackController implements Initializable{
         opcionesVisible = !opcionesVisible;
         opcionesVBox.setManaged(opcionesVisible);
         opcionesVBox.setVisible(opcionesVisible);
-    }
-    
-    @FXML
-    private void partidaPrivada() throws IOException {
-        passwdVisible = true;
-        etiquetaPasswd.setManaged(passwdVisible);
-        etiquetaPasswd.setVisible(passwdVisible);
-        botonPublica.getStyleClass().remove("button-clicked");
-        botonPrivada.getStyleClass().add("button-clicked");
-    }
-
-    @FXML
-    private void partidaPublica() throws IOException {
-        passwdVisible = false;
-        etiquetaPasswd.setManaged(passwdVisible);
-        etiquetaPasswd.setVisible(passwdVisible);
-        botonPublica.getStyleClass().add("button-clicked");
-        botonPrivada.getStyleClass().remove("button-clicked");
     }
 
     @FXML

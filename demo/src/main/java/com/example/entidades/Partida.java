@@ -5,18 +5,14 @@ public class Partida {
     private int jugadores;
     private int apuesta;
     private int turno;
+    private boolean activa;
+    private boolean privada;
 
     public Partida() {
         this.id = "";
         this.jugadores = 0;
         this.apuesta = 0;
         this.turno = 0;
-    }
-
-    public Partida(String id, int jugadores) {
-        this.id = id;
-        this.jugadores = jugadores;
-        this.apuesta = apuesta;
     }
 
     public Partida(String id, int jugadores, int apuesta) {
@@ -62,5 +58,21 @@ public class Partida {
 
     public void setTurno(int turno) {
         this.turno = turno;
+    }
+    
+    public boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+    public boolean isPrivada() {
+        return privada;
+    }
+
+    public void setPrivada(boolean privada) {
+        this.privada = privada;
     }
 }

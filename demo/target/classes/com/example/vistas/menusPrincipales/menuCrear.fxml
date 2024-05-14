@@ -43,25 +43,29 @@
     <center>
         <VBox>
             <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS" hgap="20" >
-                <Label text=" Seleccione el juego" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="white-label" />
-                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="0" GridPane.rowIndex="1" >
+                <Label text="Tipo de partida" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="white-label" />
+                <Button fx:id="botonPublica" text="Publica" onAction="#partidaPublica" styleClass="button-clicked" 
+                    GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="LEFT" />
+                <Button fx:id="botonPrivada" text="Privada" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="LEFT" onAction="#partidaPrivada"/>
+
+                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="0" GridPane.rowIndex="2" >
                         <Image url="@../../imgs/cinquillo.jpg"/>
                 </ImageView>
-                <Button fx:id="botonCinquillo" text="Cinquillo" onAction="#crearCinquillo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="4" GridPane.rowIndex="1" >
+                <Button fx:id="botonCinquillo" text="Cinquillo" onAction="#crearCinquillo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="4" GridPane.rowIndex="2" >
                         <Image url="@../../imgs/poker.jpg"/>
                 </ImageView>
-                <Button fx:id="botonPoker" text="Poker" onAction="#crearPoker" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="0" GridPane.rowIndex="2" >
+                <Button fx:id="botonPoker" text="Poker" onAction="#crearPoker" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="0" GridPane.rowIndex="3" >
                         <Image url="@../../imgs/mentiroso.jpg"/>
                 </ImageView>
-                <Button fx:id="botonMentiroso" text="Mentiroso" onAction="#crearMentiroso" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="4" GridPane.rowIndex="2" >
+                <Button fx:id="botonMentiroso" text="Mentiroso" onAction="#crearMentiroso" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="4" GridPane.rowIndex="3" >
                         <Image url="@../../imgs/blackjack.jpg"/>
                 </ImageView>
-                <Button fx:id="botonBlackJack" text="BlackJack" onAction="#crearBlackJack" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                <Button fx:id="botonUNO" text="UNO" onAction="#crearUNO" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.halignment="CENTER" >
+                <Button fx:id="botonBlackJack" text="BlackJack" onAction="#crearBlackJack" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                <Button fx:id="botonUNO" text="UNO" onAction="#crearUNO" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                <ImageView fitWidth="80" fitHeight="80" GridPane.columnIndex="2" GridPane.rowIndex="5" GridPane.halignment="CENTER" >
                     <Image url="@../../imgs/uno.jpg"/>
                 </ImageView>
             </GridPane>
