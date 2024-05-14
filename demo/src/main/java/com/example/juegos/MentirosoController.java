@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -14,6 +15,8 @@ import com.example.entidades.Carta;
 import com.example.entidades.CartaFrancesa;
 import com.example.entidades.Mentiroso;
 import com.example.entidades.Poker;
+import com.example.entidades.Usuario;
+import com.example.entidades.UsuarioPartida;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -63,7 +66,9 @@ public class MentirosoController implements Initializable{
 
     private int botones = 0;
 
-    private List<Carta> listaCartas = new ArrayList<>();
+    private List<Carta> listaCartasMesa = new ArrayList<>();
+
+    private List<UsuarioPartida> usuarios = new ArrayList<>();
 
     private List<Button> botonesSeleccionados = new ArrayList<>();
 
@@ -72,6 +77,8 @@ public class MentirosoController implements Initializable{
     private List<Integer> columnasCartas = new ArrayList<>();
 
     private List<Integer> filasCartas = new ArrayList<>();
+
+    private JSONArray usuarioArray = new JSONArray();
 
     private Mentiroso partida = new Mentiroso();
 
@@ -84,6 +91,10 @@ public class MentirosoController implements Initializable{
         int n = 0;
         int m = 0;
         cartas.getChildren().clear();
+        // Aqui ten cuidado que puede ser erroneo ya que doy por hecho que el primer usuario de la lista
+        // es el que esta jugando pero no se si alex lo pondrá así
+        String cartasU = usuarios.get(0).getCartasUsuario();
+        List<Carta> listaCartas = new Carta().parseStringCartas(cartasU);
         for (Carta carta : listaCartas) {
             Button boton = new Button(carta.toString());
             boton.getStyleClass().add(App.estiloCartas);
@@ -135,7 +146,7 @@ public class MentirosoController implements Initializable{
             new KeyFrame(Duration.seconds(5), event -> {
                 int turno = partida.getTurno();
                 recogerMentiroso();
-                if (turno != partida.getTurno()) {
+                if (turno != partida.getTurno() && turno != 0) {
                     actualizarVista();
                 }
             })
@@ -223,21 +234,32 @@ public class MentirosoController implements Initializable{
 
     private void recogerMentiroso() {
         try {
-            HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/getMentiroso").asJson();
+            HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/getMentiroso" + partida.getId()).asJson();
             JSONParser parser = new JSONParser();
             JSONObject root = (JSONObject) parser.parse(apiResponse.getBody().toString());
             // Estas tres lineas no son asi, ahi un se sabe el formato de los datos
             JSONObject datos = (JSONObject) root.get("datos");
-            JSONObject datosUsuario = (JSONObject) datos.get("usuario");
-            JSONObject datosSesion = (JSONObject) datos.get("sessionToken");
 
-            partida.setId((String) datosUsuario.get("id"));
-            partida.setTurno(((Long) datosUsuario.get("turno")).intValue());
-            partida.setNumeroActual(((Long) datosUsuario.get("numero_actual")).intValue());
-            partida.setCartasMesa((String) datosUsuario.get("cartas_mesa"));
-            partida.setCartasUltimaJugada(((Long) datosUsuario.get("ultimas_cartas")).intValue());
+            partida.setId((String) datos.get("id"));
+            partida.setTurno(((Long) datos.get("turno")).intValue());
+            partida.setUsuarioGanador(((Long) datos.get("usuarioGanador")).intValue());
+            partida.setActiva((Boolean) datos.get("activa"));
+            partida.setPrivada((Boolean) datos.get("privada"));
+            partida.setNumeroActual(((Long) datos.get("numero")).intValue());
+            partida.setCartasMesa((String) datos.get("cartasMesa"));
+            partida.setCartasUltimaJugada(((Long) datos.get("cartasUltimaJugada")).intValue());
 
-            listaCartas = new Carta().parseStringCartas(partida.getCartasMesa());
+            usuarioArray = (JSONArray) datos.get("guarda");
+            usuarios.clear();
+            for (Object object : usuarioArray) {
+                JSONObject infoUsuario = (JSONObject) object;
+                UsuarioPartida usuario = new UsuarioPartida((String) infoUsuario.get("idUsuario"),
+                                                            (String) infoUsuario.get("idPartida"),
+                                                            (((Long) infoUsuario.get("turnoUsuario")).intValue()),
+                                                            (String) infoUsuario.get("cartasUsuario"));
+                usuarios.add(usuario);
+            }
+            listaCartasMesa = new Carta().parseStringCartas(partida.getCartasMesa());
         } catch (UnirestException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -251,6 +273,9 @@ public class MentirosoController implements Initializable{
             mentirosoJson.put("ID", partida.getId());
             mentirosoJson.put("turno", partida.getTurno());
             mentirosoJson.put("numero_actual", partida.getNumeroActual());
+            mentirosoJson.put("usuarioGanador", partida.getUsuarioGanador());
+            mentirosoJson.put("activa", partida.getActiva());
+            mentirosoJson.put("privada", partida.getPrivada());
             mentirosoJson.put("ultimas_cartas", partida.getCartasUltimaJugada());
             mentirosoJson.put("cartas_mesa", partida.getCartasMesa());
             HttpResponse<JsonNode> response = Unirest.post(App.ip + "/juegos/addMentiroso")
@@ -260,5 +285,54 @@ public class MentirosoController implements Initializable{
         } catch (UnirestException e) {
             e.printStackTrace();
         } 
+    }
+
+    private void actualizarVista() {
+        for (UsuarioPartida usuario : usuarios) {
+            int turno = usuario.getTurnoUsuario();
+            String cartas = usuario.getCartasUsuario();
+            int numCartas = new Carta().parseStringCartas(cartas).size();
+            if ( turno == partida.getTurno()) {
+                if (turno == 1) {
+                    cartasUsuario4.getChildren().clear();
+                    for (int m = 0; m < numCartas; m++) {
+                        ImageView imagenRev = new ImageView();
+
+                        Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
+                
+                        imagenRev.setImage(imagen);
+                        imagenRev.setFitWidth(40);
+                        imagenRev.setFitHeight(60);
+                        cartasUsuario4.add(imagenRev, m, 0);
+                    }
+                }
+                else if (turno == 2) {
+                    cartasUsuario2.getChildren().clear();
+                    for (int m = 0; m < numCartas; m++) {
+                        ImageView imagenRev = new ImageView();
+
+                        Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
+                
+                        imagenRev.setImage(imagen);
+                        imagenRev.setFitWidth(40);
+                        imagenRev.setFitHeight(60);
+                        cartasUsuario2.add(imagenRev, m, 0);
+                    }
+                }
+                else if (turno == 3) {
+                    cartasUsuario3.getChildren().clear();
+                    for (int m = 0; m < numCartas; m++) {
+                        ImageView imagenRev = new ImageView();
+
+                        Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
+                
+                        imagenRev.setImage(imagen);
+                        imagenRev.setFitWidth(40);
+                        imagenRev.setFitHeight(60);
+                        cartasUsuario3.add(imagenRev, m, 0);
+                    }
+                }
+            }
+        }
     }
 }
