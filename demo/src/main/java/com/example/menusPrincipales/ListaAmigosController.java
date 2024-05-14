@@ -79,11 +79,6 @@ public class ListaAmigosController implements Initializable{
                 .field("idAmigo", amigo.getNombre())
                 .asJson();
 
-            HttpResponse<JsonNode> responseAmigo = Unirest.post(App.ip + "/usuarios/addAmigo?idUsuario=" + "" + "&idAmigo=")
-                .field("idUsuario", amigo.getNombre())
-                .field("idAmigo", App.usuario.getId())
-                .asJson();
-
             amigos.add(amigo);
             tablaAmigos.setItems(amigos);
             return true;
@@ -103,11 +98,6 @@ public class ListaAmigosController implements Initializable{
             HttpResponse<JsonNode> response = Unirest.delete(App.ip + "/usuarios/deleteAmigo?idUsuario="+ "" + "&idAmigo=")
                 .field("idUsuario", App.usuario.getId())
                 .field("idAmigo", amigo.getNombre())
-                .asJson();
-
-            HttpResponse<JsonNode> responseAmigo = Unirest.delete(App.ip + "/usuarios/deleteAmigo?idUsuario="+ "" + "&idAmigo=")
-                .field("idUsuario", amigo.getNombre())
-                .field("idAmigo", App.usuario.getId())
                 .asJson();
 
             amigos.add(amigo);
