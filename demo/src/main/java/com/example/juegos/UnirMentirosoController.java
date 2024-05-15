@@ -23,25 +23,19 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 public class UnirMentirosoController implements Initializable{
-    
-    @FXML
-    private Button botonPublica;
-    
-    @FXML
-    private Button botonPrivada;
 
     @FXML
     private VBox opcionesVBox;
 
     @FXML
-    private Label etiquetaPasswd;
+    private TextField campoPrivadas;
 
     @FXML
     private TableView<Partida> tablaPartidas;
@@ -129,6 +123,35 @@ public class UnirMentirosoController implements Initializable{
             JSONObject root = (JSONObject) parser.parse(response.getBody().toString());
             boolean estado = (boolean) root.get("status");
             if(estado){
+                App.partida.setId(id);
+                App.setRoot("/com/example/vistas/juegos/mentiroso");
+            }
+        } catch (UnirestException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void unirPartidaPrivada() throws IOException {
+        try {
+            HttpResponse<JsonNode> response = Unirest.post(App.ip + "/juegos/mentiroso/" + campoPrivadas.getText() + "/addUsuario")
+                .field("nombreUsuario", App.usuario.getNombre())
+                .field("usuarioSesion", App.usuario.getNombre())
+                .field("sessionToken", App.tokenSesion)
+                .asJson();
+
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(response.getBody().toString());
+            boolean estado = (boolean) root.get("status");
+            if(estado){
+                App.partida.setId(campoPrivadas.getText());
                 App.setRoot("/com/example/vistas/juegos/mentiroso");
             }
         } catch (UnirestException e) {
@@ -145,7 +168,6 @@ public class UnirMentirosoController implements Initializable{
 
     @FXML
     private void cancelar() throws IOException {
-        // TODO: Eliminar la partida de la BD
         App.setRoot("/com/example/vistas/menusPrincipales/menuPrincipal");
     }
 }

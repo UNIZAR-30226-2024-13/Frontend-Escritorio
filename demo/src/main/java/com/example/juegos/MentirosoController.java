@@ -206,9 +206,14 @@ public class MentirosoController implements Initializable{
             usuarios.clear();
             for (Object object : usuarioArray) {
                 JSONObject infoUsuario = (JSONObject) object;
-                Usuario usuario = new Usuario((String) infoUsuario.get("idUsuario"),
-                                                            (((Long) infoUsuario.get("turnoEnPartida")).intValue()),
-                                                            (String) infoUsuario.get("cartas"));
+                String id = (String) infoUsuario.get("idUsuario");
+                int turno = (((Long) infoUsuario.get("turnoEnPartida")).intValue());
+                String cartas = (String) infoUsuario.get("cartas");
+                
+                Usuario usuario = new Usuario();
+                usuario.setId(id);
+                usuario.setCartas(cartas);
+                usuario.setTurno(turno);
                 usuarios.add(usuario);
             }
         } catch (UnirestException e) {
