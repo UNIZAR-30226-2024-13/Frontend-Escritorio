@@ -306,9 +306,12 @@ public class MentirosoController implements Initializable{
         int n = 0;
         int m = 0;
         cartas.getChildren().clear();
-        // Aqui ten cuidado que puede ser erroneo ya que doy por hecho que el primer usuario de la lista
-        // es el que esta jugando pero no se si alex lo pondrá así
-        String cartasU = usuarios.get(0).getCartas();
+        String cartasU = "";
+        for (Usuario usuario : usuarios) {
+            if (App.usuario.getId() == usuario.getId()) {
+                cartasU = usuario.getCartas();
+            }
+        }
         List<Carta> listaCartas = new Carta().parseStringCartas(cartasU);
         for (Carta carta : listaCartas) {
             Button boton = new Button(carta.toString());
