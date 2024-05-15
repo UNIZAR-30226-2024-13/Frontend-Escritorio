@@ -67,7 +67,7 @@
                 </TableView>
                 <Button fx:id="botonConfirmar" text="Confirmar" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#unirPartida"/>
                 <Button fx:id="botonCancelar" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#cancelar"/>
-                <Button fx:id="botonUnirse" text="Unirse" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#unirPartida"/>
+                <Button fx:id="botonUnirse" text="Unirse" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#unirPartidaPrivada"/>
             </GridPane>
         </VBox>
     </center>
