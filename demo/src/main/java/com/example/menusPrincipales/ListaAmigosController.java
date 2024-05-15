@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import com.example.App;
 import com.example.entidades.Usuario;
 import com.mashape.unirest.http.HttpResponse;
@@ -40,14 +44,13 @@ public class ListaAmigosController implements Initializable{
     @FXML
     private Label labelFichas;
     
-    private ObservableList<Usuario> amigos;
+    private ObservableList<Usuario> amigos = FXCollections.observableArrayList(App.usuario.getAmigos());
     private boolean opcionesVisible = false;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         labelFichas.setText(App.usuario.getDinero() + " Fichas");
         columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        amigos = FXCollections.observableArrayList(App.usuario.getAmigos());
         tablaAmigos.setItems(amigos);
     }
 
@@ -74,19 +77,32 @@ public class ListaAmigosController implements Initializable{
         amigo.setNombre(nombreAmigo.getText());
 
         try {
-            HttpResponse<JsonNode> response = Unirest.post(App.ip + "/usuarios/addAmigo?idUsuario=" + "" + "&idAmigo=")
-                .field("idUsuario", App.usuario.getId())
-                .field("idAmigo", amigo.getNombre())
+            HttpResponse<JsonNode> response = Unirest.post(App.ip + "/usuarios/addAmigo")
+                .field("nombreUsuario", App.usuario.getNombre())
+                .field("nombreAmigo", amigo.getNombre())
+                .field("usuarioSesion", App.usuario.getNombre())
+                .field("sessionToken", App.tokenSesion)
                 .asJson();
 
-            amigos.add(amigo);
-            tablaAmigos.setItems(amigos);
-            return true;
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(response.getBody().toString());
+            boolean estado = (boolean) root.get("status");
+            if(estado){
+                App.usuario.addAmigo(amigo);
+                App.setRoot("/com/example/vistas/menusPrincipales/menuAmigos");
+                return true;
+            }
         } catch (UnirestException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            return false;
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+        return false;
     }
 
     @FXML
@@ -95,18 +111,31 @@ public class ListaAmigosController implements Initializable{
         amigo.setNombre(nombreAmigo.getText());
 
         try {
-            HttpResponse<JsonNode> response = Unirest.delete(App.ip + "/usuarios/deleteAmigo?idUsuario="+ "" + "&idAmigo=")
-                .field("idUsuario", App.usuario.getId())
-                .field("idAmigo", amigo.getNombre())
+            HttpResponse<JsonNode> response = Unirest.delete(App.ip + "/usuarios/deleteAmigo")
+                .field("nombreUsuario", App.usuario.getNombre())
+                .field("nombreAmigo", amigo.getNombre())
+                .field("usuarioSesion", App.usuario.getNombre())
+                .field("sessionToken", App.tokenSesion)
                 .asJson();
-
-            amigos.add(amigo);
-            tablaAmigos.setItems(amigos);
-            return true;
+                
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(response.getBody().toString());
+            boolean estado = (boolean) root.get("status");
+            if(estado){
+                App.usuario.removeAmigo(amigo);
+                App.setRoot("/com/example/vistas/menusPrincipales/menuAmigos");
+                return true;
+            }
         } catch (UnirestException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            return false;
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+        return false;
     }
 }

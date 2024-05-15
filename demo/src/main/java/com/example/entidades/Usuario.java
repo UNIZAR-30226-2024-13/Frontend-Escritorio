@@ -12,6 +12,9 @@ public class Usuario {
     private String pais;
     private List<Usuario> amigos;
     private List<Partida> partidas;
+    
+    private int turno;
+    private String cartas;
 
     public Usuario() {
         this.id = "";
@@ -99,5 +102,51 @@ public class Usuario {
 
     public void setPartidas(List<Partida> partidas) {
         this.partidas = partidas;
+    }
+
+    public void addAmigo(Usuario amigo){
+        this.amigos.add(amigo);
+    }
+
+    public void removeAmigo(Usuario amigo){
+        List<Usuario> listAux = amigos;
+        String nombre = amigo.getNombre();
+        for (Usuario amigoLista : listAux) {
+            if(amigoLista.getNombre().equals(nombre)){
+                listAux.remove(amigoLista);
+                break;
+            }
+        }
+    }
+
+    public void addPartida(Partida partida){
+        this.partidas.add(partida);
+    }
+
+    public void removePartida(Partida partida){
+        List<Partida> listAux = partidas;
+        String idPartida = partida.getId();
+        for (Partida partidaAux : listAux) {
+            if(partidaAux.getId().equals(idPartida)){
+                listAux.remove(partidaAux);
+                break;
+            }
+        }
+    }
+
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+
+    public String getCartas() {
+        return cartas;
+    }
+
+    public void setCartas(String cartas) {
+        this.cartas = cartas;
     }
 }

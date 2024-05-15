@@ -2,9 +2,11 @@ package com.example;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -194,8 +196,32 @@ public class RegistroController implements Initializable {
             aux.setEmail((String) datos.get("email"));
             aux.setDinero(((Long) datos.get("fichas")).intValue());
             aux.setPais((String) datos.get("pais"));
-            aux.setAmigos((List<Usuario>) datos.get("amigos"));
-            aux.setPartidas((List<Partida>) datos.get("partidas"));
+
+            JSONArray jsonArray = (JSONArray)datos.get("amigos");
+            if(jsonArray != null && !jsonArray.isEmpty()){
+                List<Usuario> listaAux = new ArrayList<>();
+                for (int i = 0; i < jsonArray.size(); i++) {
+                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                    String nombreAmigo = (String) jsonObject.get("nombre");
+                    Usuario amigoAux = new Usuario();
+                    amigoAux.setNombre(nombreAmigo);
+                    listaAux.add(amigoAux);
+                }
+                aux.setAmigos(listaAux);
+            }
+
+            jsonArray = (JSONArray)datos.get("partidas");
+            if(jsonArray != null && !jsonArray.isEmpty()){
+                List<Partida> listaPAux = new ArrayList<>();
+                for (int i = 0; i < jsonArray.size(); i++) {
+                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                    String iPartida = (String) jsonObject.get("partidas");
+                    Partida partidaAux = new Partida();
+                    partidaAux.setId(iPartida);
+                    listaPAux.add(partidaAux);
+                }
+                aux.setPartidas(listaPAux);
+            }
             App.usuario = aux;
 
             JSONObject usuarioLogJson = new JSONObject();

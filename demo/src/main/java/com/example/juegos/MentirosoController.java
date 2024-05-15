@@ -12,11 +12,8 @@ import org.json.simple.parser.JSONParser;
 
 import com.example.App;
 import com.example.entidades.Carta;
-import com.example.entidades.CartaFrancesa;
 import com.example.entidades.Mentiroso;
-import com.example.entidades.Poker;
 import com.example.entidades.Usuario;
-import com.example.entidades.UsuarioPartida;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -68,7 +65,7 @@ public class MentirosoController implements Initializable{
 
     private List<Carta> listaCartasMesa = new ArrayList<>();
 
-    private List<UsuarioPartida> usuarios = new ArrayList<>();
+    private List<Usuario> usuarios = new ArrayList<>();
 
     private List<Button> botonesSeleccionados = new ArrayList<>();
 
@@ -304,7 +301,7 @@ public class MentirosoController implements Initializable{
         cartas.getChildren().clear();
         // Aqui ten cuidado que puede ser erroneo ya que doy por hecho que el primer usuario de la lista
         // es el que esta jugando pero no se si alex lo pondrá así
-        String cartasU = usuarios.get(0).getCartasUsuario();
+        String cartasU = usuarios.get(0).getCartas();
         List<Carta> listaCartas = new Carta().parseStringCartas(cartasU);
         for (Carta carta : listaCartas) {
             Button boton = new Button(carta.toString());
