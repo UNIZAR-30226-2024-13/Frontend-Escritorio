@@ -187,7 +187,6 @@ public class MentirosoController implements Initializable{
 
     private void recogerMentiroso() {
         try {
-            System.out.println(App.usuario.getNombre());
             HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/mentiroso/getMentiroso/" + App.partida.getId() + "?usuarioSesion=" + App.usuario.getNombre() + "&sessionToken="+ App.tokenSesion).asJson();
             JSONParser parser = new JSONParser();
             JSONObject root = (JSONObject) parser.parse(apiResponse.getBody().toString());
@@ -227,13 +226,16 @@ public class MentirosoController implements Initializable{
     private void mandarMentiroso(String accion) {
         try {
             JSONObject mentirosoJson = new JSONObject();
+            System.out.println(cartasSeleccionadas);
             mentirosoJson.put("cartas", new Carta().parseCartasString(cartasSeleccionadas));
+            System.out.println(new Carta().parseCartasString(cartasSeleccionadas));
             mentirosoJson.put("accion", accion);
             mentirosoJson.put("numero", partida.getNumeroActual());
             HttpResponse<JsonNode> response = Unirest.post(App.ip + "/juegos/mentiroso/" + App.partida.getId() + "/jugada?sessionToken=" + App.tokenSesion + "&usuarioSesion=" + App.usuario.getNombre())
             .header("Content-Type", "application/json")
             .body(mentirosoJson.toString())
             .asJson();
+            System.out.println("Respuesta:" + response);
         } catch (UnirestException e) {
             e.printStackTrace();
         } 
