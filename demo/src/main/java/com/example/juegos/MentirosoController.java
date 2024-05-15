@@ -267,6 +267,7 @@ public class MentirosoController implements Initializable{
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void mandarMentiroso() {
         try {
             JSONObject mentirosoJson = new JSONObject();
