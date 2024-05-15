@@ -48,6 +48,12 @@ public class Usuario {
 
     }
 
+    public Usuario(String id, int turno, String cartas) {
+        this.id = id;
+        this.turno = turno;
+        this.cartas = cartas;
+    }
+
     public String getNombre() {
         return nombre;
     }

@@ -206,7 +206,7 @@ public class MentirosoController implements Initializable{
             usuarios.clear();
             for (Object object : usuarioArray) {
                 JSONObject infoUsuario = (JSONObject) object;
-                UsuarioPartida usuario = new UsuarioPartida((String) infoUsuario.get("idUsuario"),
+                Usuario usuario = new Usuario((String) infoUsuario.get("idUsuario"),
                                                             (((Long) infoUsuario.get("turnoEnPartida")).intValue()),
                                                             (String) infoUsuario.get("cartas"));
                 usuarios.add(usuario);
@@ -235,9 +235,9 @@ public class MentirosoController implements Initializable{
     }
 
     private void actualizarVista() {
-        for (UsuarioPartida usuario : usuarios) {
-            int turno = usuario.getTurnoUsuario();
-            String cartas = usuario.getCartasUsuario();
+        for (Usuario usuario : usuarios) {
+            int turno = usuario.getTurno();
+            String cartas = usuario.getCartas();
             int numCartas = new Carta().parseStringCartas(cartas).size();
             if (turno == partida.getTurno()) {
                 if (turno == 1) {
