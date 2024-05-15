@@ -82,12 +82,223 @@ public class MentirosoController implements Initializable{
 
     private Mentiroso partida = new Mentiroso();
 
+    private Timeline timeline;
+
    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        recogerMentiroso();
-        App.partidaPasswd = partida.getId();
+        timeline = new Timeline(
+            new KeyFrame(Duration.seconds(5), event -> {
+                recogerMentiroso();
+                if (usuarios.size() == 4) {
+                    inicializar();
+                    timeline.stop();
+                }
+            })
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
 
+    @FXML
+    private void pausarPartida() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/vistas/juegos/votacion.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root, 600, 450);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/example/imgs/logo.jpg")));
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    @FXML
+    private void switchToMainMenu() throws IOException {
+        App.setRoot("/com/example/vistas/menusPrincipales/menuPrincipal");
+    }
+
+    @SuppressWarnings("static-access")
+    @FXML
+    private void ponerCarta() throws IOException{ 
+        while (botones < cartasSeleccionadas.size()) {
+            Button button = new Button(cartasSeleccionadas.get(botones).toString());
+            button.getStyleClass().add(App.estiloCartas);
+            ImageView imagenRev = new ImageView();
+
+            Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
+    
+            imagenRev.setImage(imagen);
+            imagenRev.setFitWidth(40);
+            imagenRev.setFitHeight(60);
+
+            cartasMesa.add(imagenRev, botones, 0);
+            cartas.getChildren().remove(botonesSeleccionados.get(botones));
+            columnasCartas.add(cartas.getColumnIndex(botonesSeleccionados.get(botones)));
+            filasCartas.add(cartas.getRowIndex(botonesSeleccionados.get(botones)));
+            botones++;
+        } 
+        jugadaAnterior.setText("Ha tirado " + cartasSeleccionadas.size() + " cartas del número " + numeroAJugar);
+        partida.setCartasUltimaJugada(cartasSeleccionadas.size());
+        if (primerTurno) {
+            pedirNumero();
+            primerTurno = false;
+            mandarMentiroso("");     
+        }
+        else {
+            mandarMentiroso("mentir");
+        }
+    }
+
+    private void pedirNumero() throws IOException{
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/vistas/juegos/ventanaMentiroso.fxml"));
+        Parent root = fxmlLoader.load();
+        VentanaMentirosoController controller = fxmlLoader.getController(); // Obtener el controlador
+        Scene scene = new Scene(root, 600, 300);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/example/imgs/logo.jpg")));
+        stage.setScene(scene);
+        stage.showAndWait();
+        numeroAJugar = controller.getBoton();
+        partida.setNumeroActual(numeroAJugar);
+    }
+
+
+    @FXML
+    private void levantarCarta() {
+        for (int i = 0; i < cartasSeleccionadas.size(); i++) {
+            Carta carta = cartasSeleccionadas.get(i);
+            Button button = new Button(carta.toString());
+            button.getStyleClass().add(App.estiloCartas);
+            button.setOnAction(event -> {
+                button.getStyleClass().remove(App.estiloCartas);
+                button.getStyleClass().add("carta-button-clicked");
+                botonesSeleccionados.add(button);
+                cartasSeleccionadas.add(carta);
+            });
+            cartas.add(button, columnasCartas.get(i), filasCartas.get(i));
+            cartasMesa.getChildren().clear();
+        }
+        jugadaAnterior.setText("");
+        cartasSeleccionadas.clear();
+        botonesSeleccionados.clear();
+        columnasCartas.clear();
+        filasCartas.clear();
+        primerTurno = true;
+        botones = 0;
+        partida.setCartasUltimaJugada(0);
+        mandarMentiroso("levantar");
+    }
+
+    private void recogerMentiroso() {
+        try {
+            System.out.println(App.usuario.getNombre());
+            HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/mentiroso/getMentiroso/" + App.partida.getId() + "?usuarioSesion=" + App.usuario.getNombre() + "&sessionToken="+ App.tokenSesion).asJson();
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(apiResponse.getBody().toString());
+            System.out.println(root);
+            JSONObject datos = (JSONObject) root.get("datos");
+
+            partida.setId((String) datos.get("id"));
+            partida.setTurno(((Long) datos.get("turno")).intValue());
+            partida.setActiva((Boolean) datos.get("activa"));
+            partida.setPrivada((Boolean) datos.get("privada"));
+            partida.setNumeroActual(((Long) datos.get("numero")).intValue());
+            partida.setCartasMesa((String) datos.get("cartasMesa"));
+            partida.setCartasUltimaJugada(((Long) datos.get("cartasUltimaJugada")).intValue());
+
+            usuarioArray = (JSONArray) datos.get("guarda");
+            usuarios.clear();
+            for (Object object : usuarioArray) {
+                JSONObject infoUsuario = (JSONObject) object;
+                UsuarioPartida usuario = new UsuarioPartida((String) infoUsuario.get("idUsuario"),
+                                                            (((Long) infoUsuario.get("turnoEnPartida")).intValue()),
+                                                            (String) infoUsuario.get("cartas"));
+                usuarios.add(usuario);
+            }
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void mandarMentiroso(String accion) {
+        try {
+            JSONObject mentirosoJson = new JSONObject();
+            mentirosoJson.put("cartas", new Carta().parseCartasString(cartasSeleccionadas));
+            mentirosoJson.put("accion", accion);
+            mentirosoJson.put("numero", partida.getNumeroActual());
+            HttpResponse<JsonNode> response = Unirest.post(App.ip + "/juegos/mentiroso/" + App.partida.getId() + "/jugada?sessionToken=" + App.tokenSesion + "&usuarioSesion=" + App.usuario.getNombre())
+            .header("Content-Type", "application/json")
+            .body(mentirosoJson.toString())
+            .asJson();
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        } 
+    }
+
+    private void actualizarVista() {
+        for (UsuarioPartida usuario : usuarios) {
+            int turno = usuario.getTurnoUsuario();
+            String cartas = usuario.getCartasUsuario();
+            int numCartas = new Carta().parseStringCartas(cartas).size();
+            if (turno == partida.getTurno()) {
+                if (turno == 1) {
+                    cartasUsuario4.getChildren().clear();
+                    for (int m = 0; m < numCartas; m++) {
+                        ImageView imagenRev = new ImageView();
+
+                        Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
+                
+                        imagenRev.setImage(imagen);
+                        imagenRev.setFitWidth(40);
+                        imagenRev.setFitHeight(60);
+                        cartasUsuario4.add(imagenRev, m, 0);
+                    }
+                }
+                else if (turno == 2) {
+                    cartasUsuario2.getChildren().clear();
+                    for (int m = 0; m < numCartas; m++) {
+                        ImageView imagenRev = new ImageView();
+
+                        Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
+                
+                        imagenRev.setImage(imagen);
+                        imagenRev.setFitWidth(40);
+                        imagenRev.setFitHeight(60);
+                        cartasUsuario2.add(imagenRev, m, 0);
+                    }
+                }
+                else if (turno == 3) {
+                    cartasUsuario3.getChildren().clear();
+                    for (int m = 0; m < numCartas; m++) {
+                        ImageView imagenRev = new ImageView();
+
+                        Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
+                
+                        imagenRev.setImage(imagen);
+                        imagenRev.setFitWidth(40);
+                        imagenRev.setFitHeight(60);
+                        cartasUsuario3.add(imagenRev, m, 0);
+                    }
+                }
+            }
+        }
+        listaCartasMesa = new Carta().parseStringCartas(partida.getCartasMesa());
+        cartasMesa.getChildren().clear();
+        for (int m = 0; m < listaCartasMesa.size(); m++) {
+            ImageView imagenRev = new ImageView();
+
+            Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
+    
+            imagenRev.setImage(imagen);
+            imagenRev.setFitWidth(40);
+            imagenRev.setFitHeight(60);
+            cartasMesa.add(imagenRev, m, 0);
+        }
+    }
+
+    private void inicializar() {
         int n = 0;
         int m = 0;
         cartas.getChildren().clear();
@@ -142,7 +353,8 @@ public class MentirosoController implements Initializable{
         cartasUsuario3.setVgap(3);
         cartasUsuario4.setVgap(3);
         cartasMesa.setHgap(10);
-        Timeline timeline = new Timeline(
+
+        Timeline timeline2 = new Timeline(
             new KeyFrame(Duration.seconds(5), event -> {
                 int turno = partida.getTurno();
                 recogerMentiroso();
@@ -151,189 +363,7 @@ public class MentirosoController implements Initializable{
                 }
             })
         );
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-    }
-
-    @FXML
-    private void pausarPartida() throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/vistas/juegos/votacion.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root, 600, 450);
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/example/imgs/logo.jpg")));
-        stage.setScene(scene);
-        stage.showAndWait();
-    }
-
-    @FXML
-    private void switchToMainMenu() throws IOException {
-        App.setRoot("/com/example/vistas/menusPrincipales/menuPrincipal");
-    }
-
-    @SuppressWarnings("static-access")
-    @FXML
-    private void ponerCarta() throws IOException{ 
-        while (botones < cartasSeleccionadas.size()) {
-            Button button = new Button(cartasSeleccionadas.get(botones).toString());
-            button.getStyleClass().add(App.estiloCartas);
-            cartasMesa.add(button, botones, 0);
-            cartas.getChildren().remove(botonesSeleccionados.get(botones));
-            columnasCartas.add(cartas.getColumnIndex(botonesSeleccionados.get(botones)));
-            filasCartas.add(cartas.getRowIndex(botonesSeleccionados.get(botones)));
-            botones++;
-        } 
-        if (primerTurno) {
-            pedirNumero();
-            primerTurno = false;
-        }
-        jugadaAnterior.setText("Ha tirado " + cartasSeleccionadas.size() + " cartas del número " + numeroAJugar);
-        partida.setCartasUltimaJugada(cartasSeleccionadas.size());
-        mandarMentiroso();     
-    }
-
-    private void pedirNumero() throws IOException{
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/vistas/juegos/ventanaMentiroso.fxml"));
-        Parent root = fxmlLoader.load();
-        VentanaMentirosoController controller = fxmlLoader.getController(); // Obtener el controlador
-        Scene scene = new Scene(root, 600, 300);
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/example/imgs/logo.jpg")));
-        stage.setScene(scene);
-        stage.showAndWait();
-        numeroAJugar = controller.getBoton();
-        partida.setNumeroActual(numeroAJugar);
-    }
-
-
-    @FXML
-    private void levantarCarta() {
-        for (int i = 0; i < cartasSeleccionadas.size(); i++) {
-            Carta carta = cartasSeleccionadas.get(i);
-            Button button = new Button(carta.toString());
-            button.getStyleClass().add(App.estiloCartas);
-            button.setOnAction(event -> {
-                button.getStyleClass().remove(App.estiloCartas);
-                button.getStyleClass().add("carta-button-clicked");
-                botonesSeleccionados.add(button);
-                cartasSeleccionadas.add(carta);
-            });
-            cartas.add(button, columnasCartas.get(i), filasCartas.get(i));
-            cartasMesa.getChildren().clear();
-        }
-        jugadaAnterior.setText("");
-        cartasSeleccionadas.clear();
-        botonesSeleccionados.clear();
-        columnasCartas.clear();
-        filasCartas.clear();
-        primerTurno = true;
-        botones = 0;
-        partida.setCartasUltimaJugada(0);
-        mandarMentiroso();
-    }
-
-    private void recogerMentiroso() {
-        try {
-            HttpResponse<JsonNode> apiResponse = Unirest.get(App.ip + "/juegos/getMentiroso" + partida.getId()).asJson();
-            JSONParser parser = new JSONParser();
-            JSONObject root = (JSONObject) parser.parse(apiResponse.getBody().toString());
-            // Estas tres lineas no son asi, ahi un se sabe el formato de los datos
-            JSONObject datos = (JSONObject) root.get("datos");
-
-            partida.setId((String) datos.get("id"));
-            partida.setTurno(((Long) datos.get("turno")).intValue());
-            partida.setUsuarioGanador(((Long) datos.get("usuarioGanador")).intValue());
-            partida.setActiva((Boolean) datos.get("activa"));
-            partida.setPrivada((Boolean) datos.get("privada"));
-            partida.setNumeroActual(((Long) datos.get("numero")).intValue());
-            partida.setCartasMesa((String) datos.get("cartasMesa"));
-            partida.setCartasUltimaJugada(((Long) datos.get("cartasUltimaJugada")).intValue());
-
-            usuarioArray = (JSONArray) datos.get("guarda");
-            usuarios.clear();
-            for (Object object : usuarioArray) {
-                JSONObject infoUsuario = (JSONObject) object;
-                UsuarioPartida usuario = new UsuarioPartida((String) infoUsuario.get("idUsuario"),
-                                                            (String) infoUsuario.get("idPartida"),
-                                                            (((Long) infoUsuario.get("turnoUsuario")).intValue()),
-                                                            (String) infoUsuario.get("cartasUsuario"));
-                usuarios.add(usuario);
-            }
-            listaCartasMesa = new Carta().parseStringCartas(partida.getCartasMesa());
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private void mandarMentiroso() {
-        try {
-            JSONObject mentirosoJson = new JSONObject();
-            mentirosoJson.put("ID", partida.getId());
-            mentirosoJson.put("turno", partida.getTurno());
-            mentirosoJson.put("numero_actual", partida.getNumeroActual());
-            mentirosoJson.put("usuarioGanador", partida.getUsuarioGanador());
-            mentirosoJson.put("activa", partida.getActiva());
-            mentirosoJson.put("privada", partida.getPrivada());
-            mentirosoJson.put("ultimas_cartas", partida.getCartasUltimaJugada());
-            mentirosoJson.put("cartas_mesa", partida.getCartasMesa());
-            HttpResponse<JsonNode> response = Unirest.post(App.ip + "/juegos/addMentiroso")
-            .header("Content-Type", "application/json")
-            .body(mentirosoJson.toString())
-            .asJson();
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        } 
-    }
-
-    private void actualizarVista() {
-        for (UsuarioPartida usuario : usuarios) {
-            int turno = usuario.getTurnoUsuario();
-            String cartas = usuario.getCartasUsuario();
-            int numCartas = new Carta().parseStringCartas(cartas).size();
-            if ( turno == partida.getTurno()) {
-                if (turno == 1) {
-                    cartasUsuario4.getChildren().clear();
-                    for (int m = 0; m < numCartas; m++) {
-                        ImageView imagenRev = new ImageView();
-
-                        Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
-                
-                        imagenRev.setImage(imagen);
-                        imagenRev.setFitWidth(40);
-                        imagenRev.setFitHeight(60);
-                        cartasUsuario4.add(imagenRev, m, 0);
-                    }
-                }
-                else if (turno == 2) {
-                    cartasUsuario2.getChildren().clear();
-                    for (int m = 0; m < numCartas; m++) {
-                        ImageView imagenRev = new ImageView();
-
-                        Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
-                
-                        imagenRev.setImage(imagen);
-                        imagenRev.setFitWidth(40);
-                        imagenRev.setFitHeight(60);
-                        cartasUsuario2.add(imagenRev, m, 0);
-                    }
-                }
-                else if (turno == 3) {
-                    cartasUsuario3.getChildren().clear();
-                    for (int m = 0; m < numCartas; m++) {
-                        ImageView imagenRev = new ImageView();
-
-                        Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
-                
-                        imagenRev.setImage(imagen);
-                        imagenRev.setFitWidth(40);
-                        imagenRev.setFitHeight(60);
-                        cartasUsuario3.add(imagenRev, m, 0);
-                    }
-                }
-            }
-        }
+        timeline2.setCycleCount(Timeline.INDEFINITE);
+        timeline2.play();
     }
 }
