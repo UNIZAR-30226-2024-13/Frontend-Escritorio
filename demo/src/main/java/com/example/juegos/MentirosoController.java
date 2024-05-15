@@ -133,8 +133,6 @@ public class MentirosoController implements Initializable{
             filasCartas.add(cartas.getRowIndex(botonesSeleccionados.get(botones)));
             botones++;
         } 
-        jugadaAnterior.setText("Ha tirado " + cartasSeleccionadas.size() + " cartas del número " + numeroAJugar);
-        partida.setCartasUltimaJugada(cartasSeleccionadas.size());
         if (primerTurno) {
             pedirNumero();
             primerTurno = false;
@@ -143,6 +141,8 @@ public class MentirosoController implements Initializable{
         else {
             mandarMentiroso("mentir");
         }
+        jugadaAnterior.setText("Ha tirado " + cartasSeleccionadas.size() + " cartas del número " + partida.getNumeroActual());
+        partida.setCartasUltimaJugada(cartasSeleccionadas.size());
     }
 
     private void pedirNumero() throws IOException{
@@ -239,11 +239,11 @@ public class MentirosoController implements Initializable{
 
     private void actualizarVista() {
         for (Usuario usuario : usuarios) {
-            int turno = usuario.getTurno();
-            String cartas = usuario.getCartas();
-            int numCartas = new Carta().parseStringCartas(cartas).size();
-            if (turno == partida.getTurno()) {
-                if (turno == 1) {
+            if (usuario.getId() != App.usuario.getId()) {
+                int turno = usuario.getTurno();
+                String cartas = usuario.getCartas();
+                int numCartas = new Carta().parseStringCartas(cartas).size();
+                if (turno == 2) {
                     cartasUsuario4.getChildren().clear();
                     for (int m = 0; m < numCartas; m++) {
                         ImageView imagenRev = new ImageView();
@@ -253,10 +253,10 @@ public class MentirosoController implements Initializable{
                         imagenRev.setImage(imagen);
                         imagenRev.setFitWidth(40);
                         imagenRev.setFitHeight(60);
-                        cartasUsuario4.add(imagenRev, m, 0);
+                        cartasUsuario4.add(imagenRev, 0, m);
                     }
                 }
-                else if (turno == 2) {
+                else if (turno == 3) {
                     cartasUsuario2.getChildren().clear();
                     for (int m = 0; m < numCartas; m++) {
                         ImageView imagenRev = new ImageView();
@@ -269,7 +269,7 @@ public class MentirosoController implements Initializable{
                         cartasUsuario2.add(imagenRev, m, 0);
                     }
                 }
-                else if (turno == 3) {
+                else if (turno == 0) {
                     cartasUsuario3.getChildren().clear();
                     for (int m = 0; m < numCartas; m++) {
                         ImageView imagenRev = new ImageView();
@@ -279,12 +279,64 @@ public class MentirosoController implements Initializable{
                         imagenRev.setImage(imagen);
                         imagenRev.setFitWidth(40);
                         imagenRev.setFitHeight(60);
-                        cartasUsuario3.add(imagenRev, m, 0);
+                        cartasUsuario3.add(imagenRev, 0, m);
                     }
                 }
             }
+            /* 
+            int turno = usuario.getTurno();
+            String cartas = usuario.getCartas();
+            int numCartas = new Carta().parseStringCartas(cartas).size();
+            if (turno == partida.getTurno()) {
+                if (turno == 2) {
+                    cartasUsuario4.getChildren().clear();
+                    for (int m = 0; m < numCartas; m++) {
+                        ImageView imagenRev = new ImageView();
+
+                        Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
+                
+                        imagenRev.setImage(imagen);
+                        imagenRev.setFitWidth(40);
+                        imagenRev.setFitHeight(60);
+                        cartasUsuario4.add(imagenRev, 0, m);
+                    }
+                }
+                else if (turno == 3) {
+                    cartasUsuario2.getChildren().clear();
+                    for (int m = 0; m < numCartas; m++) {
+                        ImageView imagenRev = new ImageView();
+
+                        Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
+                
+                        imagenRev.setImage(imagen);
+                        imagenRev.setFitWidth(40);
+                        imagenRev.setFitHeight(60);
+                        cartasUsuario2.add(imagenRev, m, 0);
+                    }
+                }
+                else if (turno == 0) {
+                    cartasUsuario3.getChildren().clear();
+                    for (int m = 0; m < numCartas; m++) {
+                        ImageView imagenRev = new ImageView();
+
+                        Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
+                
+                        imagenRev.setImage(imagen);
+                        imagenRev.setFitWidth(40);
+                        imagenRev.setFitHeight(60);
+                        cartasUsuario3.add(imagenRev, 0, m);
+                    }
+                }
+            }
+            */
         }
         listaCartasMesa = new Carta().parseStringCartas(partida.getCartasMesa());
+        if (listaCartasMesa.size() == 0) {
+            primerTurno = true;
+        }
+        else if (listaCartasMesa.size() != 0) {
+            primerTurno = false;
+        }
         cartasMesa.getChildren().clear();
         for (int m = 0; m < listaCartasMesa.size(); m++) {
             ImageView imagenRev = new ImageView();
@@ -295,7 +347,9 @@ public class MentirosoController implements Initializable{
             imagenRev.setFitWidth(40);
             imagenRev.setFitHeight(60);
             cartasMesa.add(imagenRev, m, 0);
-        }
+        } 
+        jugadaAnterior.setText("");
+        jugadaAnterior.setText("Ha tirado " + partida.getCartasUltimaJugada() + " cartas del número " + partida.getNumeroActual());
     }
 
     private void inicializar() {
@@ -361,7 +415,7 @@ public class MentirosoController implements Initializable{
             new KeyFrame(Duration.seconds(5), event -> {
                 int turno = partida.getTurno();
                 recogerMentiroso();
-                if (turno != partida.getTurno() && turno != 0) {
+                if (turno != partida.getTurno()) {
                     actualizarVista();
                 }
             })
