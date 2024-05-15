@@ -100,4 +100,19 @@ public class Usuario {
     public void setPartidas(List<Partida> partidas) {
         this.partidas = partidas;
     }
+
+    public void addAmigo(Usuario amigo){
+        this.amigos.add(amigo);
+    }
+
+    public void removeAmigo(Usuario amigo){
+        List<Usuario> listAux = amigos;
+        String nombre = amigo.getNombre();
+        for (Usuario amigoLista : listAux) {
+            if(amigoLista.getNombre().equals(nombre)){
+                listAux.remove(amigoLista);
+                break;
+            }
+        }
+    }
 }
