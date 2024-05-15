@@ -7,15 +7,22 @@ public class Mentiroso {
     private String cartasMesa;
     private int numeroActual;
     private int cartasUltimaJugada;
+    private int usuarioGanador;
+    private boolean activa;
+    private boolean privada;
 
     public Mentiroso() {}
 
-    public Mentiroso(String id, int turno, String cartasMesa, int numeroActual, int cartasUltimaJugada) {
+    public Mentiroso(String id, int turno, String cartasMesa, int numeroActual, int cartasUltimaJugada,
+            int usuarioGanador, boolean activa, boolean privada) {
         this.id = id;
         this.turno = turno;
         this.cartasMesa = cartasMesa;
         this.numeroActual = numeroActual;
         this.cartasUltimaJugada = cartasUltimaJugada;
+        this.usuarioGanador = usuarioGanador;
+        this.activa = activa;
+        this.privada = privada;
     }
 
     public String getId() {
@@ -32,6 +39,30 @@ public class Mentiroso {
 
     public void setTurno(int turno) {
         this.turno = turno;
+    }
+
+    public int getUsuarioGanador() {
+        return usuarioGanador;
+    }
+
+    public void setUsuarioGanador(int usuarioGanador) {
+        this.usuarioGanador = usuarioGanador;
+    }
+
+    public boolean getActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+    public boolean getPrivada() {
+        return privada;
+    }
+
+    public void setPrivada(boolean privada) {
+        this.privada = privada;
     }
 
     public String getCartasMesa() {
