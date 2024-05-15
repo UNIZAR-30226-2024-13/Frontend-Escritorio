@@ -12,11 +12,8 @@ import org.json.simple.parser.JSONParser;
 
 import com.example.App;
 import com.example.entidades.Carta;
-import com.example.entidades.CartaFrancesa;
 import com.example.entidades.Mentiroso;
-import com.example.entidades.Poker;
 import com.example.entidades.Usuario;
-import com.example.entidades.UsuarioPartida;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -68,7 +65,7 @@ public class MentirosoController implements Initializable{
 
     private List<Carta> listaCartasMesa = new ArrayList<>();
 
-    private List<UsuarioPartida> usuarios = new ArrayList<>();
+    private List<Usuario> usuarios = new ArrayList<>();
 
     private List<Button> botonesSeleccionados = new ArrayList<>();
 
@@ -86,14 +83,13 @@ public class MentirosoController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         recogerMentiroso();
-        App.partidaPasswd = partida.getId();
 
         int n = 0;
         int m = 0;
         cartas.getChildren().clear();
         // Aqui ten cuidado que puede ser erroneo ya que doy por hecho que el primer usuario de la lista
         // es el que esta jugando pero no se si alex lo pondrá así
-        String cartasU = usuarios.get(0).getCartasUsuario();
+        String cartasU = usuarios.get(0).getCartas();
         List<Carta> listaCartas = new Carta().parseStringCartas(cartasU);
         for (Carta carta : listaCartas) {
             Button boton = new Button(carta.toString());
@@ -253,10 +249,17 @@ public class MentirosoController implements Initializable{
             usuarios.clear();
             for (Object object : usuarioArray) {
                 JSONObject infoUsuario = (JSONObject) object;
-                UsuarioPartida usuario = new UsuarioPartida((String) infoUsuario.get("idUsuario"),
-                                                            (String) infoUsuario.get("idPartida"),
-                                                            (((Long) infoUsuario.get("turnoUsuario")).intValue()),
-                                                            (String) infoUsuario.get("cartasUsuario"));
+                String idUsuario = (String)infoUsuario.get("idUsuario");
+                String idPartida = (String)infoUsuario.get("idPartida");
+                int turno = (((Long)infoUsuario.get("turnoUsuario")).intValue());
+                String cartas = (String) infoUsuario.get("cartasUsuario");
+
+                Usuario usuario = new Usuario();
+                usuario.setId(idUsuario);
+                usuario.setTurno(turno);
+                usuario.setCartas(cartas);
+                App.partida.setId(idPartida);
+                usuario.addPartida(App.partida);
                 usuarios.add(usuario);
             }
             listaCartasMesa = new Carta().parseStringCartas(partida.getCartasMesa());
@@ -280,18 +283,18 @@ public class MentirosoController implements Initializable{
             mentirosoJson.put("ultimas_cartas", partida.getCartasUltimaJugada());
             mentirosoJson.put("cartas_mesa", partida.getCartasMesa());
             HttpResponse<JsonNode> response = Unirest.post(App.ip + "/juegos/addMentiroso")
-            .header("Content-Type", "application/json")
-            .body(mentirosoJson.toString())
-            .asJson();
+                .header("Content-Type", "application/json")
+                .body(mentirosoJson.toString())
+                .asJson();
         } catch (UnirestException e) {
             e.printStackTrace();
         } 
     }
 
     private void actualizarVista() {
-        for (UsuarioPartida usuario : usuarios) {
-            int turno = usuario.getTurnoUsuario();
-            String cartas = usuario.getCartasUsuario();
+        for (Usuario usuario : usuarios) {
+            int turno = usuario.getTurno();
+            String cartas = usuario.getCartas();
             int numCartas = new Carta().parseStringCartas(cartas).size();
             if ( turno == partida.getTurno()) {
                 if (turno == 1) {
