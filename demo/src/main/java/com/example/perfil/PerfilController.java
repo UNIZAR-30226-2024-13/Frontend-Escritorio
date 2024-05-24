@@ -9,17 +9,22 @@ import com.example.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class PerfilController implements Initializable{
 
     @FXML
     private VBox opcionesVBox;
+    
+    @FXML
+    private Label labelFichas;
 
     private boolean opcionesVisible = false;
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        labelFichas.setText(App.usuario.getDinero() + " Fichas");
     }
 
     @FXML
@@ -45,6 +50,16 @@ public class PerfilController implements Initializable{
     @FXML
     private void switchToCambiarFoto() throws IOException {
         App.setRoot("/com/example/vistas/perfil/cambiarFoto");
+    }
+
+    @FXML
+    private void switchToCambiarCartas() throws IOException {
+        App.setRoot("/com/example/vistas/perfil/cambiarCartas");
+    }
+
+    @FXML
+    private void switchToCambiarReverso() throws IOException {
+        App.setRoot("/com/example/vistas/perfil/cambiarReverso");
     }
 
     @FXML

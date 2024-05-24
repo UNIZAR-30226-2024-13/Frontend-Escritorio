@@ -24,7 +24,7 @@
 
         <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="white-label"/>
         <TextField fx:id="campoEmailReg" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        <Label fx:id="marcaErrorEmail" text="*" GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="error-label" visible= "false" />
+        <Label fx:id="marcaErrorEmail" text="*" GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="error-label" visible= "false" />      
 
         <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="white-label"/>
         <PasswordField fx:id="campoContraseñaReg" GridPane.columnIndex="1" GridPane.rowIndex="3"/>

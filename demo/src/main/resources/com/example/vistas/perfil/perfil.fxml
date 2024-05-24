@@ -29,7 +29,7 @@
                 </graphic>
             </Button>
             <Label text="CartaVerse" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="LEFT" styleClass="white-label"/>
-            <Label text="400 Fichas" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" styleClass="white-label"/>
+            <Label fx:id="labelFichas" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" styleClass="white-label"/>
             <Button fx:id="botonPerfil" GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#mostrarOcultarOpciones" styleClass="image-button">
                 <graphic>
                     <ImageView fitWidth="70" fitHeight="70">
@@ -45,6 +45,8 @@
                 <Button fx:id="botonCambiarUsuario" text="Cambiar Usuario" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#switchToCambiarUsuario" />
                 <Button fx:id="botonCambiarContraseña" text="Cambiar Contraseña" GridPane.columnIndex="0" GridPane.rowIndex="1" onAction="#switchToCambiarContrasegna" />
                 <Button fx:id="botonCambiarFoto" text="Cambiar Foto Perfil" GridPane.columnIndex="0" GridPane.rowIndex="2" onAction="#switchToCambiarFoto" />
+                <Button fx:id="botonCambiarCartas" text="Cambiar color cartas" GridPane.columnIndex="0" GridPane.rowIndex="3" onAction="#switchToCambiarCartas" />
+                <Button fx:id="botonCambiarReverso" text="Cambiar reverso cartas" GridPane.columnIndex="0" GridPane.rowIndex="4" onAction="#switchToCambiarReverso" />
             </GridPane>
         </VBox>
     </center>

@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.Carta;
-import com.example.CartaFrancesa;
+import com.example.entidades.CartaFrancesa;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -75,11 +74,11 @@ public class BlackjackController implements Initializable{
             for (CartaFrancesa carta : listaCartas) {
                 if (numCartas == 0 || numCartas == 1) {
                     Button boton = new Button(carta.toString());
-                    boton.getStyleClass().add("carta-button");
+                    boton.getStyleClass().add(App.estiloCartas);
                     cartas.add(boton, numCartas, 0);
 
                     ImageView imagenRev = new ImageView();
-                    Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
+                    Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
             
                     imagenRev.setImage(imagen);
                     imagenRev.setFitWidth(40);
@@ -125,7 +124,7 @@ public class BlackjackController implements Initializable{
         CartaFrancesa carta = new CartaFrancesa();
         carta = listaCartas.get(numCartas);
         Label label = new Label(carta.toString());
-        label.getStyleClass().add("carta-button");
+        label.getStyleClass().add(App.estiloCartas);
         cartas.add(label, numCartas, 0);
         numCartas++;
     }

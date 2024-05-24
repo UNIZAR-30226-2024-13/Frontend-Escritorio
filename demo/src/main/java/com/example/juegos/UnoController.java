@@ -7,22 +7,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.CartaUno;
-import com.example.juegos.VentanaMentirosoController;
-
+import com.example.entidades.CartaUno;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Pagination;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
 
 public class UnoController implements Initializable{
@@ -88,7 +81,7 @@ public class UnoController implements Initializable{
             cartasMesa.getChildren().clear();
             for (CartaUno carta : listaCartas) {
                 Button boton = new Button(carta.toString());
-                boton.getStyleClass().add("carta-button");
+                boton.getStyleClass().add(App.estiloCartas);
                 boton.setOnAction(event -> {
                     botonSeleccionado = boton;
                     cartaSeleccionada = carta;
@@ -105,7 +98,7 @@ public class UnoController implements Initializable{
                     cartas.add(boton, n, filaCartas);
                     ImageView imagenRev = new ImageView();
 
-                    Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
+                    Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
             
                     imagenRev.setImage(imagen);
                     imagenRev.setFitWidth(40);
@@ -154,10 +147,11 @@ public class UnoController implements Initializable{
         // TODO : Iniciar votacion o votar si / no
     }
 
+    @SuppressWarnings("static-access")
     private void ponerCarta() { 
         cartasMesa.getChildren().clear();
         Button button = new Button(cartaSeleccionada.toString());
-        button.getStyleClass().add("carta-button");
+        button.getStyleClass().add(App.estiloCartas);
         cartasMesa.add(button, 0, 0);
         cartas.getChildren().remove(botonSeleccionado);
         columnasCartas.add(cartas.getColumnIndex(botonSeleccionado));
@@ -170,7 +164,7 @@ public class UnoController implements Initializable{
         CartaUno carta = mazoPrueba.get(0);
         mazoPrueba.remove(0);
         Button button = new Button(carta.toString());
-        button.getStyleClass().add("carta-button");
+        button.getStyleClass().add(App.estiloCartas);
         button.setOnAction(event -> {
             botonSeleccionado = button;
             cartaSeleccionada = carta;

@@ -24,6 +24,9 @@ public class CambiarFotoController implements Initializable{
 
     @FXML
     private VBox opcionesVBox;
+    
+    @FXML
+    private Label labelFichas;
 
     @FXML
     private Label nombreImagen;
@@ -38,6 +41,7 @@ public class CambiarFotoController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        labelFichas.setText(App.usuario.getDinero() + " Fichas");
     }
 
     @FXML

@@ -1,20 +1,26 @@
 package com.example.menusPrincipales;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Scanner;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import com.example.App;
-import com.example.Usuario;
+import com.example.entidades.Usuario;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -35,16 +41,17 @@ public class ListaAmigosController implements Initializable{
     @FXML
     private TableColumn<Usuario, String> columnaNombre;
     
+    @FXML
+    private Label labelFichas;
     
-    private ObservableList<Usuario> amigos;
+    private ObservableList<Usuario> amigos = FXCollections.observableArrayList(App.usuario.getAmigos());
     private boolean opcionesVisible = false;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        labelFichas.setText(App.usuario.getDinero() + " Fichas");
         columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        amigos = FXCollections.observableArrayList();
-
-        /** Conectar bien y mostrar los amigos que ya estan en la BD*/
+        tablaAmigos.setItems(amigos);
     }
 
     @FXML
@@ -65,29 +72,70 @@ public class ListaAmigosController implements Initializable{
     }
 
     @FXML
-    private void agregarAmigo(ActionEvent event){
+    private boolean agregarAmigo(ActionEvent event){
         Usuario amigo = new Usuario();
-        /**
-         * TODO: Buscar en la BD por nombre y añadirlos
-         */
         amigo.setNombre(nombreAmigo.getText());
-        amigos.add(amigo);
-        tablaAmigos.setItems(amigos);
+
+        try {
+            HttpResponse<JsonNode> response = Unirest.post(App.ip + "/usuarios/addAmigo")
+                .field("nombreUsuario", App.usuario.getNombre())
+                .field("nombreAmigo", amigo.getNombre())
+                .field("usuarioSesion", App.usuario.getNombre())
+                .field("sessionToken", App.tokenSesion)
+                .asJson();
+
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(response.getBody().toString());
+            boolean estado = (boolean) root.get("status");
+            if(estado){
+                App.usuario.addAmigo(amigo);
+                App.setRoot("/com/example/vistas/menusPrincipales/menuAmigos");
+                return true;
+            }
+        } catch (UnirestException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @FXML
-    private void eliminarAmigo(ActionEvent event){
+    private boolean eliminarAmigo(ActionEvent event){
         Usuario amigo = new Usuario();
-        /**
-         * TODO: Buscar en la BD por nombre y eliminarlo
-         */
         amigo.setNombre(nombreAmigo.getText());
-        List<Usuario> listaAmigos = amigos;
-        for (Usuario usuario : listaAmigos) {
-            if (amigo.getNombre().equals(usuario.getNombre())) {
-                amigos.remove(usuario);
+
+        try {
+            HttpResponse<JsonNode> response = Unirest.delete(App.ip + "/usuarios/deleteAmigo")
+                .field("nombreUsuario", App.usuario.getNombre())
+                .field("nombreAmigo", amigo.getNombre())
+                .field("usuarioSesion", App.usuario.getNombre())
+                .field("sessionToken", App.tokenSesion)
+                .asJson();
+                
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(response.getBody().toString());
+            boolean estado = (boolean) root.get("status");
+            if(estado){
+                App.usuario.removeAmigo(amigo);
+                App.setRoot("/com/example/vistas/menusPrincipales/menuAmigos");
+                return true;
             }
+        } catch (UnirestException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        tablaAmigos.setItems(amigos);
+        return false;
     }
 }

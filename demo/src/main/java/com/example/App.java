@@ -1,5 +1,10 @@
 package com.example;
 
+import java.io.IOException;
+
+import com.example.entidades.Partida;
+import com.example.entidades.Usuario;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,12 +12,20 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 /**
  * JavaFX App
  */
 public class App extends Application {
+
+    //public static final String ip = "http://90.94.101.49:20000/api";
+    public static final String ip = "http://localhost:20000/api";
+    public static Usuario usuario;
+    public static Partida partida = new Partida();
+    public static String tokenSesion = "";
+    public static String estiloCartas = "carta-button";
+    public static String estiloEscaleras = "cartas-escaleras";
+    public static String reversoCartas = "/com/example/imgs/reverso_azul.jpg";
+    public static String salt = "$2a$10$Tr2zdgh7I3B9Sl9na7z/q.";    
 
     private static Scene scene;
 

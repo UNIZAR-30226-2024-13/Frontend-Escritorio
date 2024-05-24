@@ -5,11 +5,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.Partida;
+import com.example.entidades.Partida;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,13 +28,20 @@ public class ListaPartidasPausadasController implements Initializable{
     
     @FXML
     private TableColumn<Partida, String> columnaTipoJuego;
-
     
+    @FXML
+    private Label labelFichas;
+    
+    private ObservableList<Partida> partidas;
+
     private boolean opcionesVisible = false;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        columnaTipoJuego.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        columnaTipoJuego.setCellValueFactory(new PropertyValueFactory<>("id_partida"));
+        labelFichas.setText(App.usuario.getDinero() + " Fichas");
+        partidas = FXCollections.observableArrayList(App.usuario.getPartidas());
+        tablaPartidasPausadas.setItems(partidas);
     }
 
     @FXML

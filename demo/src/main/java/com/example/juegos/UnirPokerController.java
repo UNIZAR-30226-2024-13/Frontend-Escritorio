@@ -3,25 +3,23 @@ package com.example.juegos;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import com.example.App;
-import com.example.Partida;
+import com.example.entidades.Partida;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 
 public class UnirPokerController implements Initializable {
     
@@ -49,6 +47,8 @@ public class UnirPokerController implements Initializable {
     @FXML
     private TableColumn<Partida, String> columnaApuesta;
     
+    @FXML
+    private Label labelFichas;
     
     private ObservableList<Partida> partidas;
     
@@ -57,6 +57,7 @@ public class UnirPokerController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        labelFichas.setText(App.usuario.getDinero() + " Fichas");
         columnaId.setCellValueFactory(new PropertyValueFactory<>("id_partida"));
         columnaJugadores.setCellValueFactory(new PropertyValueFactory<>("jugadores"));
         columnaApuesta.setCellValueFactory(new PropertyValueFactory<>("apuesta"));
@@ -133,7 +134,7 @@ public class UnirPokerController implements Initializable {
 
     @FXML
     private void crearPartida() throws IOException {
-        App.setRoot("/com/example/vistas/juegos/cinquillo");
+        App.setRoot("/com/example/vistas/juegos/poker");
     }
 
     @FXML

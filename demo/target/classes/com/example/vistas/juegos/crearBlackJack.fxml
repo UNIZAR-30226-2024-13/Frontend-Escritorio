@@ -32,7 +32,7 @@
                 </graphic>
             </Button>
             <Label text="CartaVerse" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="LEFT" styleClass="white-label"/>
-            <Label text="400 Fichas" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" styleClass="white-label"/>
+            <Label fx:id="labelFichas" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT" styleClass="white-label"/>
             <Button fx:id="botonPerfil" GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#mostrarOcultarOpciones" styleClass="image-button">
                 <graphic>
                     <ImageView fitWidth="70" fitHeight="70">
@@ -44,26 +44,13 @@
     </top>
     <center>
         <VBox>
-            <Label text="Creando partida del Blackjack" styleClass="white-label" alignment="CENTER"/>
+            <Label text="Creando partida del Mentiroso" styleClass="white-label" alignment="CENTER"/>
             <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS" hgap="20" >
-
-                <columnConstraints>
-                    <ColumnConstraints />
-                    <ColumnConstraints />
-                    <ColumnConstraints percentWidth="30"/>
-                    <ColumnConstraints />
-                    <ColumnConstraints />
-                </columnConstraints>
-
-                <Button fx:id="botonPublica" text="Publica" onAction="#partidaPublica" styleClass="button-clicked"
-                    GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="LEFT" />
-                <Button fx:id="botonPrivada" text="Privada" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="LEFT" onAction="#partidaPrivada"/>
-                <Label fx:id="etiquetaPasswd" text="Contraseña: ID PARTIDA" managed="false" visible="false" styleClass="white-label"
-                    GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="RIGHT"/>
-                <Label text="Introduce las fichas con las que deseas jugar" styleClass="white-label" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="campoFichas" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <Button fx:id="botonConfirmar" text="Confirmar" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="LEFT" onAction="#crearPartida"/>
-                <Button fx:id="botonCancelar" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.halignment="LEFT" onAction="#cancelar"/>
+                <Label fx:id="etiquetaPasswd" styleClass="white-label" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="RIGHT"/>
+            </GridPane>
+            <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS" hgap="20" >
+                <Button fx:id="botonConfirmar" text="Confirmar" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER" onAction="#crearPartida"/>
+                <Button fx:id="botonCancelar" text="Cancelar" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.halignment="CENTER" onAction="#cancelar"/>
             </GridPane>
         </VBox>
     </center>

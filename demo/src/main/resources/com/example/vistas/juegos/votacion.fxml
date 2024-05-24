@@ -21,7 +21,7 @@
             <GridPane styleClass="center-grid-pane" VBox.vgrow="ALWAYS">
                 <Label fx:id="votacionLabel" styleClass="white-label" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
                 <Label fx:id="votacionCumplida" styleClass="white-label" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER" />
-                <Button fx:id="botonSalir" text="Salir" GridPane.columnIndex="0" GridPane.rowIndex="2" visible="false" GridPane.halignment="CENTER" onAction="#switchToMainMenu" />
+                <Button fx:id="botonSalir" text="Salir" GridPane.columnIndex="0" GridPane.rowIndex="2" visible="false" GridPane.halignment="CENTER" onAction="#cerrarVotacion" />
             </GridPane>
         </VBox>
     </center>

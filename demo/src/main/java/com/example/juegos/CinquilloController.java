@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.Carta;
+import com.example.entidades.Carta;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -66,7 +66,7 @@ public class CinquilloController implements Initializable{
             cartas.getChildren().clear();
             for (Carta carta : listaCartas) {
                 Button boton = new Button(carta.toString());
-                boton.getStyleClass().add("carta-button");
+                boton.getStyleClass().add(App.estiloCartas);
                 boton.setOnAction(event -> {
                     ponerCarta(carta);
                     cartas.getChildren().remove(boton);
@@ -75,33 +75,21 @@ public class CinquilloController implements Initializable{
                 n++;
 
                 ImageView imagenRev = new ImageView();
-
-                Image imagen = new Image(getClass().getResourceAsStream("/com/example/imgs/reverso.jpg"));
+                Image imagen = new Image(getClass().getResourceAsStream(App.reversoCartas));
         
                 imagenRev.setImage(imagen);
                 imagenRev.setFitWidth(40);
                 imagenRev.setFitHeight(60);
-
-                ImageView imagenRev2 = new ImageView();
-        
-                imagenRev2.setImage(imagen);
-                imagenRev2.setFitWidth(40);
-                imagenRev2.setFitHeight(60);
-
-                ImageView imagenRev3 = new ImageView();
-        
-                imagenRev3.setImage(imagen);
-                imagenRev3.setFitWidth(40);
-                imagenRev3.setFitHeight(60);
-
+                
                 cartasUsuario2.add(imagenRev, n, 0);
-                cartasUsuario3.add(imagenRev2, 0, n);
-                cartasUsuario4.add(imagenRev3, 0, n);
+                cartasUsuario3.add(imagenRev, 0, n);
+                cartasUsuario4.add(imagenRev, 0, n);
             }
             cartas.setHgap(20);
             cartasUsuario2.setHgap(30);
             cartasUsuario3.setVgap(3);
             cartasUsuario4.setVgap(3);
+            
             escaleraOros.setVgap(10);
             escaleraCopas.setVgap(10);
             escaleraEspadas.setVgap(10);
@@ -126,7 +114,7 @@ public class CinquilloController implements Initializable{
         int fila = carta.getNumero();
         
         Label label = new Label(carta.toString());
-        label.getStyleClass().add("cartas-escaleras");
+        label.getStyleClass().add(App.estiloEscaleras);
 
         switch (carta.getPalo()) {
             case Carta.OROS:

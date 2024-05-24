@@ -9,17 +9,22 @@ import com.example.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class MenuUnirsePartidaController implements Initializable{
 
     @FXML
     private VBox opcionesVBox;
+    
+    @FXML
+    private Label labelFichas;
 
     private boolean opcionesVisible = false;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        labelFichas.setText(App.usuario.getDinero() + " Fichas");
     }
 
     @FXML
@@ -78,14 +83,14 @@ public class MenuUnirsePartidaController implements Initializable{
     }
 
     @FXML
-    private void unirBlackJack() throws IOException {
+    private void unirBlackjack() throws IOException {
         // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
-        App.setRoot("/com/example/vistas/juegos/unirBlackJack");
+        App.setRoot("/com/example/vistas/juegos/unirBlackjack");
     }
 
     @FXML
-    private void unirUNO() throws IOException {
+    private void unirUno() throws IOException {
         // TODO : AÑADIR LA PARTIDA A LA BD PARA TENER EL ID DISPONIBLE PARA USARLO COMO CONTRASEÑA
-        App.setRoot("/com/example/vistas/juegos/unirUNO");
+        App.setRoot("/com/example/vistas/juegos/unirUno");
     }
 }

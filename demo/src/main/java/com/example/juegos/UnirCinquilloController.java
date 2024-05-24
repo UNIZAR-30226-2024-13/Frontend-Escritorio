@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import com.example.App;
-import com.example.Partida;
+import com.example.entidades.Partida;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,6 +45,9 @@ public class UnirCinquilloController implements Initializable{
     @FXML
     private TableColumn<Partida, String> columnaJugadores;
     
+    @FXML
+    private Label labelFichas;
+    
     private ObservableList<Partida> partidas;
     
     private boolean opcionesVisible = false;
@@ -53,6 +56,7 @@ public class UnirCinquilloController implements Initializable{
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        labelFichas.setText(App.usuario.getDinero() + " Fichas");
         columnaId.setCellValueFactory(new PropertyValueFactory<>("id_partida"));
         columnaJugadores.setCellValueFactory(new PropertyValueFactory<>("jugadores"));
         partidas = FXCollections.observableArrayList();

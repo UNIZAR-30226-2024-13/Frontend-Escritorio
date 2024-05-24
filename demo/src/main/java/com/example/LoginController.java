@@ -2,7 +2,21 @@ package com.example;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
+import com.example.entidades.Partida;
+import com.example.entidades.Usuario;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,6 +49,9 @@ public class LoginController implements Initializable{
     @FXML
     private Label marcaErrorPasswd;
     
+    private String user;
+
+    private String passwd;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,8 +74,8 @@ public class LoginController implements Initializable{
 
     @FXML
     private void guardarDatosLogin() throws IOException {
-        String user = campoUser.getText();
-        String passwd = campoContrasegna.getText();
+        user = campoUser.getText();
+        passwd = campoContrasegna.getText();
         if (user.isEmpty()) {
             errorUser.setText("Debes rellenar el campo Nombre de usuario");
             errorPasswd.setVisible(false);
@@ -74,8 +91,86 @@ public class LoginController implements Initializable{
             marcaErrorUser.setVisible(false);
         }
         else{
-            // Comprobar si el usuario esta en la BD
-            switchToMenuPrincipal();
+            if(comprobarLogin()){
+                switchToMenuPrincipal();
+            } else {
+                errorPasswd.setText("Los datos introducidos no coinciden con lo esperado");
+                errorUser.setVisible(true);
+                marcaErrorUser.setVisible(true);
+                errorPasswd.setVisible(true);
+                marcaErrorPasswd.setVisible(true);
+            }
+        }
+    }
+
+    /**
+     * Compara los datos introducidos en las casillas de texto con los recibidos de la base de datos
+     * @return - Devuelve verdadero si los datos coinciden
+     */
+    @SuppressWarnings("unchecked")
+    private boolean comprobarLogin(){
+        try {
+            String hashPasswd = BCrypt.hashpw(passwd, App.salt);
+            JSONObject usuarioJson = new JSONObject();
+            usuarioJson.put("usuario", user);
+            usuarioJson.put("hashPasswd", hashPasswd);
+
+            HttpResponse<JsonNode> response = Unirest.post(App.ip + "/usuarios/login")
+                    .header("Content-Type", "application/json")
+                    .body(usuarioJson.toString())
+                    .asJson();
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(response.getBody().toString());
+            JSONObject datos = (JSONObject) root.get("datos");
+            JSONObject datosUsuario = (JSONObject) datos.get("usuario");
+            JSONObject datosSesion = (JSONObject) datos.get("sessionToken");
+
+            Usuario aux = new Usuario();
+
+            aux.setId((String) datosUsuario.get("id"));
+            aux.setNombre((String) datosUsuario.get("nombre"));
+            aux.setEmail((String) datosUsuario.get("email"));
+            aux.setDinero(((Long) datosUsuario.get("fichas")).intValue());
+            aux.setPais((String) datosUsuario.get("pais"));
+
+            JSONArray jsonArray = (JSONArray)datosUsuario.get("amigos");
+            if(jsonArray != null && !jsonArray.isEmpty()){
+                List<Usuario> listaAux = new ArrayList<>();
+                for (int i = 0; i < jsonArray.size(); i++) {
+                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                    String nombreAmigo = (String) jsonObject.get("nombre");
+                    Usuario amigoAux = new Usuario();
+                    amigoAux.setNombre(nombreAmigo);
+                    listaAux.add(amigoAux);
+                }
+                aux.setAmigos(listaAux);
+            }
+
+            jsonArray = (JSONArray)datos.get("partidas");
+            if(jsonArray != null && !jsonArray.isEmpty()){
+                List<Partida> listaPAux = new ArrayList<>();
+                for (int i = 0; i < jsonArray.size(); i++) {
+                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                    String iPartida = (String) jsonObject.get("partidas");
+                    Partida partidaAux = new Partida();
+                    partidaAux.setId(iPartida);
+                    listaPAux.add(partidaAux);
+                }
+                aux.setPartidas(listaPAux);
+            }
+            App.usuario = aux;
+
+            App.tokenSesion = (String) datosSesion.get("sessionToken");
+
+            return true;
+        } catch (UnirestException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
         }
     }
 }
